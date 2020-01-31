@@ -126,7 +126,7 @@
                   <article class="markdown-body single-content">
                     <p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
 
-<h2 id="toc_0">思路</h2>
+<h2 id="toc_0">Intuition</h2>
 
 <ul>
 <li>每次进行取余操作 （ %10），取出最低的数字：y = x % 10</li>
@@ -137,6 +137,8 @@
 </ul>
 
 <p><img src="media/15775085021373/15775085308097.png" alt="" style="width:1002px;"/></p>
+
+<h2 id="toc_1">Sample Code</h2>
 
 <pre class="line-numbers"><code class="language-python">class Solution:
     def isPalindrome(self, x: int) -&gt; bool:

@@ -142,7 +142,7 @@ nums2 = [2,5,6],       n = 3
 输出: [1,2,2,3,5,6]
 </code></pre>
 
-<h2 id="toc_0">思路</h2>
+<h2 id="toc_0">Intuition</h2>
 
 <ul>
 <li>因为 <code>nums1</code> 的空间都集中在后面，所以从后向前处理排序的数据会更好，节省空间，一边遍历一边将值填充进去</li>
@@ -151,7 +151,7 @@ nums2 = [2,5,6],       n = 3
 <li>时间复杂度：\(O(m+n)\)</li>
 </ul>
 
-<h2 id="toc_1">Java 解答</h2>
+<h2 id="toc_1">Java Code</h2>
 
 <pre class="line-numbers"><code class="language-java">class Solution {
   public void merge(int[] nums1, int m, int[] nums2, int n) {
@@ -173,7 +173,7 @@ nums2 = [2,5,6],       n = 3
 }
 </code></pre>
 
-<h2 id="toc_2">Python 解答</h2>
+<h2 id="toc_2">Python Code</h2>
 
 <pre class="line-numbers"><code class="language-python">class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:

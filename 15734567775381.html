@@ -137,7 +137,7 @@
 ]
 </code></pre>
 
-<h2 id="toc_0">思路</h2>
+<h2 id="toc_0">Intuition</h2>
 
 <ul>
 <li>首先对数组进行排序，排序后固定一个数 <code>nums[i]</code>，再使用左右指针指向 <code>nums[i]</code> 后面的两端，数字分别为 <code>nums[L]</code> 和 <code>nums[R]</code>，计算三个数的和 <code>sum</code> 判断是否满足为 0，满足则添加进结果集</li>
@@ -148,7 +148,7 @@
 <li>时间复杂度：\(O(n^2)\)</li>
 </ul>
 
-<h2 id="toc_1">Java 解答</h2>
+<h2 id="toc_1">Java Code</h2>
 
 <pre class="line-numbers"><code class="language-java">class Solution {
     public static List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
@@ -179,7 +179,7 @@
 }
 </code></pre>
 
-<h2 id="toc_2">Python 解答</h2>
+<h2 id="toc_2">Python Code</h2>
 
 <pre class="line-numbers"><code class="language-python">class Solution:
     def threeSum(self, nums: List[int]) -&gt; List[List[int]]:

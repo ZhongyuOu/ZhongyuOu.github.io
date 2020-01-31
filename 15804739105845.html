@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Divided Two Integers - CodingPark
+    Symmetric Tree - CodingPark
     
     </title>
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_paper-plane.png" type="image/png" />
@@ -83,7 +83,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            Divided Two Integers   
+                            Symmetric Tree   
                       </h1>
                      
                     
@@ -100,7 +100,7 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">01/31 10:7 AM</span>
+                                 <span class="date">01/31 20:31 PM</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
                                       <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
@@ -112,9 +112,9 @@
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
                                   
-                                    <a class="tag is-link is-light" href='tag_Array.html'>#Array</a>
+                                    <a class="tag is-link is-light" href='tag_Tree.html'>#Tree</a>
                                   
-                                    <a class="tag is-link is-light" href='tag_Medium.html'>#Medium</a>
+                                    <a class="tag is-link is-light" href='tag_Easy.html'>#Easy</a>
                                      
 
                                 </p>
@@ -124,47 +124,77 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
+                    <p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
 
-<p>Return the quotient after dividing dividend by divisor.</p>
+<p>For example, this binary tree <code>[1,2,2,3,4,4,3]</code> is symmetric:</p>
 
-<p>The integer division should truncate toward zero.</p>
-
-<p><strong>Example 1:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: dividend = 10, divisor = 3
-Output: 3
+<pre class="line-numbers"><code class="language-text">    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
 </code></pre>
 
-<p><strong>Example 2:</strong></p>
+<p>But the following <code>[1,2,2,null,3,null,3]</code> is not:</p>
 
-<pre class="line-numbers"><code class="language-text">Input: dividend = 7, divisor = -3
-Output: -2
+<pre class="line-numbers"><code class="language-text">    1
+   / \
+  2   2
+   \   \
+   3    3
 </code></pre>
 
-<p><strong>Note:</strong></p>
+<h2 id="toc_0">Approach 1: Recursive</h2>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return isMirror(root, root);
+    }
+    
+    public boolean isMirror(TreeNode node1, TreeNode node2) {
+        if (node1 == null &amp;&amp; node2 == null) return true;
+        if (node1 == null || node2 == null) return false;
+        return (node1.val == node2.val)
+            &amp;&amp; isMirror(node1.left, node2.right)
+            &amp;&amp; isMirror(node1.right, node2.left);
+    }
+}
+</code></pre>
+
+<h3 id="toc_1">Complexity Analysis</h3>
 
 <ul>
-<li>Both dividend and divisor will be 32-bit signed integers.</li>
-<li>The divisor will never be 0.</li>
-<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, assume that your function returns \(2^{31} − 1\) when the division result overflows.</li>
+<li><strong>Time complexity:</strong> \(O(n)\). Because we traverse the entire input tree once, the total run time is \(O(n)\), where \(n\) is the total number of nodes in the tree.</li>
+<li><strong>Space complexity:</strong> The number of recursive calls is bound by the height of the tree. In the worst case, the tree is linear and the height is in \(O(n)\). Therefore, space complexity due to recursive calls on the stack is \(O(n)\) in the worst case.</li>
 </ul>
 
-<h2 id="toc_0">Sample Code</h2>
+<h2 id="toc_2">Approach 2: Iterative</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
-    def divide(self, dividend, divisor):
-        positive = (dividend &lt; 0) == (divisor &lt; 0)
-        dividend, divisor = abs(dividend), abs(divisor)
-        res = 0
-        while dividend &gt;= divisor:
-            x = 0
-            while dividend &gt;= divisor &lt;&lt; (x + 1):
-                x += 1
-            res += 1 &lt;&lt; x
-            dividend -= divisor &lt;&lt; x
-        return min(max(-2**31, res if positive else -res), 2**31-1))
+<pre class="line-numbers"><code class="language-java">public boolean isSymmetric(TreeNode root) {
+    Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();
+    q.add(root);
+    q.add(root);
+    while (!q.isEmpty()) {
+        TreeNode t1 = q.poll();
+        TreeNode t2 = q.poll();
+        if (t1 == null &amp;&amp; t2 == null) continue;
+        if (t1 == null || t2 == null) return false;
+        if (t1.val != t2.val) return false;
+        q.add(t1.left);
+        q.add(t2.right);
+        q.add(t1.right);
+        q.add(t2.left);
+    }
+    return true;
+}
 </code></pre>
+
+<h3 id="toc_3">Complexity Analysis</h3>
+
+<ul>
+<li><strong>Time complexity:</strong> \(O(n)\). Because we traverse the entire input tree once, the total run time is \(O(n)\), where \(n\) is the total number of nodes in the tree.</li>
+<li><strong>Space complexity:</strong> There is additional space required for the search queue. In the worst case, we have to insert \(O(n)\) nodes in the queue. Therefore, space complexity is \(O(n)\).</li>
+</ul>
 
                   </article>
                   <div class="comments-wrap">

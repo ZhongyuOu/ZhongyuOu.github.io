@@ -149,7 +149,7 @@
 说明：第一张多米诺骨牌没有给第二张施加额外的力。
 </code></pre>
 
-<h2 id="toc_0">方法 1：相邻标记</h2>
+<h2 id="toc_0">Approach 1：Adjacent Chars</h2>
 
 <ul>
 <li>如果我们有 <code>&quot;A....B&quot;</code>，当 <code>A = B</code>，那么就变成 <code>&quot;AAAAAA&quot;</code>。</li>
@@ -195,7 +195,7 @@
 }
 </code></pre>
 
-<h2 id="toc_1">方法 2：计算受力</h2>
+<h2 id="toc_1">Approach 2：Compute Force</h2>
 
 <ul>
 <li>从左向右扫描，我们的力每轮迭代减少 1。当我们遇到一个 <code>&#39;R&#39;</code> 时重置为 <code>N</code> ，所以 <code>force[i]</code> 比 <code>force[j]</code> 大当且仅当 <code>dominoes[i]</code> 比 <code>dominoes[j]</code> 离最左边的 <code>&#39;R&#39;</code> 近。</li>

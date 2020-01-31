@@ -131,7 +131,7 @@
 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
 </code></pre>
 
-<h2 id="toc_0">思路</h2>
+<h2 id="toc_0">Intuition</h2>
 
 <ul>
 <li>本题目因为要计算三个数，如果靠暴力枚举的话时间复杂度会到 \(O(n^3)\)，需要降低时间复杂度</li>
@@ -144,7 +144,7 @@
 <li>时间复杂度：\(O(nlogn) + O(n^2) = O(n^2)\)</li>
 </ul>
 
-<h2 id="toc_1">Java 解法</h2>
+<h2 id="toc_1">Java Code</h2>
 
 <pre class="line-numbers"><code class="language-java">class Solution {
     public int threeSumClosest(int[] nums, int target) {
@@ -169,7 +169,7 @@
 }
 </code></pre>
 
-<h2 id="toc_2">Python 解法</h2>
+<h2 id="toc_2">Python Code</h2>
 
 <pre class="line-numbers"><code class="language-python">class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -&gt; int:

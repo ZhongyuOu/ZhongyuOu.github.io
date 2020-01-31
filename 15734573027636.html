@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    SQL_M_平面上的最近距离 - CodingPark
+    Min Distance - CodingPark
     
     </title>
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_paper-plane.png" type="image/png" />
@@ -83,7 +83,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            SQL_M_平面上的最近距离   
+                            Min Distance   
                       </h1>
                      
                     
@@ -111,6 +111,8 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
+                                  
+                                    <a class="tag is-link is-light" href='tag_Medium.html'>#Medium</a>
                                      
 
                                 </p>
@@ -138,7 +140,7 @@
 | 1.00     |
 </code></pre>
 
-<h2 id="toc_0">解答</h2>
+<h2 id="toc_0">Solution</h2>
 
 <pre class="line-numbers"><code class="language-sql">SELECT
     ROUND(SQRT(MIN((POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2)))), 2) AS shortest

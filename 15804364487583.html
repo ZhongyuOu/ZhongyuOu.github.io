@@ -133,7 +133,7 @@
 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
 </code></pre>
 
-<h2 id="toc_0">思路</h2>
+<h2 id="toc_0">Intuition</h2>
 
 <ul>
 <li>动态规划的是首先对数组进行遍历，当前最大连续子序列和为 <code>sum</code>，结果为 <code>ans</code></li>
@@ -143,7 +143,7 @@
 <li>时间复杂度：\(O(n)\)</li>
 </ul>
 
-<h2 id="toc_1">Java 解答</h2>
+<h2 id="toc_1">Java Code</h2>
 
 <pre class="line-numbers"><code class="language-java">class Solution {
     public int maxSubArray(int[] nums) {
@@ -163,7 +163,7 @@
 }
 </code></pre>
 
-<h2 id="toc_2">Python 解答</h2>
+<h2 id="toc_2">Python Code</h2>
 
 <pre class="line-numbers"><code class="language-python">class Solution:
     def maxSubArray(self, nums: List[int]) -&gt; int:
