@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Archives - CodingPark
+  Math - LinkedList - E - Linked List Cycle - CodingPark
   
   </title>
  <meta name="description" content="">
@@ -216,412 +216,136 @@
             <div class="large-9 medium-9 columns">
 
  <div class="markdown-body">
-	
-		 
-		  	<h2>2020</h2>
-		
-		
-			<div>
-				<h3><a href="15804365379093.html">LinkedList - E - Merge Two Sorted Lists</a></h3>
-				<p>
-					<time datetime="2020-01-31T10:08:57+08:00" pubdate><span class='month'>1月</span> <span class='day'>31</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h1>Math - LinkedList - E - Linked List Cycle</h1>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15804364748378.html">Array - M - Divided Two Integers</a></h3>
-				<p>
-					<time datetime="2020-01-31T10:07:54+08:00" pubdate><span class='month'>1月</span> <span class='day'>31</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<p>Given a linked list, determine if it has a cycle in it.</p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15804364487583.html">Array - E - Max SubArray</a></h3>
-				<p>
-					<time datetime="2020-01-31T10:07:28+08:00" pubdate><span class='month'>1月</span> <span class='day'>31</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<p>To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail co<code>n</code>ects to. If pos is -1, then there is no cycle in the linked list.</p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15802233461013.html">Tree - M - Binary Tree Level Order Traversal</a></h3>
-				<p>
-					<time datetime="2020-01-28T22:55:46+08:00" pubdate><span class='month'>1月</span> <span class='day'>28</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Tree.html'>Tree</a>&nbsp;
-				   
-				  </span>
+<p><strong>Example 1:</strong></p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15797451740361.html">Tree - M - Binary Tree Preorder Traversal</a></h3>
-				<p>
-					<time datetime="2020-01-23T10:06:14+08:00" pubdate><span class='month'>1月</span> <span class='day'>23</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Tree.html'>Tree</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-text">Input: head = [3,2,0,-4], pos = 1
+Output: true
+Explanation: There is a cycle in the linked list, where tail co`n`ects to the second node.
+</code></pre>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15794258384164.html">LinkedList - M - Rotate</a></h3>
-				<p>
-					<time datetime="2020-01-19T17:23:58+08:00" pubdate><span class='month'>1月</span> <span class='day'>19</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<p><img src="media/15757035238329/15757035947205.png" alt="eg1"/></p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15793500905829.html">LinkedList - M - Flatten a Multilevel Doubly Linked List</a></h3>
-				<p>
-					<time datetime="2020-01-18T20:21:30+08:00" pubdate><span class='month'>1月</span> <span class='day'>18</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<p><strong>Example 2:</strong></p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15791026198982.html">LinkedList - M - Add Two Numbers</a></h3>
-				<p>
-					<time datetime="2020-01-15T23:36:59+08:00" pubdate><span class='month'>1月</span> <span class='day'>15</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-text">Input: head = [1], pos = -1
+Output: false
+Explanation: There is no cycle in the linked list.
+</code></pre>
 
-				</p>
-			</div>
- 	
-		 
-		  	<h2>2019</h2>
-		
-		
-			<div>
-				<h3><a href="15775085021373.html">Math - E - Palindrome Number</a></h3>
-				<p>
-					<time datetime="2019-12-28T12:48:22+08:00" pubdate><span class='month'>12月</span> <span class='day'>28</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+<p><img src="media/15757035238329/15757036496923.png" alt="eg2"/></p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15773727256411.html">LinkedList - E - Palindrome Linked List</a></h3>
-				<p>
-					<time datetime="2019-12-26T23:05:25+08:00" pubdate><span class='month'>12月</span> <span class='day'>26</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h2 id="toc_0">Approach 1: Hash Table</h2>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15769805997965.html">LinkedList - M - Odd Even Linked List</a></h3>
-				<p>
-					<time datetime="2019-12-22T10:09:59+08:00" pubdate><span class='month'>12月</span> <span class='day'>22</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<p><strong>Intuition</strong><br/>
+To detect if a list is cyclic, we can check whether a node had been visited before. A natural way is to use a hash table.</p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15767443041636.html">LinkedList - M - Remove Nth Node from End of List</a></h3>
-				<p>
-					<time datetime="2019-12-19T16:31:44+08:00" pubdate><span class='month'>12月</span> <span class='day'>19</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<p><strong>Algorithm</strong><br/>
+We go through each node one by one and record each node&#39;s reference (or memory address) in a hash table. If the current node is null, we have reached the end of the list and it must not be cyclic. If current node’s reference is in the hash table, then return true.</p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15767231455989.html">LinkedList - M - Linked List Cycle II</a></h3>
-				<p>
-					<time datetime="2019-12-19T10:39:05+08:00" pubdate><span class='month'>12月</span> <span class='day'>19</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+    Set&lt;ListNode&gt; nodesSeen = new HashSet&lt;&gt;();
+    while (head != null) {
+        if (nodesSeen.contains(head)) {
+            return true;
+        } else {
+            nodesSeen.add(head);
+        }
+        head = head.next;
+    }
+    return false;
+}
+</code></pre>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15758785713938.html">LinkedList - M - Swap Nodes in Pairs</a></h3>
-				<p>
-					<time datetime="2019-12-09T16:02:51+08:00" pubdate><span class='month'>12月</span> <span class='day'>09</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<p><strong>Complexity analysis</strong></p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15758224019897.html">Math - E - Reverse</a></h3>
-				<p>
-					<time datetime="2019-12-09T00:26:41+08:00" pubdate><span class='month'>12月</span> <span class='day'>09</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+<ul>
+<li>Time complexity : <code>O(n)</code>. We visit each of the <code>n</code> elements in the list at most once. Adding a node to the hash table costs only <code>O(1)</code> time.</li>
+<li>Space complexity: <code>O(n)</code>. The space depends on the number of elements added to the hash table, which contains at most <code>n</code> elements.</li>
+</ul>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15757068438294.html">LinkedList - E - Remove Linked List Elements</a></h3>
-				<p>
-					<time datetime="2019-12-07T16:20:43+08:00" pubdate><span class='month'>12月</span> <span class='day'>07</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h2 id="toc_1">Approach 2: Two Pointers</h2>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15757035238329.html">Math - LinkedList - E - Linked List Cycle</a></h3>
-				<p>
-					<time datetime="2019-12-07T15:25:23+08:00" pubdate><span class='month'>12月</span> <span class='day'>07</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+    if (head == null || head.next == null) {
+        return false;
+    }
+    ListNode slow = head;
+    ListNode fast = head.next;
+    while (slow != fast) {
+        if (fast == null || fast.next == null) {
+            return false;
+        }
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return true;
+}
+</code></pre>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15750825009903.html">Array - M - Next Permutation</a></h3>
-				<p>
-					<time datetime="2019-11-30T10:55:00+08:00" pubdate><span class='month'>11月</span> <span class='day'>30</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<p><strong>Complexity analysis:</strong></p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15748621727087.html">DP - H - Super Agg Drop</a></h3>
-				<p>
-					<time datetime="2019-11-27T21:42:52+08:00" pubdate><span class='month'>11月</span> <span class='day'>27</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Dynamic%20Programing.html'>Dynamic Programing</a>&nbsp;
-				   
-				  </span>
+<ul>
+<li><p><strong>Time complexity:</strong> <code>O(n)</code>. Let us denote <code>n</code> as the total number of nodes in the linked list. To analyze its time complexity, we consider the following two cases separately.</p>
+<ul>
+<li><p><strong>List has no cycle:</strong><br/>
+The fast pointer reaches the end first and the run time depends on the list&#39;s length, which is <code>O(n)</code>.</p></li>
+<li><p><strong>List has a cycle:</strong><br/>
+We break down the movement of the slow pointer into two steps, the non-cyclic part and the cyclic part:</p>
+<ol>
+<li>The slow pointer takes &quot;non-cyclic length&quot; steps to enter the cycle. At this point, the fast pointer has already reached the cycle. \(\text{Number of iterations} = \text{non-cyclic length} = N\)</li>
+<li>Both pointers are now in the cycle. Consider two runners running in a cycle - the fast runner moves 2 steps while the slow runner moves 1 steps at a time. Since the speed difference is 1, it takes \(\frac{\text{distance between the 2 runners}}{\text{difference of speed}}\) loops for the fast runner to catch up with the slow runner. As the distance is at most &quot;\(\text{cyclic length K}\)&quot; and the speed difference is 1, we conclude that<br/>
+\(\text{Number of iterations} = almost &quot;\text{cyclic length K}cyclic length K&quot;\).</li>
+</ol></li>
+</ul>
+<p>Therefore, the worst case time complexity is <code>O(N+K)</code>, which is <code>O(n)</code>.</p></li>
+<li><p><strong>Space complexity:</strong> We only use two nodes (slow and fast) so the space complexity is <code>O(1)</code>.</p></li>
+</ul>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15748543212519.html">DP - M - Push Dominoes</a></h3>
-				<p>
-					<time datetime="2019-11-27T19:32:01+08:00" pubdate><span class='month'>11月</span> <span class='day'>27</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Dynamic%20Programing.html'>Dynamic Programing</a>&nbsp;
-				   
-				  </span>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15745678356677.html">Math - M - Pow(x,n)</a></h3>
-				<p>
-					<time datetime="2019-11-24T11:57:15+08:00" pubdate><span class='month'>11月</span> <span class='day'>24</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+</div>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15742402167934.html">Array - M - Merge Sorted Array</a></h3>
-				<p>
-					<time datetime="2019-11-20T16:56:56+08:00" pubdate><span class='month'>11月</span> <span class='day'>20</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<br /><br />
+<hr />
 
-				</p>
-			</div>
- 	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
 		
+	        <a href="15757068438294.html"  title="Previous Post: LinkedList - E - Remove Linked List Elements">&laquo; LinkedList - E - Remove Linked List Elements</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
 		
-			<div>
-				<h3><a href="15742372257078.html">DP - E - House Robber</a></h3>
-				<p>
-					<time datetime="2019-11-20T16:07:05+08:00" pubdate><span class='month'>11月</span> <span class='day'>20</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Dynamic%20Programing.html'>Dynamic Programing</a>&nbsp;
-				   
-				  </span>
+	        <a href="15750825009903.html" 
+	        title="Next Post: Array - M - Next Permutation">Array - M - Next Permutation &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15736322961648.html">Array - M - Three Sum Closest</a></h3>
-				<p>
-					<time datetime="2019-11-13T16:04:56+08:00" pubdate><span class='month'>11月</span> <span class='day'>13</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15734567775381.html">Array - M - Three Sum</a></h3>
-				<p>
-					<time datetime="2019-11-11T15:19:37+08:00" pubdate><span class='month'>11月</span> <span class='day'>11</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	 
-</div>  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15757035238329.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 
@@ -647,6 +371,9 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
   
 
 
@@ -660,6 +387,8 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
+
+<script src="asset/prism.js"></script>
 
 
 <style type="text/css">

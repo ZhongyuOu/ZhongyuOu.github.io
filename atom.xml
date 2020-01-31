@@ -1,0 +1,1392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[CodingPark]]></title>
+  <link href="codingpark/atom.xml" rel="self"/>
+  <link href="codingpark/"/>
+  <updated>2020-01-31T10:43:46+08:00</updated>
+  <id>codingpark/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.mweb.im">MWeb</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - E - Merge Two Sorted Lists]]></title>
+    <link href="codingpark/15804365379093.html"/>
+    <updated>2020-01-31T10:08:57+08:00</updated>
+    <id>codingpark/15804365379093.html</id>
+    <content type="html"><![CDATA[
+<p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</code></pre>
+
+<h2 id="toc_0">Approach 1: Iteratively</h2>
+
+<pre class="line-numbers"><code class="language-python">def mergeTwoLists1(self, l1, l2):
+    dummy = cur = ListNode(0)
+    while l1 and l2:
+        if l1.val &lt; l2.val:
+            cur.next = l1
+            l1 = l1.next
+        else:
+            cur.next = l2
+            l2 = l2.next
+        cur = cur.next
+    cur.next = l1 or l2
+    return dummy.next
+</code></pre>
+
+<h2 id="toc_1">Approach 2: Recursively</h2>
+
+<pre class="line-numbers"><code class="language-python">def mergeTwoLists2(self, l1, l2):
+    if not l1 or not l2:
+        return l1 or l2
+    if l1.val &lt; l2.val:
+        l1.next = self.mergeTwoLists(l1.next, l2)
+        return l1
+    else:
+        l2.next = self.mergeTwoLists(l1, l2.next)
+        return l2
+</code></pre>
+
+<h2 id="toc_2">Approach 3: In-place</h2>
+
+<pre class="line-numbers"><code class="language-python">def mergeTwoLists(self, l1, l2):
+    if None in (l1, l2):
+        return l1 or l2
+    dummy = cur = ListNode(0)
+    dummy.next = l1
+    while l1 and l2:
+        if l1.val &lt; l2.val:
+            l1 = l1.next
+        else:
+            nxt = cur.next
+            cur.next = l2
+            tmp = l2.next
+            l2.next = nxt
+            l2 = tmp
+        cur = cur.next
+    cur.next = l1 or l2
+    return dummy.next
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Array - M - Divided Two Integers]]></title>
+    <link href="codingpark/15804364748378.html"/>
+    <updated>2020-01-31T10:07:54+08:00</updated>
+    <id>codingpark/15804364748378.html</id>
+    <content type="html"><![CDATA[
+<p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
+
+<p>Return the quotient after dividing dividend by divisor.</p>
+
+<p>The integer division should truncate toward zero.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: dividend = 10, divisor = 3
+Output: 3
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: dividend = 7, divisor = -3
+Output: -2
+</code></pre>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>Both dividend and divisor will be 32-bit signed integers.</li>
+<li>The divisor will never be 0.</li>
+<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, assume that your function returns \(2^{31} − 1\) when the division result overflows.</li>
+</ul>
+
+<h2 id="toc_0">Python Implement</h2>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def divide(self, dividend, divisor):
+        positive = (dividend &lt; 0) == (divisor &lt; 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        res = 0
+        while dividend &gt;= divisor:
+            x = 0
+            while dividend &gt;= divisor &lt;&lt; (x + 1):
+                x += 1
+            res += 1 &lt;&lt; x
+            dividend -= divisor &lt;&lt; x
+        return min(max(-2**31, res if positive else -res), 2**31-1))
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Array - E - Max SubArray]]></title>
+    <link href="codingpark/15804364487583.html"/>
+    <updated>2020-01-31T10:07:28+08:00</updated>
+    <id>codingpark/15804364487583.html</id>
+    <content type="html"><![CDATA[
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+
+<p>示例:</p>
+
+<pre class="line-numbers"><code class="language-text">输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+</code></pre>
+
+<h2 id="toc_0">思路</h2>
+
+<ul>
+<li>动态规划的是首先对数组进行遍历，当前最大连续子序列和为 <code>sum</code>，结果为 <code>ans</code></li>
+<li>如果 <code>sum &gt; 0</code>，则说明 <code>sum</code> 对结果有增益效果，则 <code>sum</code> 保留并加上当前遍历数字</li>
+<li>如果 <code>sum &lt;= 0</code>，则说明 <code>sum</code> 对结果无增益效果，需要舍弃，则 <code>sum</code> 直接更新为当前遍历数字</li>
+<li>每次比较 <code>sum</code> 和 <code>ans</code> 的大小，将最大值置为 <code>ans</code>，遍历结束返回结果</li>
+<li>时间复杂度：\(O(n)\)</li>
+</ul>
+
+<h2 id="toc_1">Java 解答</h2>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int ans = nums[0];
+
+        for (int num: nums) {
+            if (sum &gt; 0) {
+                sum += num;
+            } else {
+                sum = num;
+            }
+            ans = Math.max(sum, ans);
+        }
+        return ans;
+    }
+}
+</code></pre>
+
+<h2 id="toc_2">Python 解答</h2>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        total = 0
+        ans = nums[0]
+        for num in nums:
+            if total &gt; 0:
+                total += num
+            else:
+                total = num
+            ans = max(total, ans)
+        return ans
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tree - M - Binary Tree Level Order Traversal]]></title>
+    <link href="codingpark/15802233461013.html"/>
+    <updated>2020-01-28T22:55:46+08:00</updated>
+    <id>codingpark/15802233461013.html</id>
+    <content type="html"><![CDATA[
+<p>Given a binary tree, return the level order traversal of its nodes&#39; values. (ie, from left to right, level by level).</p>
+
+<p>For example:<br/>
+Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
+
+<pre class="line-numbers"><code class="language-text">    3
+   / \
+  9  20
+    /  \
+   15   7
+</code></pre>
+
+<p>return its level order traversal as:</p>
+
+<pre class="line-numbers"><code class="language-text">[
+  [3],
+  [9,20],
+  [15,7]
+]
+</code></pre>
+
+<h2 id="toc_0">Approach 1: Double Queue</h2>
+
+<pre class="line-numbers"><code class="language-python">from collections import deque
+class Solution:
+    def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
+        
+        if not root:
+            return []
+        
+        queue = deque([root])
+        result = []
+        while len(queue) &gt; 0:
+            levelValues = []
+            for _ in range(len(queue)):            
+                currentNode = queue.popleft()
+                if currentNode.left:
+                    queue.append(currentNode.left)
+                if currentNode.right:
+                    queue.append(currentNode.right)
+                
+                levelValues.append(currentNode.val)
+            result.append(levelValues)
+            
+        return result
+</code></pre>
+
+<h2 id="toc_1">Approach 2: List Comprehension</h2>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
+        if root == None:
+            return
+        ans, level = [], [root]
+        while level:
+            ans.append([node.val for node in level])
+            level = [leaf for node in level for leaf in (node.left, node.right) if leaf]
+        return ans
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tree - M - Binary Tree Preorder Traversal]]></title>
+    <link href="codingpark/15797451740361.html"/>
+    <updated>2020-01-23T10:06:14+08:00</updated>
+    <id>codingpark/15797451740361.html</id>
+    <content type="html"><![CDATA[
+<p>Given a binary tree, return the preorder traversal of its nodes&#39; values.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,2,3]
+</code></pre>
+
+<p><strong>Follow up:</strong> Recursive solution is trivial, could you do it iteratively?</p>
+
+<h2 id="toc_0">Sample Code</h2>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def preorderTraversal(self, root: TreeNode) -&gt; List[int]:
+        if not root:
+            return
+        stack = [root]
+        res = []
+        while stack:
+            curr = stack.pop()
+            res.append(curr.val)
+            if curr.right:
+                stack.append(curr.right)
+            if curr.left:
+                stack.append(curr.left)
+        return res
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Rotate]]></title>
+    <link href="codingpark/15794258384164.html"/>
+    <updated>2020-01-19T17:23:58+08:00</updated>
+    <id>codingpark/15794258384164.html</id>
+    <content type="html"><![CDATA[
+<p>Given a linked list, rotate the list to the right by k places, where k is non-negative.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
+Output: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
+Explanation:
+rotate 1 steps to the right: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL
+rotate 2 steps to the right: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
+Output: 2-&gt;0-&gt;1-&gt;NULL
+Explanation:
+rotate 1 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
+rotate 2 steps to the right: 1-&gt;2-&gt;0-&gt;NULL
+rotate 3 steps to the right: 0-&gt;1-&gt;2-&gt;NULL
+rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
+</code></pre>
+
+<h2 id="toc_0">Intuition</h2>
+
+<p>Since n may be a large number compared to the length of list. So we need to know the length of linked list. After that, move the list after the <code>(l-n%l)th</code> node to the front to finish the rotation.</p>
+
+<p>Ex: {1,2,3} k=2 Move the list after the 1st node to the front</p>
+
+<p>Ex: {1,2,3} k=5, In this case Move the list after (3-5%3=1)st node to the front.</p>
+
+<p>So the code has three parts.</p>
+
+<ul>
+<li>Get the length</li>
+<li>Move to the <code>(l-n%l)th</code> node</li>
+<li>Do the rotation</li>
+</ul>
+
+<h2 id="toc_1">Sample Code</h2>
+
+<pre class="line-numbers"><code class="language-java">public ListNode rotateRight(ListNode head, int n) {
+    if (head==null||head.next==null) return head;
+    ListNode dummy=new ListNode(0);
+    dummy.next=head;
+    ListNode fast=dummy,slow=dummy;
+
+    int i;
+    for (i=0;fast.next!=null;i++)//Get the total length 
+        fast=fast.next;
+    
+    for (int j=i-n%i;j&gt;0;j--) //Get the i-n%i th node
+        slow=slow.next;
+    
+    fast.next=dummy.next; //Do the rotation
+    dummy.next=slow.next;
+    slow.next=null;
+    
+    return dummy.next;
+}
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Flatten a Multilevel Doubly Linked List]]></title>
+    <link href="codingpark/15793500905829.html"/>
+    <updated>2020-01-18T20:21:30+08:00</updated>
+    <id>codingpark/15793500905829.html</id>
+    <content type="html"><![CDATA[
+<p>You are given a doubly linked list which in addition to the next and previous pointers, it could have a child pointer, which may or may not point to a separate doubly linked list. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure, as shown in the example below.</p>
+
+<p>Flatten the list so that all the nodes appear in a single-level, doubly linked list. You are given the head of the first level of the list.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: head = [1,2,null,3]
+Output: [1,3,2]
+Explanation:
+
+The input multilevel linked list is as follows:
+
+  1---2---NULL
+  |
+  3---NULL
+</code></pre>
+
+<h2 id="toc_0">Algorithm</h2>
+
+<ul>
+<li>Start form the <code>head</code> , move one step each time to the next node;</li>
+<li>When meet with a node with child, say node <code>p</code>, follow its child chain to the end and connect the tail node with <code>p.next</code>, by doing this we merged the <code>child chain</code> back to the <code>main thread</code>;</li>
+<li>Return to <code>p</code> and proceed until find next node with child;</li>
+<li>Repeat until reach <code>null</code>.</li>
+</ul>
+
+<h2 id="toc_1">Sample Code</h2>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public Node flatten(Node head) {
+        if( head == null) return head;
+    // Pointer
+        Node p = head; 
+        while( p!= null) {
+            /* CASE 1: if no child, proceed */
+            if( p.child == null ) {
+                p = p.next;
+                continue;
+            }
+            /* CASE 2: find the tail of the child and link it to p.next */
+            Node temp = p.child;
+            // Find the tail of the child
+            while( temp.next != null ) 
+                temp = temp.next;
+            // Connect tail with p.next, if it is not null
+            temp.next = p.next;  
+            if( p.next != null )  p.next.prev = temp;
+            // Connect p with p.child, and remove p.child
+            p.next = p.child; 
+            p.child.prev = p;
+            p.child = null;
+        }
+        return head;
+    }
+}
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Add Two Numbers]]></title>
+    <link href="codingpark/15791026198982.html"/>
+    <updated>2020-01-15T23:36:59+08:00</updated>
+    <id>codingpark/15791026198982.html</id>
+    <content type="html"><![CDATA[
+<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+Output: 7 -&gt; 0 -&gt; 8
+Explanation: 342 + 465 = 807.
+</code></pre>
+
+<h2 id="toc_0">Solution:</h2>
+
+<pre class="line-numbers"><code class="language-python"># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        carry = 0;
+        res = n = ListNode(0);
+        while l1 or l2 or carry:
+            if l1:
+                carry += l1.val
+                l1 = l1.next;
+            if l2:
+                carry += l2.val;
+                l2 = l2.next;
+            carry, val = divmod(carry, 10)
+            n.next = n = ListNode(val);
+        return res.next
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Math - E - Palindrome Number]]></title>
+    <link href="codingpark/15775085021373.html"/>
+    <updated>2019-12-28T12:48:22+08:00</updated>
+    <id>codingpark/15775085021373.html</id>
+    <content type="html"><![CDATA[
+<p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+
+<h2 id="toc_0">思路</h2>
+
+<ul>
+<li>每次进行取余操作 （ %10），取出最低的数字：y = x % 10</li>
+<li>将最低的数字加到取出数的末尾：revertNum = revertNum * 10 + y</li>
+<li>每取一个最低位数字，x 都要自除以 10</li>
+<li>判断 x 是不是小于 revertNum ，当它小于的时候，说明数字已经对半或者过半了</li>
+<li>最后，判断奇偶数情况：如果是偶数的话，revertNum 和 x 相等；如果是奇数的话，最中间的数字就在revertNum 的最低位上，将它除以 10 以后应该和 x 相等。</li>
+</ul>
+
+<p><img src="media/15775085021373/15775085308097.png" alt="" style="width:1002px;"/></p>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def isPalindrome(self, x: int) -&gt; bool:
+        if x &lt; 0 or (x % 10 == 0 and x != 0):
+            return False
+        revertedNumber = 0
+        while x &gt; revertedNumber:
+            ans = ans * 10 + x % 10;
+            x //= 10
+        return x == revertedNumber or x == revertedNumber // 10
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - E - Palindrome Linked List]]></title>
+    <link href="codingpark/15773727256411.html"/>
+    <updated>2019-12-26T23:05:25+08:00</updated>
+    <id>codingpark/15773727256411.html</id>
+    <content type="html"><![CDATA[
+<p>Given a singly linked list, determine if it is a palindrome.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2
+Output: false
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;2-&gt;1
+Output: true
+</code></pre>
+
+<p><strong>Follow up:</strong><br/>
+Could you do it in \(O(n)\) time and \(O(1)\) space?</p>
+
+<h2 id="toc_0">Algorithm</h2>
+
+<p>This can be solved by reversing the 2nd half and compare the two halves. Let&#39;s start with an example [1, 1, 2, 1].</p>
+
+<p>In the beginning, set two pointers <code>fast</code> and <code>slow</code> starting at the head.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
+sf
+</code></pre>
+
+<p>(1) <strong>Move:</strong> <code>fast</code> pointer goes to the end, and <code>slow</code> goes to the middle.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
+          s          f
+</code></pre>
+
+<p>(2) <strong>Reverse:</strong> the right half is reversed, and <code>slow</code> pointer becomes the 2nd head.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1           
+h                      s
+</code></pre>
+
+<p>(3) <strong>Compare:</strong> run the two pointers <code>head</code> and <code>slow</code> together and compare.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1             
+     h            s
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">public boolean isPalindrome(ListNode head) {
+    ListNode fast = head, slow = head;
+    while (fast != null &amp;&amp; fast.next != null) {
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    // odd nodes: let right half smaller
+    if (fast != null) {
+        slow = slow.next;
+    }
+    slow = reverse(slow);
+    fast = head;
+    
+    while (slow != null) {
+        if (fast.val != slow.val) {
+            return false;
+        }
+        fast = fast.next;
+        slow = slow.next;
+    }
+    return true;
+}
+
+public ListNode reverse(ListNode head) {
+    ListNode prev = null;
+    while (head != null) {
+        ListNode next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+    }
+    return prev;
+}
+</code></pre>
+
+<h2 id="toc_1">Complexity Analysis</h2>
+
+<ul>
+<li><p><strong>Time complexity:</strong> \(O(n)\).<br/>
+The algorithm makes one traversal of the list of n nodes. Therefore time complexity is \(O(n)\).</p></li>
+<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
+We only used constant extra space.</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Odd Even Linked List]]></title>
+    <link href="codingpark/15769805997965.html"/>
+    <updated>2019-12-22T10:09:59+08:00</updated>
+    <id>codingpark/15769805997965.html</id>
+    <content type="html"><![CDATA[
+<p>Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.</p>
+
+<p>You should try to do it in place. The program should run in <code>O(1)</code> space complexity and <code>O(nodes)</code> time complexity.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
+Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
+</code></pre>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>The relative order inside both the even and odd groups should remain as it was in the input.</li>
+<li>The first node is considered odd, the second node even and so on ...</li>
+</ul>
+
+<h2 id="toc_0">Intuition</h2>
+
+<p>Put the odd nodes in a linked list and the even nodes in another. Then link the evenList to the tail of the oddList.</p>
+
+<h2 id="toc_1">Algorithm</h2>
+
+<p><img src="https://leetcode.com/problems/odd-even-linked-list/Figures/328_Odd_Even.svg" alt="example"/></p>
+
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) return null;
+        ListNode odd = head, even = head.next, evenHead = even;
+        while (even != null &amp;&amp; even.next != null) {
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+}
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Remove Nth Node from End of List]]></title>
+    <link href="codingpark/15767443041636.html"/>
+    <updated>2019-12-19T16:31:44+08:00</updated>
+    <id>codingpark/15767443041636.html</id>
+    <content type="html"><![CDATA[
+<p>Given a linked list, remove the n-th node from the end of list and return its head.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
+
+After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.
+</code></pre>
+
+<p><strong>Note:</strong><br/>
+Given n will always be valid.</p>
+
+<h2 id="toc_0">Algorithm</h2>
+
+<p>We could use two pointers. The first pointer advances the list by <code>n+1</code> steps from the beginning, while the second pointer starts from the beginning of the list. Now, both pointers are exactly separated by <code>n</code> nodes apart. We maintain this constant gap by advancing both pointers together until the first pointer arrives past the last node. The second pointer will be pointing at the <code>nth</code> node counting from the last. We relink the next pointer of the node referenced by the second pointer to point to the node&#39;s next next node.</p>
+
+<p><img src="media/15767443041636/15767445250171.png" alt=""/></p>
+
+<pre class="line-numbers"><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode first = dummy;
+    ListNode second = dummy;
+    // Advances first pointer so that the gap between first and second is n nodes apart
+    for (int i = 1; i &lt;= n + 1; i++) {
+        first = first.next;
+    }
+    // Move first to the end, maintaining the gap
+    while (first != null) {
+        first = first.next;
+        second = second.next;
+    }
+    second.next = second.next.next;
+    return dummy.next;
+}
+</code></pre>
+
+<h3 id="toc_1">Complexity Analysis</h3>
+
+<ul>
+<li><p><strong>Time complexity:</strong> \(O(L)\).<br/>
+The algorithm makes one traversal of the list of L nodes. Therefore time complexity is \(O(L)\).</p></li>
+<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
+We only used constant extra space.</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Linked List Cycle II]]></title>
+    <link href="codingpark/15767231455989.html"/>
+    <updated>2019-12-19T10:39:05+08:00</updated>
+    <id>codingpark/15767231455989.html</id>
+    <content type="html"><![CDATA[
+<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
+
+<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
+
+<h2 id="toc_0">方法 1: 哈希表</h2>
+
+<p>用一个 <code>Set</code> 保存已经访问过的节点，我们可以遍历整个列表并返回第一个出现重复的节点。</p>
+
+<h3 id="toc_1">算法</h3>
+
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        Set&lt;ListNode&gt; visited = new HashSet&lt;ListNode&gt;();
+
+        ListNode node = head;
+        while (node != null) {
+            if (visited.contains(node)) {
+                return node;
+            }
+            visited.add(node);
+            node = node.next;
+        }
+
+        return null;
+    }
+}
+</code></pre>
+
+<h3 id="toc_2">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度: \(O(n)\)</li>
+<li>空间复杂度: \(O(n)\)</li>
+</ul>
+
+<h2 id="toc_3">方法 2: Floyd 算法</h2>
+
+<h3 id="toc_4">阶段一: 寻找相遇点</h3>
+
+<p><img src="media/15767231455989/15767236611250.png" alt=""/><br/>
+环中的节点从 <code>0</code> 到 <code>C−1</code> 编号，其中 <code>C</code> 是环的长度。非环节点从 <code>−F</code> 到 <code>−1</code> 编号，其中 <code>F</code> 是环以外节点的数目。 <code>F</code> 次迭代以后，慢指针指向了 <code>0</code> 且快指针指向某个节点 <code>h</code> ，其中 \(F \equiv h \pmod C\) 。这是因为快指针在 <code>F</code> 次迭代中遍历了 <code>2F</code> 个节点，且恰好有 <code>F</code> 个在环中。继续迭代 <code>C−h</code> 次，慢指针显然指向第 <code>C−h</code> 号节点，而快指针也会指向相同的节点。原因在于，快指针从 <code>h</code> 号节点出发遍历了 <code>2(C−h)</code> 个节点。\[\begin{aligned} h + 2(C-h) &amp;= 2C - h \\ &amp;\equiv C-h \pmod C \end{aligned}\] ​因此，如果列表是有环的，快指针和慢指针最后会同时指向同一个节点，因此被称为 相遇 。</p>
+
+<h3 id="toc_5">阶段二: 寻找环起点</h3>
+
+<p><img src="media/15767231455989/15767240034520.png" alt=""/><br/>
+利用已知的条件：慢指针移动 1 步，快指针移动 2 步，来说明它们相遇在环的入口处。（下面证明中的 tortoise 表示慢指针，hare 表示快指针）\[\begin{aligned} 2 \cdot distance(tortoise) &amp;= distance(hare) \\ 2(F+a) &amp;= F+a+b+a \\ 2F+2a &amp;= F+2a+b \\ F &amp;= b \\ \end{aligned}\]因为 F=bF=b ，指针从 hh 点出发和从链表的头出发，最后会遍历相同数目的节点后在环的入口处相遇。</p>
+
+<h3 id="toc_6">算法</h3>
+
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    private ListNode getIntersect(ListNode head) {
+        ListNode tortoise = head;
+        ListNode hare = head;
+
+        // A fast pointer will either loop around a cycle and meet the slow
+        // pointer or reach the `null` at the end of a non-cyclic list.
+        while (hare != null &amp;&amp; hare.next != null) {
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            if (tortoise == hare) {
+                return tortoise;
+            }
+        }
+
+        return null;
+}
+
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        // If there is a cycle, the fast/slow pointers will intersect at some
+        // node. Otherwise, there is no cycle, so we cannot find an e***ance to
+        // a cycle.
+        ListNode intersect = getIntersect(head);
+        if (intersect == null) {
+            return null;
+        }
+
+        // To find the e***ance to the cycle, we have two pointers traverse at
+        // the same speed -- one from the front of the list, and the other from
+        // the point of intersection.
+        ListNode ptr1 = head;
+        ListNode ptr2 = intersect;
+        while (ptr1 != ptr2) {
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+
+        return ptr1;
+    }
+}
+</code></pre>
+
+<h3 id="toc_7">复杂度分析</h3>
+
+<ul>
+<li>时间复杂度: \(O(n)\)</li>
+<li>空间复杂度: \(O(1)\)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - M - Swap Nodes in Pairs]]></title>
+    <link href="codingpark/15758785713938.html"/>
+    <updated>2019-12-09T16:02:51+08:00</updated>
+    <id>codingpark/15758785713938.html</id>
+    <content type="html"><![CDATA[
+<p>Given a linked list, swap every two adjacent nodes and return its head.</p>
+
+<p>You may <strong>not</strong> modify the values in the list&#39;s nodes, only nodes itself may be changed.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
+</code></pre>
+
+<h2 id="toc_0">Approach1: Recursion</h2>
+
+<pre class="line-numbers"><code class="language-java">/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = head.next;
+        head.next = swapPairs(head.next.next);
+        newHead.next = head;
+        return newHead;
+    }
+}
+</code></pre>
+
+<h2 id="toc_1">Approach 2: Fake Head</h2>
+
+<pre class="line-numbers"><code class="language-java">private static ListNode swapPairs(ListNode head) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode cur = dummy;
+
+    while (cur.next != null &amp;&amp; cur.next.next != null) {
+        ListNode first = cur.next;
+        ListNode second = cur.next.next;
+        first.next = second.next;
+        cur.next = second;
+        cur.next.next = first;
+        cur = cur.next.next;
+    }
+    return dummy.next;
+}
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Math - E - Reverse]]></title>
+    <link href="codingpark/15758224019897.html"/>
+    <updated>2019-12-09T00:26:41+08:00</updated>
+    <id>codingpark/15758224019897.html</id>
+    <content type="html"><![CDATA[
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 123
+Output: 321
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: -123
+Output: -321
+</code></pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 120
+Output: 21
+</code></pre>
+
+<p><strong>Note:</strong><br/>
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, <strong>assume that your function returns 0 when the reversed integer overflows</strong>.</p>
+
+<h2 id="toc_0">Intuition</h2>
+
+<p>We can build up the reverse integer one digit at a time. While doing so, we can check beforehand whether or not appending another digit would cause overflow.</p>
+
+<h2 id="toc_1">Algorithm</h2>
+
+<p>Reversing an integer can be done similarly to reversing a string.</p>
+
+<p>We want to repeatedly &quot;pop&quot; the last digit off of \(x\) and &quot;push&quot; it to the back of the \(\text{rev}\). In the end, \(\text{rev}\) will be the reverse of the \(x\).</p>
+
+<p>To &quot;pop&quot; and &quot;push&quot; digits without the help of some auxiliary stack/array, we can use math.</p>
+
+<p>However, this approach is dangerous, because the statement \(\text{temp} = \text{rev} \cdot 10 + \text{pop}\) can cause overflow.</p>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public int reverse(int x) {
+        int rev = 0;
+        while (x != 0) {
+            int pop = x % 10;
+            x /= 10;
+            if (rev &gt; Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 &amp;&amp; pop &gt; 7)) return 0;
+            if (rev &lt; Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 &amp;&amp; pop &lt; -8)) return 0;
+            rev = rev * 10 + pop;
+        }
+        return rev;
+    }
+}
+</code></pre>
+
+<h2 id="toc_2">Complexity Analysis</h2>
+
+<ul>
+<li>Time Complexity: \(O(\log(x))\). There are roughly \(\log_{10}(x)\)​ digits in \(x\).</li>
+<li>Space Complexity: \(O(1)\).</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LinkedList - E - Remove Linked List Elements]]></title>
+    <link href="codingpark/15757068438294.html"/>
+    <updated>2019-12-07T16:20:43+08:00</updated>
+    <id>codingpark/15757068438294.html</id>
+    <content type="html"><![CDATA[
+<p>Remove all elements from a linked list of integers that have value val.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input:  1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
+Output: 1-&gt;2-&gt;3-&gt;4-&gt;5
+</code></pre>
+
+<h2 id="toc_0">Approach: Fake Head</h2>
+
+<p><strong>Intuition</strong><br/>
+First we make a list of edge cases that need to be considered:</p>
+
+<ol>
+<li>The linked list is empty, i.e. the head node is None.</li>
+<li>Multiple nodes with the target value in a row.</li>
+<li>The head node has the target value.</li>
+<li>The head node, and any number of nodes immediately after it have the target value.</li>
+<li>All of the nodes have the target value.</li>
+<li>The last node has the target value.</li>
+</ol>
+
+<p><strong>Algorithm</strong></p>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def removeElements(self, head, val):
+        &quot;&quot;&quot;
+        :type head: ListNode
+        :type val: int
+        :rtype: ListNode
+        &quot;&quot;&quot;
+        
+        dummy_head = ListNode(-1)
+        dummy_head.next = head
+        
+        current_node = dummy_head
+        while current_node.next != None:
+            if current_node.next.val == val:
+                current_node.next = current_node.next.next
+            else:
+                current_node = current_node.next
+                
+        return dummy_head.next
+</code></pre>
+
+<p><strong>Complexity analysis</strong></p>
+
+<ul>
+<li>Time complexity: \(O(n)\)</li>
+<li>Space complexity: \(O(1)\)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Math - LinkedList - E - Linked List Cycle]]></title>
+    <link href="codingpark/15757035238329.html"/>
+    <updated>2019-12-07T15:25:23+08:00</updated>
+    <id>codingpark/15757035238329.html</id>
+    <content type="html"><![CDATA[
+<p>Given a linked list, determine if it has a cycle in it.</p>
+
+<p>To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail co<code>n</code>ects to. If pos is -1, then there is no cycle in the linked list.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: head = [3,2,0,-4], pos = 1
+Output: true
+Explanation: There is a cycle in the linked list, where tail co`n`ects to the second node.
+</code></pre>
+
+<p><img src="media/15757035238329/15757035947205.png" alt="eg1"/></p>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: head = [1], pos = -1
+Output: false
+Explanation: There is no cycle in the linked list.
+</code></pre>
+
+<p><img src="media/15757035238329/15757036496923.png" alt="eg2"/></p>
+
+<h2 id="toc_0">Approach 1: Hash Table</h2>
+
+<p><strong>Intuition</strong><br/>
+To detect if a list is cyclic, we can check whether a node had been visited before. A natural way is to use a hash table.</p>
+
+<p><strong>Algorithm</strong><br/>
+We go through each node one by one and record each node&#39;s reference (or memory address) in a hash table. If the current node is null, we have reached the end of the list and it must not be cyclic. If current node’s reference is in the hash table, then return true.</p>
+
+<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+    Set&lt;ListNode&gt; nodesSeen = new HashSet&lt;&gt;();
+    while (head != null) {
+        if (nodesSeen.contains(head)) {
+            return true;
+        } else {
+            nodesSeen.add(head);
+        }
+        head = head.next;
+    }
+    return false;
+}
+</code></pre>
+
+<p><strong>Complexity analysis</strong></p>
+
+<ul>
+<li>Time complexity : <code>O(n)</code>. We visit each of the <code>n</code> elements in the list at most once. Adding a node to the hash table costs only <code>O(1)</code> time.</li>
+<li>Space complexity: <code>O(n)</code>. The space depends on the number of elements added to the hash table, which contains at most <code>n</code> elements.</li>
+</ul>
+
+<h2 id="toc_1">Approach 2: Two Pointers</h2>
+
+<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+    if (head == null || head.next == null) {
+        return false;
+    }
+    ListNode slow = head;
+    ListNode fast = head.next;
+    while (slow != fast) {
+        if (fast == null || fast.next == null) {
+            return false;
+        }
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return true;
+}
+</code></pre>
+
+<p><strong>Complexity analysis:</strong></p>
+
+<ul>
+<li><p><strong>Time complexity:</strong> <code>O(n)</code>. Let us denote <code>n</code> as the total number of nodes in the linked list. To analyze its time complexity, we consider the following two cases separately.</p>
+<ul>
+<li><p><strong>List has no cycle:</strong><br/>
+The fast pointer reaches the end first and the run time depends on the list&#39;s length, which is <code>O(n)</code>.</p></li>
+<li><p><strong>List has a cycle:</strong><br/>
+We break down the movement of the slow pointer into two steps, the non-cyclic part and the cyclic part:</p>
+<ol>
+<li>The slow pointer takes &quot;non-cyclic length&quot; steps to enter the cycle. At this point, the fast pointer has already reached the cycle. \(\text{Number of iterations} = \text{non-cyclic length} = N\)</li>
+<li>Both pointers are now in the cycle. Consider two runners running in a cycle - the fast runner moves 2 steps while the slow runner moves 1 steps at a time. Since the speed difference is 1, it takes \(\frac{\text{distance between the 2 runners}}{\text{difference of speed}}\) loops for the fast runner to catch up with the slow runner. As the distance is at most &quot;\(\text{cyclic length K}\)&quot; and the speed difference is 1, we conclude that<br/>
+\(\text{Number of iterations} = almost &quot;\text{cyclic length K}cyclic length K&quot;\).</li>
+</ol></li>
+</ul>
+<p>Therefore, the worst case time complexity is <code>O(N+K)</code>, which is <code>O(n)</code>.</p></li>
+<li><p><strong>Space complexity:</strong> We only use two nodes (slow and fast) so the space complexity is <code>O(1)</code>.</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Array - M - Next Permutation]]></title>
+    <link href="codingpark/15750825009903.html"/>
+    <updated>2019-11-30T10:55:00+08:00</updated>
+    <id>codingpark/15750825009903.html</id>
+    <content type="html"><![CDATA[
+<p>Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.</p>
+
+<p>If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).</p>
+
+<p>The replacement must be in-place and use only constant extra memory.</p>
+
+<p>Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.</p>
+
+<pre class="line-numbers"><code class="language-text">1,2,3 → 1,3,2
+3,2,1 → 1,2,3
+1,1,5 → 1,5,1
+</code></pre>
+
+<h2 id="toc_0">Algorithm</h2>
+
+<p>First, we observe that for any given sequence that is in descending order, no next larger permutation is possible. For example, no next permutation is possible for the following array:</p>
+
+<pre class="line-numbers"><code class="language-text">[9, 5, 4, 3, 1]
+</code></pre>
+
+<p>We need to find the first pair of two successive numbers <code>a[i]</code> and <code>a[i−1]</code>, from the right, which satisfy <code>a[i] &gt; a[i-1]</code>. Now, no rearrangements to the right of <code>a[i−1]</code> can create a larger permutation since that subarray consists of numbers in descending order. Thus, we need to rearrange the numbers to the right of <code>a[i−1]</code>including itself.</p>
+
+<p>Now, what kind of rearrangement will produce the next larger number? We want to create the permutation just larger than the current one. Therefore, we need to replace the number <code>a[i-1]</code> with the number which is just larger than itself among the numbers lying to its right section, say <code>a[j]</code>.</p>
+
+<p><img src="https://leetcode.com/media/original_images/31_nums_graph.png" alt="order"/></p>
+
+<p>We swap the numbers <code>a[i-1]</code> and <code>a[j]</code>. We now have the correct number at index <code>i−1</code>. But still the current permutation isn&#39;t the permutation that we are looking for. We need the smallest permutation that can be formed by using the numbers only to the right of <code>a[i−1]</code>. Therefore, we need to place those numbers in ascending order to get their smallest permutation.</p>
+
+<p>But, recall that while scanning the numbers from the right, we simply kept decrementing the index until we found the pair <code>a[i]</code> and <code>a[i−1]</code> where, <code>a[i] &gt; a[i-1]</code>. Thus, all numbers to the right of <code>a[i−1]</code> were already sorted in descending order. Furthermore, swapping <code>a[i−1]</code> and <code>a[j]</code> didn&#39;t change that order. Therefore, we simply need to reverse the numbers following <code>a[i−1]</code> to get the next smallest lexicographic permutation.</p>
+
+<p>The following animation will make things clearer:</p>
+
+<p><img src="https://leetcode.com/media/original_images/31_Next_Permutation.gif" alt="move"/></p>
+
+<h2 id="toc_1">Java Implement</h2>
+
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        while (i &gt;= 0 &amp;&amp; nums[i + 1] &lt;= nums[i]) {
+            i--;
+        }
+        if (i &gt;= 0) {
+            int j = nums.length - 1;
+            while (j &gt;= 0 &amp;&amp; nums[j] &lt;= nums[i]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1);
+    }
+
+    private void reverse(int[] nums, int start) {
+        int i = start, j = nums.length - 1;
+        while (i &lt; j) {
+            swap(nums, i, j);
+            i++;
+            j--;
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+</code></pre>
+
+<h2 id="toc_2">Complexity Analysis</h2>
+
+<p>Time complexity : \(O(n)\). In worst case, only two scans of the whole array are needed.</p>
+
+<p>Space complexity : \(O(1)\). No extra space is used. In place replacements are done.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DP - H - Super Agg Drop]]></title>
+    <link href="codingpark/15748621727087.html"/>
+    <updated>2019-11-27T21:42:52+08:00</updated>
+    <id>codingpark/15748621727087.html</id>
+    <content type="html"><![CDATA[
+<p>你面前有一栋从 1 到 N 共 N 层的楼，然后给你 K 个鸡蛋（K 至少为 1）。现在确定这栋楼存在楼层 <code>0 &lt;= F &lt;= N</code>，在这层楼将鸡蛋扔下去，鸡蛋恰好没摔碎（高于 F 的楼层都会碎，低于F的楼层都不会碎）。现在问你，最坏情况下，你至少要扔几次鸡蛋，才能确定这个楼层 F 呢？</p>
+
+<p>PS：F 可以为 0，比如说鸡蛋在 1 层都能摔碎，那么 <code>F = 0</code>。</p>
+
+<h2 id="toc_0">思路：</h2>
+
+<p>在第 <code>i</code> 层楼扔了鸡蛋之后，可能出现两种情况：鸡蛋碎了，鸡蛋没碎。</p>
+
+<ul>
+<li>如果鸡蛋碎了，那么鸡蛋的个数 <code>K</code> 应该减一，搜索的楼层区间应该从 <code>[1...N]</code> 变为 <code>[1...i-1]</code> 共 <code>i-1</code> 层楼；</li>
+<li>如果鸡蛋没碎，那么鸡蛋的个数 K 不变，搜索的楼层区间应该从 <code>[1...N]</code> 变为 <code>[i+1...N]</code> 共 <code>N-i</code> 层楼。</li>
+</ul>
+
+<p>复杂度分析：</p>
+
+<ul>
+<li>时间复杂度为函数本身复杂度和 K 个子问题复杂度的乘积 \(O(KN^2)\)；</li>
+<li>空间复杂度为子问题个数 \(O(KN)\)。</li>
+</ul>
+
+<h2 id="toc_1">Python 实现</h2>
+
+<pre class="line-numbers"><code class="language-python">def superEggDrop(K: int, N: int):
+
+    memo = dict()
+    def dp(K, N) -&gt; int:
+        # 基线条件
+        if K == 1: return N
+        if N == 0: return 0
+        # 避免重复计算
+        if (K, N) in memo:
+            return memo[(K, N)]
+
+        res = float(&#39;INF&#39;)
+        # 穷举所有可能的选择
+        for i in range(1, N + 1):
+            res = min(res, 
+                      max(
+                            dp(K, N - i), 
+                            dp(K - 1, i - 1)
+                         ) + 1
+                  )
+        # 记入备忘录
+        memo[(K, N)] = res
+        return res
+
+    return dp(K, N)
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DP - M - Push Dominoes]]></title>
+    <link href="codingpark/15748543212519.html"/>
+    <updated>2019-11-27T19:32:01+08:00</updated>
+    <id>codingpark/15748543212519.html</id>
+    <content type="html"><![CDATA[
+<p>一行中有 N 张多米诺骨牌，我们将每张多米诺骨牌垂直竖立。在开始时，我们同时把一些多米诺骨牌向左或向右推。</p>
+
+<p><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/05/19/domino.png" alt="dominoes"/></p>
+
+<p>每过一秒，倒向左边的多米诺骨牌会推动其左侧相邻的多米诺骨牌。同样地，倒向右边的多米诺骨牌也会推动竖立在其右侧的相邻多米诺骨牌。如果同时有多米诺骨牌落在一张垂直竖立的多米诺骨牌的两边，由于受力平衡，该骨牌仍然保持不变。</p>
+
+<p>就这个问题而言，我们会认为正在下降的多米诺骨牌不会对其它正在下降或已经下降的多米诺骨牌施加额外的力。</p>
+
+<p>给定表示初始状态的字符串 <code>&quot;S&quot;</code> 。如果第 <code>i</code> 张多米诺骨牌被推向左边，则 <code>S[i] = &#39;L&#39;</code>；如果第 <code>i</code> 张多米诺骨牌被推向右边，则 <code>S[i] = &#39;R&#39;</code>；如果第 i 张多米诺骨牌没有被推动，则 <code>S[i] = &#39;.&#39;</code>。</p>
+
+<p>返回表示最终状态的字符串。</p>
+
+<p>示例 1：</p>
+
+<pre class="line-numbers"><code class="language-text">输入：&quot;.L.R...LR..L..&quot;
+输出：&quot;LL.RR.LLRRLL..&quot;
+</code></pre>
+
+<p>示例 2：</p>
+
+<pre class="line-numbers"><code class="language-text">输入：&quot;RR.L&quot;
+输出：&quot;RR.L&quot;
+说明：第一张多米诺骨牌没有给第二张施加额外的力。
+</code></pre>
+
+<h2 id="toc_0">方法 1：相邻标记</h2>
+
+<ul>
+<li>如果我们有 <code>&quot;A....B&quot;</code>，当 <code>A = B</code>，那么就变成 <code>&quot;AAAAAA&quot;</code>。</li>
+<li>如果我们有 <code>&quot;R....L&quot;</code>，那么结果会变成 <code>&quot;RRRLLL&quot;</code> 或者 <code>&quot;RRR.LLL&quot;</code>。如果初始标记的坐标是 <code>i</code> 和 <code>j</code>，我们可以检查距离 <code>k-i</code> 和 <code>j-k</code> 来决定位置 <code>k</code> 的形态是 <code>&#39;L&#39;</code>，<code>&#39;R&#39;</code> 还是 <code>&#39;.&#39;</code>。</li>
+<li>如果我们有 <code>&quot;L....R&quot;</code>，就什么都不做，跳过。</li>
+<li>时间和空间复杂度：\(O(n)\)</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public String pushDominoes(String dominoes) {
+        int N = dominoes.length();
+        int[] indexes = new int[N+2];
+        char[] symbols = new char[N+2];
+        int len = 1;
+        indexes[0] = -1;
+        symbols[0] = &#39;L&#39;;
+
+        for (int i = 0; i &lt; N; ++i)
+            if (dominoes.charAt(i) != &#39;.&#39;) {
+                indexes[len] = i;
+                symbols[len++] = dominoes.charAt(i);
+            }
+
+        indexes[len] = N;
+        symbols[len++] = &#39;R&#39;;
+
+        char[] ans = dominoes.toCharArray();
+        for (int index = 0; index &lt; len - 1; ++index) {
+            int i = indexes[index], j = indexes[index+1];
+            char x = symbols[index], y = symbols[index+1];
+            char write;
+            if (x == y) {
+                for (int k = i+1; k &lt; j; ++k)
+                    ans[k] = x;
+            } else if (x &gt; y) { // RL
+                for (int k = i+1; k &lt; j; ++k)
+                    ans[k] = k-i == j-k ? &#39;.&#39; : k-i &lt; j-k ? &#39;R&#39; : &#39;L&#39;;
+            }
+        }
+
+        return String.valueOf(ans);
+    }
+}
+</code></pre>
+
+<h2 id="toc_1">方法 2：计算受力</h2>
+
+<ul>
+<li>从左向右扫描，我们的力每轮迭代减少 1。当我们遇到一个 <code>&#39;R&#39;</code> 时重置为 <code>N</code> ，所以 <code>force[i]</code> 比 <code>force[j]</code> 大当且仅当 <code>dominoes[i]</code> 比 <code>dominoes[j]</code> 离最左边的 <code>&#39;R&#39;</code> 近。</li>
+<li>类似的，从右向左扫描，可以找到向左侧的力，离 <code>L</code> 的远近。</li>
+<li>对于骨牌的结果 <code>answer[i]</code>，如果左右两侧力相等，答案是 <code>&#39;.&#39;</code>。否则，哪边力大答案就是哪边。</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public String pushDominoes(String S) {
+        char[] A = S.toCharArray();
+        int N = A.length;
+        int[] forces = new int[N];
+
+        // Populate forces going from left to right
+        int force = 0;
+        for (int i = 0; i &lt; N; ++i) {
+            if (A[i] == &#39;R&#39;) force = N;
+            else if (A[i] == &#39;L&#39;) force = 0;
+            else force = Math.max(force - 1, 0);
+            forces[i] += force;
+        }
+
+        // Populate forces going from right to left
+        force = 0;
+        for (int i = N-1; i &gt;= 0; --i) {
+            if (A[i] == &#39;L&#39;) force = N;
+            else if (A[i] == &#39;R&#39;) force = 0;
+            else force = Math.max(force - 1, 0);
+            forces[i] -= force;
+        }
+
+        StringBuilder ans = new StringBuilder();
+        for (int f: forces)
+            ans.append(f &gt; 0 ? &#39;R&#39; : f &lt; 0 ? &#39;L&#39; : &#39;.&#39;);
+        return ans.toString();
+    }
+}
+</code></pre>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Archives - CodingPark
+  Array - M - Three Sum - CodingPark
   
   </title>
  <meta name="description" content="">
@@ -216,412 +216,134 @@
             <div class="large-9 medium-9 columns">
 
  <div class="markdown-body">
-	
-		 
-		  	<h2>2020</h2>
-		
-		
-			<div>
-				<h3><a href="15804365379093.html">LinkedList - E - Merge Two Sorted Lists</a></h3>
-				<p>
-					<time datetime="2020-01-31T10:08:57+08:00" pubdate><span class='month'>1月</span> <span class='day'>31</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h1>Array - M - Three Sum</h1>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15804364748378.html">Array - M - Divided Two Integers</a></h3>
-				<p>
-					<time datetime="2020-01-31T10:07:54+08:00" pubdate><span class='month'>1月</span> <span class='day'>31</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15804364487583.html">Array - E - Max SubArray</a></h3>
-				<p>
-					<time datetime="2020-01-31T10:07:28+08:00" pubdate><span class='month'>1月</span> <span class='day'>31</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
+<p>注意：答案中不可以包含重复的三元组。</p>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15802233461013.html">Tree - M - Binary Tree Level Order Traversal</a></h3>
-				<p>
-					<time datetime="2020-01-28T22:55:46+08:00" pubdate><span class='month'>1月</span> <span class='day'>28</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Tree.html'>Tree</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-text">例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15797451740361.html">Tree - M - Binary Tree Preorder Traversal</a></h3>
-				<p>
-					<time datetime="2020-01-23T10:06:14+08:00" pubdate><span class='month'>1月</span> <span class='day'>23</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Tree.html'>Tree</a>&nbsp;
-				   
-				  </span>
+满足要求的三元组集合为：
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+</code></pre>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15794258384164.html">LinkedList - M - Rotate</a></h3>
-				<p>
-					<time datetime="2020-01-19T17:23:58+08:00" pubdate><span class='month'>1月</span> <span class='day'>19</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h2 id="toc_0">思路</h2>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15793500905829.html">LinkedList - M - Flatten a Multilevel Doubly Linked List</a></h3>
-				<p>
-					<time datetime="2020-01-18T20:21:30+08:00" pubdate><span class='month'>1月</span> <span class='day'>18</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<ul>
+<li>首先对数组进行排序，排序后固定一个数 <code>nums[i]</code>，再使用左右指针指向 <code>nums[i]</code> 后面的两端，数字分别为 <code>nums[L]</code> 和 <code>nums[R]</code>，计算三个数的和 <code>sum</code> 判断是否满足为 0，满足则添加进结果集</li>
+<li>如果 <code>nums[i] &gt; 0</code>，则三数之和必然无法等于 0，结束循环</li>
+<li>如果 <code>nums[i] == nums[i-1]</code>，则说明该数字重复，会导致结果重复，所以应该跳过</li>
+<li>当 <code>sum == 0</code> 时，<code>nums[L] == nums[L+1]</code> 则会导致结果重复，应该跳过，L++</li>
+<li>当 <code>sum == 0</code> 时，<code>nums[R] == nums[R-1]</code> 则会导致结果重复，应该跳过，R--</li>
+<li>时间复杂度：\(O(n^2)\)</li>
+</ul>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15791026198982.html">LinkedList - M - Add Two Numbers</a></h3>
-				<p>
-					<time datetime="2020-01-15T23:36:59+08:00" pubdate><span class='month'>1月</span> <span class='day'>15</span> <span class='year'>2020</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h2 id="toc_1">Java 解答</h2>
 
-				</p>
-			</div>
- 	
-		 
-		  	<h2>2019</h2>
-		
-		
-			<div>
-				<h3><a href="15775085021373.html">Math - E - Palindrome Number</a></h3>
-				<p>
-					<time datetime="2019-12-28T12:48:22+08:00" pubdate><span class='month'>12月</span> <span class='day'>28</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public static List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
+        List&lt;List&lt;Integer&gt;&gt; ans = new ArrayList();
+        int len = nums.length;
+        if(nums == null || len &lt; 3) return ans;
+        Arrays.sort(nums); // 排序
+        for (int i = 0; i &lt; len ; i++) {
+            if(nums[i] &gt; 0) break; // 如果当前数字大于0，则三数之和一定大于0，所以结束循环
+            if(i &gt; 0 &amp;&amp; nums[i] == nums[i-1]) continue; // 去重
+            int L = i+1;
+            int R = len-1;
+            while(L &lt; R){
+                int sum = nums[i] + nums[L] + nums[R];
+                if(sum == 0){
+                    ans.add(Arrays.asList(nums[i],nums[L],nums[R]));
+                    while (L&lt;R &amp;&amp; nums[L] == nums[L+1]) L++; // 去重
+                    while (L&lt;R &amp;&amp; nums[R] == nums[R-1]) R--; // 去重
+                    L++;
+                    R--;
+                }
+                else if (sum &lt; 0) L++;
+                else if (sum &gt; 0) R--;
+            }
+        }        
+        return ans;
+    }
+}
+</code></pre>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15773727256411.html">LinkedList - E - Palindrome Linked List</a></h3>
-				<p>
-					<time datetime="2019-12-26T23:05:25+08:00" pubdate><span class='month'>12月</span> <span class='day'>26</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<h2 id="toc_2">Python 解答</h2>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15769805997965.html">LinkedList - M - Odd Even Linked List</a></h3>
-				<p>
-					<time datetime="2019-12-22T10:09:59+08:00" pubdate><span class='month'>12月</span> <span class='day'>22</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def threeSum(self, nums: List[int]) -&gt; List[List[int]]:
+        results = []
+        length = len(nums)
+        if length &lt; 3:
+            return results
+        
+        nums = sorted(nums)
+        for i in range(length):
+            if nums[i] &gt; 0:  #若第i个数大于零则跳出循环
+                break
+            if i &gt; 0 and nums[i] == nums[i-1]:  #去重
+                continue
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15767443041636.html">LinkedList - M - Remove Nth Node from End of List</a></h3>
-				<p>
-					<time datetime="2019-12-19T16:31:44+08:00" pubdate><span class='month'>12月</span> <span class='day'>19</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+            left = i + 1
+            right = length - 1
+            while (left &lt; right):
+                totalSum = nums[i] + nums[left] + nums[right]
+                if totalSum &gt; 0:
+                    right -= 1
+                elif totalSum &lt; 0:
+                    left += 1
+                else:
+                    results.append([nums[i], nums[left], nums[right]])
+                    while left &lt; right and nums[left] == nums[left+1]:  #去重
+                        left += 1
+                    while left &lt; right and nums[right] == nums[right-1]:  #去重
+                        right -= 1
+                    left += 1
+                    right -= 1
+        return results
+</code></pre>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15767231455989.html">LinkedList - M - Linked List Cycle II</a></h3>
-				<p>
-					<time datetime="2019-12-19T10:39:05+08:00" pubdate><span class='month'>12月</span> <span class='day'>19</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15758785713938.html">LinkedList - M - Swap Nodes in Pairs</a></h3>
-				<p>
-					<time datetime="2019-12-09T16:02:51+08:00" pubdate><span class='month'>12月</span> <span class='day'>09</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+</div>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15758224019897.html">Math - E - Reverse</a></h3>
-				<p>
-					<time datetime="2019-12-09T00:26:41+08:00" pubdate><span class='month'>12月</span> <span class='day'>09</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+<br /><br />
+<hr />
 
-				</p>
-			</div>
- 	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
 		
+	        <a href="15736322961648.html"  title="Previous Post: Array - M - Three Sum Closest">&laquo; Array - M - Three Sum Closest</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
 		
-			<div>
-				<h3><a href="15757068438294.html">LinkedList - E - Remove Linked List Elements</a></h3>
-				<p>
-					<time datetime="2019-12-07T16:20:43+08:00" pubdate><span class='month'>12月</span> <span class='day'>07</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='LinkedList.html'>LinkedList</a>&nbsp;
-				   
-				  </span>
+	</div>
+  </div>
+</div>
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15757035238329.html">Math - LinkedList - E - Linked List Cycle</a></h3>
-				<p>
-					<time datetime="2019-12-07T15:25:23+08:00" pubdate><span class='month'>12月</span> <span class='day'>07</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15750825009903.html">Array - M - Next Permutation</a></h3>
-				<p>
-					<time datetime="2019-11-30T10:55:00+08:00" pubdate><span class='month'>11月</span> <span class='day'>30</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15748621727087.html">DP - H - Super Agg Drop</a></h3>
-				<p>
-					<time datetime="2019-11-27T21:42:52+08:00" pubdate><span class='month'>11月</span> <span class='day'>27</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Dynamic%20Programing.html'>Dynamic Programing</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15748543212519.html">DP - M - Push Dominoes</a></h3>
-				<p>
-					<time datetime="2019-11-27T19:32:01+08:00" pubdate><span class='month'>11月</span> <span class='day'>27</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Dynamic%20Programing.html'>Dynamic Programing</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15745678356677.html">Math - M - Pow(x,n)</a></h3>
-				<p>
-					<time datetime="2019-11-24T11:57:15+08:00" pubdate><span class='month'>11月</span> <span class='day'>24</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Math.html'>Math</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15742402167934.html">Array - M - Merge Sorted Array</a></h3>
-				<p>
-					<time datetime="2019-11-20T16:56:56+08:00" pubdate><span class='month'>11月</span> <span class='day'>20</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15742372257078.html">DP - E - House Robber</a></h3>
-				<p>
-					<time datetime="2019-11-20T16:07:05+08:00" pubdate><span class='month'>11月</span> <span class='day'>20</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Dynamic%20Programing.html'>Dynamic Programing</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15736322961648.html">Array - M - Three Sum Closest</a></h3>
-				<p>
-					<time datetime="2019-11-13T16:04:56+08:00" pubdate><span class='month'>11月</span> <span class='day'>13</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	
-		
-		
-			<div>
-				<h3><a href="15734567775381.html">Array - M - Three Sum</a></h3>
-				<p>
-					<time datetime="2019-11-11T15:19:37+08:00" pubdate><span class='month'>11月</span> <span class='day'>11</span> <span class='year'>2019</span></time>
-					&nbsp;&nbsp;
-				  <span class="categories">posted in 
-				  
-					    <a class='category' href='Array.html'>Array</a>&nbsp;
-				   
-				  </span>
-
-				</p>
-			</div>
- 	 
-</div>  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15734567775381.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 
@@ -647,6 +369,9 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
   
 
 
@@ -660,6 +385,8 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
 
 
+
+<script src="asset/prism.js"></script>
 
 
 <style type="text/css">
