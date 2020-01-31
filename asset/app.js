@@ -1,15 +1,15 @@
 var i18nZHData = {
-      'tran-site-categories':'网站分类',
-      'tran-site-tags':'网站标签',
-      'tran-posted-in':'发布到',
-      'tran-tags':'标签：',
-      'tran-archives':'归档',
-      'tran-categories':'分类：',
-      'tran-comments':'评论',
-      'tran-readmore':'继续阅读...',
-      'tran-prev-page':'&laquo; 上一页',
-      'tran-next-page':'下一页 &raquo;',
-      'tran-disqus-comments':'评论'
+      'tran-site-categories':'Categories',
+      'tran-site-tags':'Tags',
+      'tran-posted-in':'post to',
+      'tran-tags':'Tags:',
+      'tran-archives':'Achive',
+      'tran-categories':'Categories：',
+      'tran-comments':'Comment',
+      'tran-readmore':'Read more...',
+      'tran-prev-page':'&laquo; Prev',
+      'tran-next-page':'Next &raquo;',
+      'tran-disqus-comments':'Comment'
     };
 
 document.addEventListener('DOMContentLoaded',function(){
