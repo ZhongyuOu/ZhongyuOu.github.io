@@ -2,203 +2,65 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[CodingPark]]></title>
-  <link href="codingpark/atom.xml" rel="self"/>
-  <link href="codingpark/"/>
-  <updated>2020-01-31T10:46:07+08:00</updated>
-  <id>codingpark/</id>
+  <link href="https://zhongyuou.github.io/atom.xml" rel="self"/>
+  <link href="https://zhongyuou.github.io/"/>
+  <updated>2020-01-31T13:43:34+08:00</updated>
+  <id>https://zhongyuou.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im">MWeb</generator>
-
+  <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[LinkedList - E - Merge Two Sorted Lists]]></title>
-    <link href="codingpark/15804365379093.html"/>
-    <updated>2020-01-31T10:08:57+08:00</updated>
-    <id>codingpark/15804365379093.html</id>
+    <title type="html"><![CDATA[Add Two Numbers]]></title>
+    <link href="https://zhongyuou.github.io/15791026198982.html"/>
+    <updated>2020-01-15T23:36:59+08:00</updated>
+    <id>https://zhongyuou.github.io/15791026198982.html</id>
     <content type="html"><![CDATA[
-<p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
+<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
-Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+<pre class="line-numbers"><code class="language-text">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+Output: 7 -&gt; 0 -&gt; 8
+Explanation: 342 + 465 = 807.
 </code></pre>
 
-<h2 id="toc_0">Approach 1: Iteratively</h2>
+<h2 id="toc_0">Solution:</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists1(self, l1, l2):
-    dummy = cur = ListNode(0)
-    while l1 and l2:
-        if l1.val &lt; l2.val:
-            cur.next = l1
-            l1 = l1.next
-        else:
-            cur.next = l2
-            l2 = l2.next
-        cur = cur.next
-    cur.next = l1 or l2
-    return dummy.next
-</code></pre>
+<pre class="line-numbers"><code class="language-python"># Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
-<h2 id="toc_1">Approach 2: Recursively</h2>
-
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists2(self, l1, l2):
-    if not l1 or not l2:
-        return l1 or l2
-    if l1.val &lt; l2.val:
-        l1.next = self.mergeTwoLists(l1.next, l2)
-        return l1
-    else:
-        l2.next = self.mergeTwoLists(l1, l2.next)
-        return l2
-</code></pre>
-
-<h2 id="toc_2">Approach 3: In-place</h2>
-
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists(self, l1, l2):
-    if None in (l1, l2):
-        return l1 or l2
-    dummy = cur = ListNode(0)
-    dummy.next = l1
-    while l1 and l2:
-        if l1.val &lt; l2.val:
-            l1 = l1.next
-        else:
-            nxt = cur.next
-            cur.next = l2
-            tmp = l2.next
-            l2.next = nxt
-            l2 = tmp
-        cur = cur.next
-    cur.next = l1 or l2
-    return dummy.next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        carry = 0;
+        res = n = ListNode(0);
+        while l1 or l2 or carry:
+            if l1:
+                carry += l1.val
+                l1 = l1.next;
+            if l2:
+                carry += l2.val;
+                l2 = l2.next;
+            carry, val = divmod(carry, 10)
+            n.next = n = ListNode(val);
+        return res.next
 </code></pre>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Array - M - Divided Two Integers]]></title>
-    <link href="codingpark/15804364748378.html"/>
-    <updated>2020-01-31T10:07:54+08:00</updated>
-    <id>codingpark/15804364748378.html</id>
-    <content type="html"><![CDATA[
-<p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
-
-<p>Return the quotient after dividing dividend by divisor.</p>
-
-<p>The integer division should truncate toward zero.</p>
-
-<p><strong>Example 1:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: dividend = 10, divisor = 3
-Output: 3
-</code></pre>
-
-<p><strong>Example 2:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: dividend = 7, divisor = -3
-Output: -2
-</code></pre>
-
-<p><strong>Note:</strong></p>
-
-<ul>
-<li>Both dividend and divisor will be 32-bit signed integers.</li>
-<li>The divisor will never be 0.</li>
-<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, assume that your function returns \(2^{31} − 1\) when the division result overflows.</li>
-</ul>
-
-<h2 id="toc_0">Python Implement</h2>
-
-<pre class="line-numbers"><code class="language-python">class Solution:
-    def divide(self, dividend, divisor):
-        positive = (dividend &lt; 0) == (divisor &lt; 0)
-        dividend, divisor = abs(dividend), abs(divisor)
-        res = 0
-        while dividend &gt;= divisor:
-            x = 0
-            while dividend &gt;= divisor &lt;&lt; (x + 1):
-                x += 1
-            res += 1 &lt;&lt; x
-            dividend -= divisor &lt;&lt; x
-        return min(max(-2**31, res if positive else -res), 2**31-1))
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Array - E - Max SubArray]]></title>
-    <link href="codingpark/15804364487583.html"/>
-    <updated>2020-01-31T10:07:28+08:00</updated>
-    <id>codingpark/15804364487583.html</id>
-    <content type="html"><![CDATA[
-<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-
-<p>示例:</p>
-
-<pre class="line-numbers"><code class="language-text">输入: [-2,1,-3,4,-1,2,1,-5,4],
-输出: 6
-解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
-</code></pre>
-
-<h2 id="toc_0">思路</h2>
-
-<ul>
-<li>动态规划的是首先对数组进行遍历，当前最大连续子序列和为 <code>sum</code>，结果为 <code>ans</code></li>
-<li>如果 <code>sum &gt; 0</code>，则说明 <code>sum</code> 对结果有增益效果，则 <code>sum</code> 保留并加上当前遍历数字</li>
-<li>如果 <code>sum &lt;= 0</code>，则说明 <code>sum</code> 对结果无增益效果，需要舍弃，则 <code>sum</code> 直接更新为当前遍历数字</li>
-<li>每次比较 <code>sum</code> 和 <code>ans</code> 的大小，将最大值置为 <code>ans</code>，遍历结束返回结果</li>
-<li>时间复杂度：\(O(n)\)</li>
-</ul>
-
-<h2 id="toc_1">Java 解答</h2>
-
-<pre class="line-numbers"><code class="language-java">class Solution {
-    public int maxSubArray(int[] nums) {
-        int sum = 0;
-        int ans = nums[0];
-
-        for (int num: nums) {
-            if (sum &gt; 0) {
-                sum += num;
-            } else {
-                sum = num;
-            }
-            ans = Math.max(sum, ans);
-        }
-        return ans;
-    }
-}
-</code></pre>
-
-<h2 id="toc_2">Python 解答</h2>
-
-<pre class="line-numbers"><code class="language-python">class Solution:
-    def maxSubArray(self, nums: List[int]) -&gt; int:
-        total = 0
-        ans = nums[0]
-        for num in nums:
-            if total &gt; 0:
-                total += num
-            else:
-                total = num
-            ans = max(total, ans)
-        return ans
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tree - M - Binary Tree Level Order Traversal]]></title>
-    <link href="codingpark/15802233461013.html"/>
+    <title type="html"><![CDATA[Binary Tree Level Order Traversal]]></title>
+    <link href="https://zhongyuou.github.io/15802233461013.html"/>
     <updated>2020-01-28T22:55:46+08:00</updated>
-    <id>codingpark/15802233461013.html</id>
+    <id>https://zhongyuou.github.io/15802233461013.html</id>
     <content type="html"><![CDATA[
 <p>Given a binary tree, return the level order traversal of its nodes&#39; values. (ie, from left to right, level by level).</p>
 
@@ -264,10 +126,10 @@ class Solution:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Tree - M - Binary Tree Preorder Traversal]]></title>
-    <link href="codingpark/15797451740361.html"/>
+    <title type="html"><![CDATA[Binary Tree Preorder Traversal]]></title>
+    <link href="https://zhongyuou.github.io/15797451740361.html"/>
     <updated>2020-01-23T10:06:14+08:00</updated>
-    <id>codingpark/15797451740361.html</id>
+    <id>https://zhongyuou.github.io/15797451740361.html</id>
     <content type="html"><![CDATA[
 <p>Given a binary tree, return the preorder traversal of its nodes&#39; values.</p>
 
@@ -307,80 +169,61 @@ Output: [1,2,3]
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[LinkedList - M - Rotate]]></title>
-    <link href="codingpark/15794258384164.html"/>
-    <updated>2020-01-19T17:23:58+08:00</updated>
-    <id>codingpark/15794258384164.html</id>
+    <title type="html"><![CDATA[Divided Two Integers]]></title>
+    <link href="https://zhongyuou.github.io/15804364748378.html"/>
+    <updated>2020-01-31T10:07:54+08:00</updated>
+    <id>https://zhongyuou.github.io/15804364748378.html</id>
     <content type="html"><![CDATA[
-<p>Given a linked list, rotate the list to the right by k places, where k is non-negative.</p>
+<p>Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.</p>
+
+<p>Return the quotient after dividing dividend by divisor.</p>
+
+<p>The integer division should truncate toward zero.</p>
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
-Output: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
-Explanation:
-rotate 1 steps to the right: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL
-rotate 2 steps to the right: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
+<pre class="line-numbers"><code class="language-text">Input: dividend = 10, divisor = 3
+Output: 3
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
-Output: 2-&gt;0-&gt;1-&gt;NULL
-Explanation:
-rotate 1 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
-rotate 2 steps to the right: 1-&gt;2-&gt;0-&gt;NULL
-rotate 3 steps to the right: 0-&gt;1-&gt;2-&gt;NULL
-rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
+<pre class="line-numbers"><code class="language-text">Input: dividend = 7, divisor = -3
+Output: -2
 </code></pre>
 
-<h2 id="toc_0">Intuition</h2>
-
-<p>Since n may be a large number compared to the length of list. So we need to know the length of linked list. After that, move the list after the <code>(l-n%l)th</code> node to the front to finish the rotation.</p>
-
-<p>Ex: {1,2,3} k=2 Move the list after the 1st node to the front</p>
-
-<p>Ex: {1,2,3} k=5, In this case Move the list after (3-5%3=1)st node to the front.</p>
-
-<p>So the code has three parts.</p>
+<p><strong>Note:</strong></p>
 
 <ul>
-<li>Get the length</li>
-<li>Move to the <code>(l-n%l)th</code> node</li>
-<li>Do the rotation</li>
+<li>Both dividend and divisor will be 32-bit signed integers.</li>
+<li>The divisor will never be 0.</li>
+<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, assume that your function returns \(2^{31} − 1\) when the division result overflows.</li>
 </ul>
 
-<h2 id="toc_1">Sample Code</h2>
+<h2 id="toc_0">Python Implement</h2>
 
-<pre class="line-numbers"><code class="language-java">public ListNode rotateRight(ListNode head, int n) {
-    if (head==null||head.next==null) return head;
-    ListNode dummy=new ListNode(0);
-    dummy.next=head;
-    ListNode fast=dummy,slow=dummy;
-
-    int i;
-    for (i=0;fast.next!=null;i++)//Get the total length 
-        fast=fast.next;
-    
-    for (int j=i-n%i;j&gt;0;j--) //Get the i-n%i th node
-        slow=slow.next;
-    
-    fast.next=dummy.next; //Do the rotation
-    dummy.next=slow.next;
-    slow.next=null;
-    
-    return dummy.next;
-}
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def divide(self, dividend, divisor):
+        positive = (dividend &lt; 0) == (divisor &lt; 0)
+        dividend, divisor = abs(dividend), abs(divisor)
+        res = 0
+        while dividend &gt;= divisor:
+            x = 0
+            while dividend &gt;= divisor &lt;&lt; (x + 1):
+                x += 1
+            res += 1 &lt;&lt; x
+            dividend -= divisor &lt;&lt; x
+        return min(max(-2**31, res if positive else -res), 2**31-1))
 </code></pre>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[LinkedList - M - Flatten a Multilevel Doubly Linked List]]></title>
-    <link href="codingpark/15793500905829.html"/>
+    <title type="html"><![CDATA[Flatten a Multilevel Doubly Linked List]]></title>
+    <link href="https://zhongyuou.github.io/15793500905829.html"/>
     <updated>2020-01-18T20:21:30+08:00</updated>
-    <id>codingpark/15793500905829.html</id>
+    <id>https://zhongyuou.github.io/15793500905829.html</id>
     <content type="html"><![CDATA[
 <p>You are given a doubly linked list which in addition to the next and previous pointers, it could have a child pointer, which may or may not point to a separate doubly linked list. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure, as shown in the example below.</p>
 
@@ -443,597 +286,75 @@ The input multilevel linked list is as follows:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[LinkedList - M - Add Two Numbers]]></title>
-    <link href="codingpark/15791026198982.html"/>
-    <updated>2020-01-15T23:36:59+08:00</updated>
-    <id>codingpark/15791026198982.html</id>
+    <title type="html"><![CDATA[House Robber]]></title>
+    <link href="https://zhongyuou.github.io/15742372257078.html"/>
+    <updated>2019-11-20T16:07:05+08:00</updated>
+    <id>https://zhongyuou.github.io/15742372257078.html</id>
     <content type="html"><![CDATA[
-<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
 
-<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
 
-<p><strong>Example:</strong></p>
+<p>示例 1:</p>
 
-<pre class="line-numbers"><code class="language-text">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
-Output: 7 -&gt; 0 -&gt; 8
-Explanation: 342 + 465 = 807.
+<pre class="line-numbers"><code class="language-text">输入: [1,2,3,1]
+输出: 4
+解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+结果: 偷窃到的最高金额 = 1 + 3 = 4 。
 </code></pre>
 
-<h2 id="toc_0">Solution:</h2>
+<p>示例 2：</p>
 
-<pre class="line-numbers"><code class="language-python"># Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        carry = 0;
-        res = n = ListNode(0);
-        while l1 or l2 or carry:
-            if l1:
-                carry += l1.val
-                l1 = l1.next;
-            if l2:
-                carry += l2.val;
-                l2 = l2.next;
-            carry, val = divmod(carry, 10)
-            n.next = n = ListNode(val);
-        return res.next
+<pre class="line-numbers"><code class="language-text">输入: [2,7,9,3,1]
+输出: 12
+解释: 偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+结果: 偷窃到的最高金额 = 2 + 9 + 1 = 12 。
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Math - E - Palindrome Number]]></title>
-    <link href="codingpark/15775085021373.html"/>
-    <updated>2019-12-28T12:48:22+08:00</updated>
-    <id>codingpark/15775085021373.html</id>
-    <content type="html"><![CDATA[
-<p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
 
 <h2 id="toc_0">思路</h2>
 
 <ul>
-<li>每次进行取余操作 （ %10），取出最低的数字：y = x % 10</li>
-<li>将最低的数字加到取出数的末尾：revertNum = revertNum * 10 + y</li>
-<li>每取一个最低位数字，x 都要自除以 10</li>
-<li>判断 x 是不是小于 revertNum ，当它小于的时候，说明数字已经对半或者过半了</li>
-<li>最后，判断奇偶数情况：如果是偶数的话，revertNum 和 x 相等；如果是奇数的话，最中间的数字就在revertNum 的最低位上，将它除以 10 以后应该和 x 相等。</li>
+<li>动态规划方程：<code>dp[n] = MAX(dp[n-1], dp[n-2] + num)</code></li>
+<li>由于不可以在相邻的房屋闯入，所以在当前位置 n 房屋可盗窃的最大值，要么就是 n-1 房屋可盗窃的最大值，要么就是 n-2 房屋可盗窃的最大值加上当前房屋的值，二者之间取最大值</li>
+<li>举例来说：1 号房间可盗窃最大值为 3 即为 <code>dp[1]=3</code>，2 号房间可盗窃最大值为 4 即为 <code>dp[2]=4</code>，3 号房间自身的值为 2 即为 <code>num=2</code>，那么 <code>dp[3] = MAX(dp[2], dp[1] + num) = 5</code>，3 号房间可盗窃最大值为 5</li>
+<li>时间复杂度：\(O(n)\)，n 为数组长度</li>
 </ul>
 
-<p><img src="media/15775085021373/15775085308097.png" alt="" style="width:1002px;"/></p>
-
-<pre class="line-numbers"><code class="language-python">class Solution:
-    def isPalindrome(self, x: int) -&gt; bool:
-        if x &lt; 0 or (x % 10 == 0 and x != 0):
-            return False
-        revertedNumber = 0
-        while x &gt; revertedNumber:
-            ans = ans * 10 + x % 10;
-            x //= 10
-        return x == revertedNumber or x == revertedNumber // 10
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LinkedList - E - Palindrome Linked List]]></title>
-    <link href="codingpark/15773727256411.html"/>
-    <updated>2019-12-26T23:05:25+08:00</updated>
-    <id>codingpark/15773727256411.html</id>
-    <content type="html"><![CDATA[
-<p>Given a singly linked list, determine if it is a palindrome.</p>
-
-<p><strong>Example 1:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2
-Output: false
-</code></pre>
-
-<p><strong>Example 2:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;2-&gt;1
-Output: true
-</code></pre>
-
-<p><strong>Follow up:</strong><br/>
-Could you do it in \(O(n)\) time and \(O(1)\) space?</p>
-
-<h2 id="toc_0">Algorithm</h2>
-
-<p>This can be solved by reversing the 2nd half and compare the two halves. Let&#39;s start with an example [1, 1, 2, 1].</p>
-
-<p>In the beginning, set two pointers <code>fast</code> and <code>slow</code> starting at the head.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
-sf
-</code></pre>
-
-<p>(1) <strong>Move:</strong> <code>fast</code> pointer goes to the end, and <code>slow</code> goes to the middle.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
-          s          f
-</code></pre>
-
-<p>(2) <strong>Reverse:</strong> the right half is reversed, and <code>slow</code> pointer becomes the 2nd head.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1           
-h                      s
-</code></pre>
-
-<p>(3) <strong>Compare:</strong> run the two pointers <code>head</code> and <code>slow</code> together and compare.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1             
-     h            s
-</code></pre>
-
-<pre class="line-numbers"><code class="language-java">public boolean isPalindrome(ListNode head) {
-    ListNode fast = head, slow = head;
-    while (fast != null &amp;&amp; fast.next != null) {
-        fast = fast.next.next;
-        slow = slow.next;
-    }
-    // odd nodes: let right half smaller
-    if (fast != null) {
-        slow = slow.next;
-    }
-    slow = reverse(slow);
-    fast = head;
-    
-    while (slow != null) {
-        if (fast.val != slow.val) {
-            return false;
-        }
-        fast = fast.next;
-        slow = slow.next;
-    }
-    return true;
-}
-
-public ListNode reverse(ListNode head) {
-    ListNode prev = null;
-    while (head != null) {
-        ListNode next = head.next;
-        head.next = prev;
-        prev = head;
-        head = next;
-    }
-    return prev;
-}
-</code></pre>
-
-<h2 id="toc_1">Complexity Analysis</h2>
-
-<ul>
-<li><p><strong>Time complexity:</strong> \(O(n)\).<br/>
-The algorithm makes one traversal of the list of n nodes. Therefore time complexity is \(O(n)\).</p></li>
-<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
-We only used constant extra space.</p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LinkedList - M - Odd Even Linked List]]></title>
-    <link href="codingpark/15769805997965.html"/>
-    <updated>2019-12-22T10:09:59+08:00</updated>
-    <id>codingpark/15769805997965.html</id>
-    <content type="html"><![CDATA[
-<p>Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.</p>
-
-<p>You should try to do it in place. The program should run in <code>O(1)</code> space complexity and <code>O(nodes)</code> time complexity.</p>
-
-<p><strong>Example 1:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
-Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
-</code></pre>
-
-<p><strong>Example 2:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
-Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
-</code></pre>
-
-<p><strong>Note:</strong></p>
-
-<ul>
-<li>The relative order inside both the even and odd groups should remain as it was in the input.</li>
-<li>The first node is considered odd, the second node even and so on ...</li>
-</ul>
-
-<h2 id="toc_0">Intuition</h2>
-
-<p>Put the odd nodes in a linked list and the even nodes in another. Then link the evenList to the tail of the oddList.</p>
-
-<h2 id="toc_1">Algorithm</h2>
-
-<p><img src="https://leetcode.com/problems/odd-even-linked-list/Figures/328_Odd_Even.svg" alt="example"/></p>
-
-<pre class="line-numbers"><code class="language-java">public class Solution {
-    public ListNode oddEvenList(ListNode head) {
-        if (head == null) return null;
-        ListNode odd = head, even = head.next, evenHead = even;
-        while (even != null &amp;&amp; even.next != null) {
-            odd.next = even.next;
-            odd = odd.next;
-            even.next = odd.next;
-            even = even.next;
-        }
-        odd.next = evenHead;
-        return head;
-    }
-}
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LinkedList - M - Remove Nth Node from End of List]]></title>
-    <link href="codingpark/15767443041636.html"/>
-    <updated>2019-12-19T16:31:44+08:00</updated>
-    <id>codingpark/15767443041636.html</id>
-    <content type="html"><![CDATA[
-<p>Given a linked list, remove the n-th node from the end of list and return its head.</p>
-
-<p><strong>Example:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
-
-After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.
-</code></pre>
-
-<p><strong>Note:</strong><br/>
-Given n will always be valid.</p>
-
-<h2 id="toc_0">Algorithm</h2>
-
-<p>We could use two pointers. The first pointer advances the list by <code>n+1</code> steps from the beginning, while the second pointer starts from the beginning of the list. Now, both pointers are exactly separated by <code>n</code> nodes apart. We maintain this constant gap by advancing both pointers together until the first pointer arrives past the last node. The second pointer will be pointing at the <code>nth</code> node counting from the last. We relink the next pointer of the node referenced by the second pointer to point to the node&#39;s next next node.</p>
-
-<p><img src="media/15767443041636/15767445250171.png" alt=""/></p>
-
-<pre class="line-numbers"><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
-    ListNode dummy = new ListNode(0);
-    dummy.next = head;
-    ListNode first = dummy;
-    ListNode second = dummy;
-    // Advances first pointer so that the gap between first and second is n nodes apart
-    for (int i = 1; i &lt;= n + 1; i++) {
-        first = first.next;
-    }
-    // Move first to the end, maintaining the gap
-    while (first != null) {
-        first = first.next;
-        second = second.next;
-    }
-    second.next = second.next.next;
-    return dummy.next;
-}
-</code></pre>
-
-<h3 id="toc_1">Complexity Analysis</h3>
-
-<ul>
-<li><p><strong>Time complexity:</strong> \(O(L)\).<br/>
-The algorithm makes one traversal of the list of L nodes. Therefore time complexity is \(O(L)\).</p></li>
-<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
-We only used constant extra space.</p></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LinkedList - M - Linked List Cycle II]]></title>
-    <link href="codingpark/15767231455989.html"/>
-    <updated>2019-12-19T10:39:05+08:00</updated>
-    <id>codingpark/15767231455989.html</id>
-    <content type="html"><![CDATA[
-<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
-
-<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
-
-<h2 id="toc_0">方法 1: 哈希表</h2>
-
-<p>用一个 <code>Set</code> 保存已经访问过的节点，我们可以遍历整个列表并返回第一个出现重复的节点。</p>
-
-<h3 id="toc_1">算法</h3>
-
-<pre class="line-numbers"><code class="language-java">public class Solution {
-    public ListNode detectCycle(ListNode head) {
-        Set&lt;ListNode&gt; visited = new HashSet&lt;ListNode&gt;();
-
-        ListNode node = head;
-        while (node != null) {
-            if (visited.contains(node)) {
-                return node;
-            }
-            visited.add(node);
-            node = node.next;
-        }
-
-        return null;
-    }
-}
-</code></pre>
-
-<h3 id="toc_2">复杂度分析</h3>
-
-<ul>
-<li>时间复杂度: \(O(n)\)</li>
-<li>空间复杂度: \(O(n)\)</li>
-</ul>
-
-<h2 id="toc_3">方法 2: Floyd 算法</h2>
-
-<h3 id="toc_4">阶段一: 寻找相遇点</h3>
-
-<p><img src="media/15767231455989/15767236611250.png" alt=""/><br/>
-环中的节点从 <code>0</code> 到 <code>C−1</code> 编号，其中 <code>C</code> 是环的长度。非环节点从 <code>−F</code> 到 <code>−1</code> 编号，其中 <code>F</code> 是环以外节点的数目。 <code>F</code> 次迭代以后，慢指针指向了 <code>0</code> 且快指针指向某个节点 <code>h</code> ，其中 \(F \equiv h \pmod C\) 。这是因为快指针在 <code>F</code> 次迭代中遍历了 <code>2F</code> 个节点，且恰好有 <code>F</code> 个在环中。继续迭代 <code>C−h</code> 次，慢指针显然指向第 <code>C−h</code> 号节点，而快指针也会指向相同的节点。原因在于，快指针从 <code>h</code> 号节点出发遍历了 <code>2(C−h)</code> 个节点。\[\begin{aligned} h + 2(C-h) &amp;= 2C - h \\ &amp;\equiv C-h \pmod C \end{aligned}\] ​因此，如果列表是有环的，快指针和慢指针最后会同时指向同一个节点，因此被称为 相遇 。</p>
-
-<h3 id="toc_5">阶段二: 寻找环起点</h3>
-
-<p><img src="media/15767231455989/15767240034520.png" alt=""/><br/>
-利用已知的条件：慢指针移动 1 步，快指针移动 2 步，来说明它们相遇在环的入口处。（下面证明中的 tortoise 表示慢指针，hare 表示快指针）\[\begin{aligned} 2 \cdot distance(tortoise) &amp;= distance(hare) \\ 2(F+a) &amp;= F+a+b+a \\ 2F+2a &amp;= F+2a+b \\ F &amp;= b \\ \end{aligned}\]因为 F=bF=b ，指针从 hh 点出发和从链表的头出发，最后会遍历相同数目的节点后在环的入口处相遇。</p>
-
-<h3 id="toc_6">算法</h3>
-
-<pre class="line-numbers"><code class="language-java">public class Solution {
-    private ListNode getIntersect(ListNode head) {
-        ListNode tortoise = head;
-        ListNode hare = head;
-
-        // A fast pointer will either loop around a cycle and meet the slow
-        // pointer or reach the `null` at the end of a non-cyclic list.
-        while (hare != null &amp;&amp; hare.next != null) {
-            tortoise = tortoise.next;
-            hare = hare.next.next;
-            if (tortoise == hare) {
-                return tortoise;
-            }
-        }
-
-        return null;
-}
-
-    public ListNode detectCycle(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-
-        // If there is a cycle, the fast/slow pointers will intersect at some
-        // node. Otherwise, there is no cycle, so we cannot find an e***ance to
-        // a cycle.
-        ListNode intersect = getIntersect(head);
-        if (intersect == null) {
-            return null;
-        }
-
-        // To find the e***ance to the cycle, we have two pointers traverse at
-        // the same speed -- one from the front of the list, and the other from
-        // the point of intersection.
-        ListNode ptr1 = head;
-        ListNode ptr2 = intersect;
-        while (ptr1 != ptr2) {
-            ptr1 = ptr1.next;
-            ptr2 = ptr2.next;
-        }
-
-        return ptr1;
-    }
-}
-</code></pre>
-
-<h3 id="toc_7">复杂度分析</h3>
-
-<ul>
-<li>时间复杂度: \(O(n)\)</li>
-<li>空间复杂度: \(O(1)\)</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LinkedList - M - Swap Nodes in Pairs]]></title>
-    <link href="codingpark/15758785713938.html"/>
-    <updated>2019-12-09T16:02:51+08:00</updated>
-    <id>codingpark/15758785713938.html</id>
-    <content type="html"><![CDATA[
-<p>Given a linked list, swap every two adjacent nodes and return its head.</p>
-
-<p>You may <strong>not</strong> modify the values in the list&#39;s nodes, only nodes itself may be changed.</p>
-
-<p><strong>Example:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
-</code></pre>
-
-<h2 id="toc_0">Approach1: Recursion</h2>
-
-<pre class="line-numbers"><code class="language-java">/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public ListNode swapPairs(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode newHead = head.next;
-        head.next = swapPairs(head.next.next);
-        newHead.next = head;
-        return newHead;
-    }
-}
-</code></pre>
-
-<h2 id="toc_1">Approach 2: Fake Head</h2>
-
-<pre class="line-numbers"><code class="language-java">private static ListNode swapPairs(ListNode head) {
-    ListNode dummy = new ListNode(0);
-    dummy.next = head;
-    ListNode cur = dummy;
-
-    while (cur.next != null &amp;&amp; cur.next.next != null) {
-        ListNode first = cur.next;
-        ListNode second = cur.next.next;
-        first.next = second.next;
-        cur.next = second;
-        cur.next.next = first;
-        cur = cur.next.next;
-    }
-    return dummy.next;
-}
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Math - E - Reverse]]></title>
-    <link href="codingpark/15758224019897.html"/>
-    <updated>2019-12-09T00:26:41+08:00</updated>
-    <id>codingpark/15758224019897.html</id>
-    <content type="html"><![CDATA[
-<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
-
-<p><strong>Example 1:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 123
-Output: 321
-</code></pre>
-
-<p><strong>Example 2:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: -123
-Output: -321
-</code></pre>
-
-<p><strong>Example 3:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 120
-Output: 21
-</code></pre>
-
-<p><strong>Note:</strong><br/>
-Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, <strong>assume that your function returns 0 when the reversed integer overflows</strong>.</p>
-
-<h2 id="toc_0">Intuition</h2>
-
-<p>We can build up the reverse integer one digit at a time. While doing so, we can check beforehand whether or not appending another digit would cause overflow.</p>
-
-<h2 id="toc_1">Algorithm</h2>
-
-<p>Reversing an integer can be done similarly to reversing a string.</p>
-
-<p>We want to repeatedly &quot;pop&quot; the last digit off of \(x\) and &quot;push&quot; it to the back of the \(\text{rev}\). In the end, \(\text{rev}\) will be the reverse of the \(x\).</p>
-
-<p>To &quot;pop&quot; and &quot;push&quot; digits without the help of some auxiliary stack/array, we can use math.</p>
-
-<p>However, this approach is dangerous, because the statement \(\text{temp} = \text{rev} \cdot 10 + \text{pop}\) can cause overflow.</p>
+<h2 id="toc_1">Java 解法</h2>
 
 <pre class="line-numbers"><code class="language-java">class Solution {
-    public int reverse(int x) {
-        int rev = 0;
-        while (x != 0) {
-            int pop = x % 10;
-            x /= 10;
-            if (rev &gt; Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 &amp;&amp; pop &gt; 7)) return 0;
-            if (rev &lt; Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 &amp;&amp; pop &lt; -8)) return 0;
-            rev = rev * 10 + pop;
+    public int rob(int[] nums) {
+        int len = nums.length;
+        if(len == 0) return 0;
+        int[] dp = new int[len + 1];
+        dp[0] = 0;
+        dp[1] = nums[0];
+        for(int i = 2; i &lt;= len; i++) {
+            dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i-1]);
         }
-        return rev;
+        return dp[len];
     }
 }
 </code></pre>
 
-<h2 id="toc_2">Complexity Analysis</h2>
-
-<ul>
-<li>Time Complexity: \(O(\log(x))\). There are roughly \(\log_{10}(x)\)​ digits in \(x\).</li>
-<li>Space Complexity: \(O(1)\).</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[LinkedList - E - Remove Linked List Elements]]></title>
-    <link href="codingpark/15757068438294.html"/>
-    <updated>2019-12-07T16:20:43+08:00</updated>
-    <id>codingpark/15757068438294.html</id>
-    <content type="html"><![CDATA[
-<p>Remove all elements from a linked list of integers that have value val.</p>
-
-<p><strong>Example:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input:  1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
-Output: 1-&gt;2-&gt;3-&gt;4-&gt;5
-</code></pre>
-
-<h2 id="toc_0">Approach: Fake Head</h2>
-
-<p><strong>Intuition</strong><br/>
-First we make a list of edge cases that need to be considered:</p>
-
-<ol>
-<li>The linked list is empty, i.e. the head node is None.</li>
-<li>Multiple nodes with the target value in a row.</li>
-<li>The head node has the target value.</li>
-<li>The head node, and any number of nodes immediately after it have the target value.</li>
-<li>All of the nodes have the target value.</li>
-<li>The last node has the target value.</li>
-</ol>
-
-<p><strong>Algorithm</strong></p>
+<h2 id="toc_2">Python 解法</h2>
 
 <pre class="line-numbers"><code class="language-python">class Solution:
-    def removeElements(self, head, val):
-        &quot;&quot;&quot;
-        :type head: ListNode
-        :type val: int
-        :rtype: ListNode
-        &quot;&quot;&quot;
-        
-        dummy_head = ListNode(-1)
-        dummy_head.next = head
-        
-        current_node = dummy_head
-        while current_node.next != None:
-            if current_node.next.val == val:
-                current_node.next = current_node.next.next
-            else:
-                current_node = current_node.next
-                
-        return dummy_head.next
+    def rob(self, nums: List[int]) -&gt; int:
+        cur, pre = 0, 0
+        for num in nums:
+            cur, pre = max(pre + num, cur), cur
+        return cur
 </code></pre>
-
-<p><strong>Complexity analysis</strong></p>
-
-<ul>
-<li>Time complexity: \(O(n)\)</li>
-<li>Space complexity: \(O(1)\)</li>
-</ul>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Math - LinkedList - E - Linked List Cycle]]></title>
-    <link href="codingpark/15757035238329.html"/>
+    <title type="html"><![CDATA[Linked List Cycle]]></title>
+    <link href="https://zhongyuou.github.io/15757035238329.html"/>
     <updated>2019-12-07T15:25:23+08:00</updated>
-    <id>codingpark/15757035238329.html</id>
+    <id>https://zhongyuou.github.io/15757035238329.html</id>
     <content type="html"><![CDATA[
 <p>Given a linked list, determine if it has a cycle in it.</p>
 
@@ -1128,10 +449,333 @@ We break down the movement of the slow pointer into two steps, the non-cyclic pa
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Array - M - Next Permutation]]></title>
-    <link href="codingpark/15750825009903.html"/>
+    <title type="html"><![CDATA[Linked List Cycle II]]></title>
+    <link href="https://zhongyuou.github.io/15767231455989.html"/>
+    <updated>2019-12-19T10:39:05+08:00</updated>
+    <id>https://zhongyuou.github.io/15767231455989.html</id>
+    <content type="html"><![CDATA[
+<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
+
+<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
+
+<h2 id="toc_0">Approach 1: Hash Table</h2>
+
+<p>用一个 <code>Set</code> 保存已经访问过的节点，我们可以遍历整个列表并返回第一个出现重复的节点。</p>
+
+<h3 id="toc_1">Sample Code</h3>
+
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        Set&lt;ListNode&gt; visited = new HashSet&lt;ListNode&gt;();
+
+        ListNode node = head;
+        while (node != null) {
+            if (visited.contains(node)) {
+                return node;
+            }
+            visited.add(node);
+            node = node.next;
+        }
+
+        return null;
+    }
+}
+</code></pre>
+
+<h3 id="toc_2">Complexity Analysis</h3>
+
+<ul>
+<li>时间复杂度: \(O(n)\)</li>
+<li>空间复杂度: \(O(n)\)</li>
+</ul>
+
+<h2 id="toc_3">Approach 2: Floyd Method</h2>
+
+<h3 id="toc_4">Part 1: Find the intersection</h3>
+
+<p><img src="media/15767231455989/15767236611250.png" alt=""/><br/>
+环中的节点从 <code>0</code> 到 <code>C−1</code> 编号，其中 <code>C</code> 是环的长度。非环节点从 <code>−F</code> 到 <code>−1</code> 编号，其中 <code>F</code> 是环以外节点的数目。 <code>F</code> 次迭代以后，慢指针指向了 <code>0</code> 且快指针指向某个节点 <code>h</code> ，其中 \(F \equiv h \pmod C\) 。这是因为快指针在 <code>F</code> 次迭代中遍历了 <code>2F</code> 个节点，且恰好有 <code>F</code> 个在环中。继续迭代 <code>C−h</code> 次，慢指针显然指向第 <code>C−h</code> 号节点，而快指针也会指向相同的节点。原因在于，快指针从 <code>h</code> 号节点出发遍历了 <code>2(C−h)</code> 个节点。\[\begin{aligned} h + 2(C-h) &amp;= 2C - h \\ &amp;\equiv C-h \pmod C \end{aligned}\] ​因此，如果列表是有环的，快指针和慢指针最后会同时指向同一个节点，因此被称为 相遇 。</p>
+
+<h3 id="toc_5">Part 2: Find the cycle&#39;s beginning</h3>
+
+<p><img src="media/15767231455989/15767240034520.png" alt=""/><br/>
+利用已知的条件：慢指针移动 1 步，快指针移动 2 步，来说明它们相遇在环的入口处。（下面证明中的 tortoise 表示慢指针，hare 表示快指针）\[\begin{aligned} 2 \cdot distance(tortoise) &amp;= distance(hare) \\ 2(F+a) &amp;= F+a+b+a \\ 2F+2a &amp;= F+2a+b \\ F &amp;= b \\ \end{aligned}\]因为 F=bF=b ，指针从 hh 点出发和从链表的头出发，最后会遍历相同数目的节点后在环的入口处相遇。</p>
+
+<h3 id="toc_6">Sample Code</h3>
+
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    private ListNode getIntersect(ListNode head) {
+        ListNode tortoise = head;
+        ListNode hare = head;
+
+        // A fast pointer will either loop around a cycle and meet the slow
+        // pointer or reach the `null` at the end of a non-cyclic list.
+        while (hare != null &amp;&amp; hare.next != null) {
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            if (tortoise == hare) {
+                return tortoise;
+            }
+        }
+
+        return null;
+}
+
+    public ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        // If there is a cycle, the fast/slow pointers will intersect at some
+        // node. Otherwise, there is no cycle, so we cannot find an e***ance to
+        // a cycle.
+        ListNode intersect = getIntersect(head);
+        if (intersect == null) {
+            return null;
+        }
+
+        // To find the e***ance to the cycle, we have two pointers traverse at
+        // the same speed -- one from the front of the list, and the other from
+        // the point of intersection.
+        ListNode ptr1 = head;
+        ListNode ptr2 = intersect;
+        while (ptr1 != ptr2) {
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+
+        return ptr1;
+    }
+}
+</code></pre>
+
+<h3 id="toc_7">Complexity Analysis</h3>
+
+<ul>
+<li>时间复杂度: \(O(n)\)</li>
+<li>空间复杂度: \(O(1)\)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Max SubArray]]></title>
+    <link href="https://zhongyuou.github.io/15804364487583.html"/>
+    <updated>2020-01-31T10:07:28+08:00</updated>
+    <id>https://zhongyuou.github.io/15804364487583.html</id>
+    <content type="html"><![CDATA[
+<p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+
+<p>示例:</p>
+
+<pre class="line-numbers"><code class="language-text">输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+</code></pre>
+
+<h2 id="toc_0">思路</h2>
+
+<ul>
+<li>动态规划的是首先对数组进行遍历，当前最大连续子序列和为 <code>sum</code>，结果为 <code>ans</code></li>
+<li>如果 <code>sum &gt; 0</code>，则说明 <code>sum</code> 对结果有增益效果，则 <code>sum</code> 保留并加上当前遍历数字</li>
+<li>如果 <code>sum &lt;= 0</code>，则说明 <code>sum</code> 对结果无增益效果，需要舍弃，则 <code>sum</code> 直接更新为当前遍历数字</li>
+<li>每次比较 <code>sum</code> 和 <code>ans</code> 的大小，将最大值置为 <code>ans</code>，遍历结束返回结果</li>
+<li>时间复杂度：\(O(n)\)</li>
+</ul>
+
+<h2 id="toc_1">Java 解答</h2>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int ans = nums[0];
+
+        for (int num: nums) {
+            if (sum &gt; 0) {
+                sum += num;
+            } else {
+                sum = num;
+            }
+            ans = Math.max(sum, ans);
+        }
+        return ans;
+    }
+}
+</code></pre>
+
+<h2 id="toc_2">Python 解答</h2>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def maxSubArray(self, nums: List[int]) -&gt; int:
+        total = 0
+        ans = nums[0]
+        for num in nums:
+            if total &gt; 0:
+                total += num
+            else:
+                total = num
+            ans = max(total, ans)
+        return ans
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Merge Sorted Array]]></title>
+    <link href="https://zhongyuou.github.io/15742402167934.html"/>
+    <updated>2019-11-20T16:56:56+08:00</updated>
+    <id>https://zhongyuou.github.io/15742402167934.html</id>
+    <content type="html"><![CDATA[
+<p>给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。</p>
+
+<p>说明:</p>
+
+<ul>
+<li>初始化 nums1 和 nums2 的元素数量分别为 m 和 n。</li>
+<li>你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。</li>
+</ul>
+
+<p>示例:</p>
+
+<pre class="line-numbers"><code class="language-text">输入:
+nums1 = [1,2,3,0,0,0], m = 3
+nums2 = [2,5,6],       n = 3
+
+输出: [1,2,2,3,5,6]
+</code></pre>
+
+<h2 id="toc_0">思路</h2>
+
+<ul>
+<li>因为 <code>nums1</code> 的空间都集中在后面，所以从后向前处理排序的数据会更好，节省空间，一边遍历一边将值填充进去</li>
+<li>设置指针 <code>len1</code> 和 <code>len2</code> 分别指向 <code>nums1</code> 和 <code>nums2</code> 的有数字尾部，从尾部值开始比较遍历，同时设置指针 <code>len</code> 指向 <code>nums1</code> 的最末尾，每次遍历比较值大小之后，则进行填充</li>
+<li>当 <code>len1&lt;0</code> 时遍历结束，此时 <code>nums2</code> 中海油数据未拷贝完全，将其直接拷贝到 <code>nums1</code> 的前面，最后得到结果数组</li>
+<li>时间复杂度：\(O(m+n)\)</li>
+</ul>
+
+<h2 id="toc_1">Java 解答</h2>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+  public void merge(int[] nums1, int m, int[] nums2, int n) {
+    // two get pointers for nums1 and nums2
+    int p1 = m - 1;
+    int p2 = n - 1;
+    // set pointer for nums1
+    int p = m + n - 1;
+
+    // while there are still elements to compare
+    while ((p1 &gt;= 0) &amp;&amp; (p2 &gt;= 0))
+      // compare two elements from nums1 and nums2 
+      // and add the largest one in nums1 
+      nums1[p--] = (nums1[p1] &lt; nums2[p2]) ? nums2[p2--] : nums1[p1--];
+
+    // add missing elements from nums2
+    System.arraycopy(nums2, 0, nums1, p1 + 1, p2 + 1);
+  }
+}
+</code></pre>
+
+<h2 id="toc_2">Python 解答</h2>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        # two get pointers for nums1 and nums2
+        p1 = m - 1
+        p2 = n - 1
+        # set pointer for nums1
+        p = m + n - 1
+        
+        # while there are still elements to compare
+        while p1 &gt;= 0 and p2 &gt;= 0:
+            if nums1[p1] &lt; nums2[p2]:
+                nums1[p] = nums2[p2]
+                p2 -= 1
+            else:
+                nums1[p] =  nums1[p1]
+                p1 -= 1
+            p -= 1
+        
+        # add missing elements from nums2
+        nums1[:p2 + 1] = nums2[:p2 + 1]
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Merge Two Sorted Lists]]></title>
+    <link href="https://zhongyuou.github.io/15804365379093.html"/>
+    <updated>2020-01-31T10:08:57+08:00</updated>
+    <id>https://zhongyuou.github.io/15804365379093.html</id>
+    <content type="html"><![CDATA[
+<p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</code></pre>
+
+<h2 id="toc_0">Approach 1: Iteratively</h2>
+
+<pre class="line-numbers"><code class="language-python">def mergeTwoLists1(self, l1, l2):
+    dummy = cur = ListNode(0)
+    while l1 and l2:
+        if l1.val &lt; l2.val:
+            cur.next = l1
+            l1 = l1.next
+        else:
+            cur.next = l2
+            l2 = l2.next
+        cur = cur.next
+    cur.next = l1 or l2
+    return dummy.next
+</code></pre>
+
+<h2 id="toc_1">Approach 2: Recursively</h2>
+
+<pre class="line-numbers"><code class="language-python">def mergeTwoLists2(self, l1, l2):
+    if not l1 or not l2:
+        return l1 or l2
+    if l1.val &lt; l2.val:
+        l1.next = self.mergeTwoLists(l1.next, l2)
+        return l1
+    else:
+        l2.next = self.mergeTwoLists(l1, l2.next)
+        return l2
+</code></pre>
+
+<h2 id="toc_2">Approach 3: In-place</h2>
+
+<pre class="line-numbers"><code class="language-python">def mergeTwoLists(self, l1, l2):
+    if None in (l1, l2):
+        return l1 or l2
+    dummy = cur = ListNode(0)
+    dummy.next = l1
+    while l1 and l2:
+        if l1.val &lt; l2.val:
+            l1 = l1.next
+        else:
+            nxt = cur.next
+            cur.next = l2
+            tmp = l2.next
+            l2.next = nxt
+            l2 = tmp
+        cur = cur.next
+    cur.next = l1 or l2
+    return dummy.next
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Next Permutation]]></title>
+    <link href="https://zhongyuou.github.io/15750825009903.html"/>
     <updated>2019-11-30T10:55:00+08:00</updated>
-    <id>codingpark/15750825009903.html</id>
+    <id>https://zhongyuou.github.io/15750825009903.html</id>
     <content type="html"><![CDATA[
 <p>Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.</p>
 
@@ -1212,68 +856,246 @@ We break down the movement of the slow pointer into two steps, the non-cyclic pa
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[DP - H - Super Agg Drop]]></title>
-    <link href="codingpark/15748621727087.html"/>
-    <updated>2019-11-27T21:42:52+08:00</updated>
-    <id>codingpark/15748621727087.html</id>
+    <title type="html"><![CDATA[Odd Even Linked List]]></title>
+    <link href="https://zhongyuou.github.io/15769805997965.html"/>
+    <updated>2019-12-22T10:09:59+08:00</updated>
+    <id>https://zhongyuou.github.io/15769805997965.html</id>
     <content type="html"><![CDATA[
-<p>你面前有一栋从 1 到 N 共 N 层的楼，然后给你 K 个鸡蛋（K 至少为 1）。现在确定这栋楼存在楼层 <code>0 &lt;= F &lt;= N</code>，在这层楼将鸡蛋扔下去，鸡蛋恰好没摔碎（高于 F 的楼层都会碎，低于F的楼层都不会碎）。现在问你，最坏情况下，你至少要扔几次鸡蛋，才能确定这个楼层 F 呢？</p>
+<p>Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.</p>
 
-<p>PS：F 可以为 0，比如说鸡蛋在 1 层都能摔碎，那么 <code>F = 0</code>。</p>
+<p>You should try to do it in place. The program should run in <code>O(1)</code> space complexity and <code>O(nodes)</code> time complexity.</p>
 
-<h2 id="toc_0">思路：</h2>
+<p><strong>Example 1:</strong></p>
 
-<p>在第 <code>i</code> 层楼扔了鸡蛋之后，可能出现两种情况：鸡蛋碎了，鸡蛋没碎。</p>
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
+Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
+</code></pre>
+
+<p><strong>Note:</strong></p>
 
 <ul>
-<li>如果鸡蛋碎了，那么鸡蛋的个数 <code>K</code> 应该减一，搜索的楼层区间应该从 <code>[1...N]</code> 变为 <code>[1...i-1]</code> 共 <code>i-1</code> 层楼；</li>
-<li>如果鸡蛋没碎，那么鸡蛋的个数 K 不变，搜索的楼层区间应该从 <code>[1...N]</code> 变为 <code>[i+1...N]</code> 共 <code>N-i</code> 层楼。</li>
+<li>The relative order inside both the even and odd groups should remain as it was in the input.</li>
+<li>The first node is considered odd, the second node even and so on ...</li>
 </ul>
 
-<p>复杂度分析：</p>
+<h2 id="toc_0">Intuition</h2>
 
-<ul>
-<li>时间复杂度为函数本身复杂度和 K 个子问题复杂度的乘积 \(O(KN^2)\)；</li>
-<li>空间复杂度为子问题个数 \(O(KN)\)。</li>
-</ul>
+<p>Put the odd nodes in a linked list and the even nodes in another. Then link the evenList to the tail of the oddList.</p>
 
-<h2 id="toc_1">Python 实现</h2>
+<h2 id="toc_1">Algorithm</h2>
 
-<pre class="line-numbers"><code class="language-python">def superEggDrop(K: int, N: int):
+<p><img src="https://leetcode.com/problems/odd-even-linked-list/Figures/328_Odd_Even.svg" alt="example"/></p>
 
-    memo = dict()
-    def dp(K, N) -&gt; int:
-        # 基线条件
-        if K == 1: return N
-        if N == 0: return 0
-        # 避免重复计算
-        if (K, N) in memo:
-            return memo[(K, N)]
-
-        res = float(&#39;INF&#39;)
-        # 穷举所有可能的选择
-        for i in range(1, N + 1):
-            res = min(res, 
-                      max(
-                            dp(K, N - i), 
-                            dp(K - 1, i - 1)
-                         ) + 1
-                  )
-        # 记入备忘录
-        memo[(K, N)] = res
-        return res
-
-    return dp(K, N)
+<pre class="line-numbers"><code class="language-java">public class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) return null;
+        ListNode odd = head, even = head.next, evenHead = even;
+        while (even != null &amp;&amp; even.next != null) {
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+}
 </code></pre>
 
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[DP - M - Push Dominoes]]></title>
-    <link href="codingpark/15748543212519.html"/>
+    <title type="html"><![CDATA[Palindrome Linked List]]></title>
+    <link href="https://zhongyuou.github.io/15773727256411.html"/>
+    <updated>2019-12-26T23:05:25+08:00</updated>
+    <id>https://zhongyuou.github.io/15773727256411.html</id>
+    <content type="html"><![CDATA[
+<p>Given a singly linked list, determine if it is a palindrome.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2
+Output: false
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;2-&gt;1
+Output: true
+</code></pre>
+
+<p><strong>Follow up:</strong><br/>
+Could you do it in \(O(n)\) time and \(O(1)\) space?</p>
+
+<h2 id="toc_0">Algorithm</h2>
+
+<p>This can be solved by reversing the 2nd half and compare the two halves. Let&#39;s start with an example [1, 1, 2, 1].</p>
+
+<p>In the beginning, set two pointers <code>fast</code> and <code>slow</code> starting at the head.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
+sf
+</code></pre>
+
+<p>(1) <strong>Move:</strong> <code>fast</code> pointer goes to the end, and <code>slow</code> goes to the middle.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
+          s          f
+</code></pre>
+
+<p>(2) <strong>Reverse:</strong> the right half is reversed, and <code>slow</code> pointer becomes the 2nd head.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1           
+h                      s
+</code></pre>
+
+<p>(3) <strong>Compare:</strong> run the two pointers <code>head</code> and <code>slow</code> together and compare.</p>
+
+<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1             
+     h            s
+</code></pre>
+
+<pre class="line-numbers"><code class="language-java">public boolean isPalindrome(ListNode head) {
+    ListNode fast = head, slow = head;
+    while (fast != null &amp;&amp; fast.next != null) {
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+    // odd nodes: let right half smaller
+    if (fast != null) {
+        slow = slow.next;
+    }
+    slow = reverse(slow);
+    fast = head;
+    
+    while (slow != null) {
+        if (fast.val != slow.val) {
+            return false;
+        }
+        fast = fast.next;
+        slow = slow.next;
+    }
+    return true;
+}
+
+public ListNode reverse(ListNode head) {
+    ListNode prev = null;
+    while (head != null) {
+        ListNode next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+    }
+    return prev;
+}
+</code></pre>
+
+<h2 id="toc_1">Complexity Analysis</h2>
+
+<ul>
+<li><p><strong>Time complexity:</strong> \(O(n)\).<br/>
+The algorithm makes one traversal of the list of n nodes. Therefore time complexity is \(O(n)\).</p></li>
+<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
+We only used constant extra space.</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Palindrome Number]]></title>
+    <link href="https://zhongyuou.github.io/15775085021373.html"/>
+    <updated>2019-12-28T12:48:22+08:00</updated>
+    <id>https://zhongyuou.github.io/15775085021373.html</id>
+    <content type="html"><![CDATA[
+<p>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+
+<h2 id="toc_0">思路</h2>
+
+<ul>
+<li>每次进行取余操作 （ %10），取出最低的数字：y = x % 10</li>
+<li>将最低的数字加到取出数的末尾：revertNum = revertNum * 10 + y</li>
+<li>每取一个最低位数字，x 都要自除以 10</li>
+<li>判断 x 是不是小于 revertNum ，当它小于的时候，说明数字已经对半或者过半了</li>
+<li>最后，判断奇偶数情况：如果是偶数的话，revertNum 和 x 相等；如果是奇数的话，最中间的数字就在revertNum 的最低位上，将它除以 10 以后应该和 x 相等。</li>
+</ul>
+
+<p><img src="media/15775085021373/15775085308097.png" alt="" style="width:1002px;"/></p>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def isPalindrome(self, x: int) -&gt; bool:
+        if x &lt; 0 or (x % 10 == 0 and x != 0):
+            return False
+        revertedNumber = 0
+        while x &gt; revertedNumber:
+            ans = ans * 10 + x % 10;
+            x //= 10
+        return x == revertedNumber or x == revertedNumber // 10
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pow(x,n)]]></title>
+    <link href="https://zhongyuou.github.io/15745678356677.html"/>
+    <updated>2019-11-24T11:57:15+08:00</updated>
+    <id>https://zhongyuou.github.io/15745678356677.html</id>
+    <content type="html"><![CDATA[
+<p>实现 pow(x, n) ，即计算 x 的 n 次幂函数。</p>
+
+<h2 id="toc_0">Intuition</h2>
+
+<p>假定我们已经得到了 \(x^{\frac {n}{2}}\)的结果，并且我们现在想得到 \(x^n\) 的结果。令 <code>A</code> 是 \(x^{\frac {n}{2}}\) 的结果，则可以根据 n 的奇偶性来讨论 \(x^n\) 的值。</p>
+
+<ul>
+<li>如果 n 为偶数，由公式 \((x^n)^2 = x^{2*n}\) 得 \(x^n = A * A\);</li>
+<li>如果 n 为奇数，则 \(x^n = A * A * x\)。</li>
+</ul>
+
+<p>时间复杂度：\(O(log_{2}n)\)，空间复杂度：\(O(log_{2}n)\)。</p>
+
+<h2 id="toc_1">Sample Code</h2>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    private double fastPow(double x, long n) {
+        if (n == 0) {
+            return 1.0;
+        }
+        double half = fastPow(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+    }
+    public double myPow(double x, int n) {
+        long N = n;
+        if (N &lt; 0) {
+            x = 1 / x;
+            N = -N;
+        }
+
+        return fastPow(x, N);
+    }
+};
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Push Dominoes]]></title>
+    <link href="https://zhongyuou.github.io/15748543212519.html"/>
     <updated>2019-11-27T19:32:01+08:00</updated>
-    <id>codingpark/15748543212519.html</id>
+    <id>https://zhongyuou.github.io/15748543212519.html</id>
     <content type="html"><![CDATA[
 <p>一行中有 N 张多米诺骨牌，我们将每张多米诺骨牌垂直竖立。在开始时，我们同时把一些多米诺骨牌向左或向右推。</p>
 
@@ -1385,6 +1207,190 @@ We break down the movement of the slow pointer into two steps, the non-cyclic pa
     }
 }
 </code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Remove Linked List Elements]]></title>
+    <link href="https://zhongyuou.github.io/15757068438294.html"/>
+    <updated>2019-12-07T16:20:43+08:00</updated>
+    <id>https://zhongyuou.github.io/15757068438294.html</id>
+    <content type="html"><![CDATA[
+<p>Remove all elements from a linked list of integers that have value val.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input:  1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
+Output: 1-&gt;2-&gt;3-&gt;4-&gt;5
+</code></pre>
+
+<h2 id="toc_0">Approach: Fake Head</h2>
+
+<p><strong>Intuition</strong><br/>
+First we make a list of edge cases that need to be considered:</p>
+
+<ol>
+<li>The linked list is empty, i.e. the head node is None.</li>
+<li>Multiple nodes with the target value in a row.</li>
+<li>The head node has the target value.</li>
+<li>The head node, and any number of nodes immediately after it have the target value.</li>
+<li>All of the nodes have the target value.</li>
+<li>The last node has the target value.</li>
+</ol>
+
+<p><strong>Algorithm</strong></p>
+
+<pre class="line-numbers"><code class="language-python">class Solution:
+    def removeElements(self, head, val):
+        &quot;&quot;&quot;
+        :type head: ListNode
+        :type val: int
+        :rtype: ListNode
+        &quot;&quot;&quot;
+        
+        dummy_head = ListNode(-1)
+        dummy_head.next = head
+        
+        current_node = dummy_head
+        while current_node.next != None:
+            if current_node.next.val == val:
+                current_node.next = current_node.next.next
+            else:
+                current_node = current_node.next
+                
+        return dummy_head.next
+</code></pre>
+
+<p><strong>Complexity analysis</strong></p>
+
+<ul>
+<li>Time complexity: \(O(n)\)</li>
+<li>Space complexity: \(O(1)\)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Remove Nth Node from End of List]]></title>
+    <link href="https://zhongyuou.github.io/15767443041636.html"/>
+    <updated>2019-12-19T16:31:44+08:00</updated>
+    <id>https://zhongyuou.github.io/15767443041636.html</id>
+    <content type="html"><![CDATA[
+<p>Given a linked list, remove the n-th node from the end of list and return its head.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
+
+After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.
+</code></pre>
+
+<p><strong>Note:</strong><br/>
+Given n will always be valid.</p>
+
+<h2 id="toc_0">Algorithm</h2>
+
+<p>We could use two pointers. The first pointer advances the list by <code>n+1</code> steps from the beginning, while the second pointer starts from the beginning of the list. Now, both pointers are exactly separated by <code>n</code> nodes apart. We maintain this constant gap by advancing both pointers together until the first pointer arrives past the last node. The second pointer will be pointing at the <code>nth</code> node counting from the last. We relink the next pointer of the node referenced by the second pointer to point to the node&#39;s next next node.</p>
+
+<p><img src="media/15767443041636/15767445250171.png" alt=""/></p>
+
+<pre class="line-numbers"><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode first = dummy;
+    ListNode second = dummy;
+    // Advances first pointer so that the gap between first and second is n nodes apart
+    for (int i = 1; i &lt;= n + 1; i++) {
+        first = first.next;
+    }
+    // Move first to the end, maintaining the gap
+    while (first != null) {
+        first = first.next;
+        second = second.next;
+    }
+    second.next = second.next.next;
+    return dummy.next;
+}
+</code></pre>
+
+<h3 id="toc_1">Complexity Analysis</h3>
+
+<ul>
+<li><p><strong>Time complexity:</strong> \(O(L)\).<br/>
+The algorithm makes one traversal of the list of L nodes. Therefore time complexity is \(O(L)\).</p></li>
+<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
+We only used constant extra space.</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reverse]]></title>
+    <link href="https://zhongyuou.github.io/15758224019897.html"/>
+    <updated>2019-12-09T00:26:41+08:00</updated>
+    <id>https://zhongyuou.github.io/15758224019897.html</id>
+    <content type="html"><![CDATA[
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 123
+Output: 321
+</code></pre>
+
+<p><strong>Example 2:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: -123
+Output: -321
+</code></pre>
+
+<p><strong>Example 3:</strong></p>
+
+<pre class="line-numbers"><code class="language-text">Input: 120
+Output: 21
+</code></pre>
+
+<p><strong>Note:</strong><br/>
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: \([−2^{31},  2^{31} − 1]\). For the purpose of this problem, <strong>assume that your function returns 0 when the reversed integer overflows</strong>.</p>
+
+<h2 id="toc_0">Intuition</h2>
+
+<p>We can build up the reverse integer one digit at a time. While doing so, we can check beforehand whether or not appending another digit would cause overflow.</p>
+
+<h2 id="toc_1">Algorithm</h2>
+
+<p>Reversing an integer can be done similarly to reversing a string.</p>
+
+<p>We want to repeatedly &quot;pop&quot; the last digit off of \(x\) and &quot;push&quot; it to the back of the \(\text{rev}\). In the end, \(\text{rev}\) will be the reverse of the \(x\).</p>
+
+<p>To &quot;pop&quot; and &quot;push&quot; digits without the help of some auxiliary stack/array, we can use math.</p>
+
+<p>However, this approach is dangerous, because the statement \(\text{temp} = \text{rev} \cdot 10 + \text{pop}\) can cause overflow.</p>
+
+<pre class="line-numbers"><code class="language-java">class Solution {
+    public int reverse(int x) {
+        int rev = 0;
+        while (x != 0) {
+            int pop = x % 10;
+            x /= 10;
+            if (rev &gt; Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 &amp;&amp; pop &gt; 7)) return 0;
+            if (rev &lt; Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 &amp;&amp; pop &lt; -8)) return 0;
+            rev = rev * 10 + pop;
+        }
+        return rev;
+    }
+}
+</code></pre>
+
+<h2 id="toc_2">Complexity Analysis</h2>
+
+<ul>
+<li>Time Complexity: \(O(\log(x))\). There are roughly \(\log_{10}(x)\)​ digits in \(x\).</li>
+<li>Space Complexity: \(O(1)\).</li>
+</ul>
 
 ]]></content>
   </entry>

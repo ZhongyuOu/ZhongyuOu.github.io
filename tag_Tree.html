@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Three Sum Closest - CodingPark
+    Tree - CodingPark
     
     </title>
     <link rel="shortcut icon" href="/Users/johnnyau/Downloads/paper-plane.png" type="image/png" />
@@ -73,144 +73,145 @@
             </nav>
       </div>
 
- <div class="hero-body ct-body"></div>
-      
-    </section>
-    <section class="ct-body">
+ 
+ <div class="hero-body ct-body">
+    <div class="container">
+          <h1 class="title-only">
+                <span>#Tree</span>
+          </h1>
+    </div>
+  </div>
+</section>
+<section class="ct-body">
       <div class="container">
-          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
-              <div class="column is-four-fifths">
-                  <div class="post-body single-content">
+          <div class="columns is-variable bd-klmn-columns is-4">
+              <div class="column is-two-thirds">
+               <div class="post-body">
+                  <div class="card archives">
                     
-                    <h1 class="title">
-                            Three Sum Closest   
-                      </h1>
-                     
                     
-                      <div class="media">
-                            
-                            <figure class="media-left">
-                              <p class="image is-48x48">
-                                
-                                  <img class="is-rounded" src="/Users/johnnyau/Downloads/WechatIMG187_gaitubao_240x240.jpg">
-                                
-                              </p>
-                            </figure>
-                            
-                            <div class="media-content">
-                              <div class="content">
-                                <p>
-                                 <span class="date">11/13 16:4 PM</span>
-                                  <span class="tran-posted-in">posted in</span>&nbsp; 
-                                  
-                                      <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
-                                         
-                                  
-
-                                   
-                                      
-                                  <br />
-                                  <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_Array.html'>#Array</a>
-                                  
-                                    <a class="tag is-link is-light" href='tag_Medium.html'>#Medium</a>
+                        
+                       <div class="card-content">
+                         <div class="content">
+                          <a href="15802233461013.html">
+                            <h2 class="title">Binary Tree Level Order Traversal</h2>
+                          </a>
+                             <p class="des">
+                             <span class="date">01/28 22:55 PM</span>
+                              <span class="tran-posted-in">posted in</span>&nbsp; 
+                              
+                                  <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
                                      
+                             
+                                  
+                              <span class="tran-tags">Tags:</span>&nbsp;
+                              
+                                <a href='tag_Tree.html'>#Tree</a>
+                              
+                                <a href='tag_Medium.html'>#Medium</a>
+                                
+                           </p>
+                          </div>
+                       </div>
+                    
+                    
+                        
+                       <div class="card-content">
+                         <div class="content">
+                          <a href="15797451740361.html">
+                            <h2 class="title">Binary Tree Preorder Traversal</h2>
+                          </a>
+                             <p class="des">
+                             <span class="date">01/23 10:6 AM</span>
+                              <span class="tran-posted-in">posted in</span>&nbsp; 
+                              
+                                  <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
+                                     
+                             
+                                  
+                              <span class="tran-tags">Tags:</span>&nbsp;
+                              
+                                <a href='tag_Tree.html'>#Tree</a>
+                              
+                                <a href='tag_Medium.html'>#Medium</a>
+                                
+                           </p>
+                          </div>
+                       </div>
+                     
+          </div><!-- end card -->
+        </div><!-- end post body -->
 
-                                </p>
-                              </div>
-                            </div>
-                         
+              </div><!-- end column -->
+              <div class="column">
+                    <div class="card">
+                      <header class="card-header">
+                        <p class="card-header-title">
+                           <span class="tran-site-categories">Categories</span> 
+                        </p>
+                     
+                      </header>
+                      <div class="card-content site-categories">
+                        <div class="content"> 
+                          <ul>
+                          
+                                <li><a href="LeetCode.html">LeetCode</a>
+                                  
+                                  
+                                  
+                                </li> 
+                          
+                                <li><a href="SQL.html">SQL</a>
+                                  
+                                  
+                                  
+                                </li> 
+                          
+                          </ul>
+                        </div>
+                      </div>
+                     
                     </div>
-                </div>
-                  <article class="markdown-body single-content">
-                    <p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
 
-<pre class="line-numbers"><code class="language-text">例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
-
-与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
-</code></pre>
-
-<h2 id="toc_0">思路</h2>
-
-<ul>
-<li>本题目因为要计算三个数，如果靠暴力枚举的话时间复杂度会到 \(O(n^3)\)，需要降低时间复杂度</li>
-<li>首先进行数组排序，时间复杂度 \(O(nlogn)\)</li>
-<li>在数组 <code>nums</code> 中，进行遍历，每遍历一个值利用其下标i，形成一个固定值 <code>nums[i]</code></li>
-<li>再使用前指针指向 <code>start = i + 1</code> 处，后指针指向 <code>end = nums.length - 1</code> 处，也就是结尾处</li>
-<li>根据 <code>sum = nums[i] + nums[start] + nums[end]</code> 的结果，判断 <code>sum</code> 与目标 <code>target</code> 的距离，如果更近则更新结果 <code>ans</code></li>
-<li>同时判断 <code>sum</code> 与 <code>target</code> 的大小关系，因为数组有序，如果 <code>sum &gt; target</code> 则 <code>end--</code>，如果 <code>sum &lt; target</code> 则 <code>start++</code>，如果 <code>sum == target</code> 则说明距离为 0 直接返回结果</li>
-<li>整个遍历过程，固定值为 n 次，双指针为 n 次，时间复杂度为 \(O(n^2)\)</li>
-<li>时间复杂度：\(O(nlogn) + O(n^2) = O(n^2)\)</li>
-</ul>
-
-<h2 id="toc_1">Java 解法</h2>
-
-<pre class="line-numbers"><code class="language-java">class Solution {
-    public int threeSumClosest(int[] nums, int target) {
-        Arrays.sort(nums);
-        int ans = nums[0] + nums[1] + nums[2];
-        for(int i=0;i&lt;nums.length;i++) {
-            int start = i+1, end = nums.length - 1;
-            while(start &lt; end) {
-                int sum = nums[start] + nums[end] + nums[i];
-                if(Math.abs(target - sum) &lt; Math.abs(target - ans))
-                    ans = sum;
-                if(sum &gt; target)
-                    end--;
-                else if(sum &lt; target)
-                    start++;
-                else
-                    return ans;
-            }
-        }
-        return ans;
-    }
-}
-</code></pre>
-
-<h2 id="toc_2">Python 解法</h2>
-
-<pre class="line-numbers"><code class="language-python">class Solution:
-    def threeSumClosest(self, nums: List[int], target: int) -&gt; int:
-        nums.sort()
-        ans = nums[0] + nums[1] + nums[2]
-
-        for i in range(len(nums)-1):
-            l = i + 1
-            r = len(nums) - 1
-
-            while l &lt; r:
-                total = nums[i] + nums[l] + nums[r]
-                if abs(target - total) &lt; abs(target - ans):
-                    ans = total
-                if total &gt; target:
-                    r -= 1
-                elif total &lt; target:
-                    l += 1
-                else:
-                    return ans
-        return ans
-</code></pre>
-
-                  </article>
-                  <div class="comments-wrap">
-                    <div class="share-comments">
-                      
-
-                      
-
-                      
-                    </div>
-                  </div><!-- end comments wrap -->
+                    <div class="card">
+                        <header class="card-header">
+                          <p class="card-header-title">
+                              <span class="tran-site-tags">Tags</span> 
+                          </p>
+                       
+                        </header>
+                        <div class="card-content site-tags">
+                          <div class="content">
+                           <div class="tags">
+                            
+                              <a class="tag is-link is-light" href="tag_Array.html">#Array</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_DP.html">#DP</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Easy.html">#Easy</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Hard.html">#Hard</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_LinkedList.html">#LinkedList</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Math.html">#Math</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Medium.html">#Medium</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Tree.html">#Tree</a> 
+                            
+                           </div>
+                             
+                          </div>
+                        </div>
+                       
+                      </div>
               </div>
-            </div><!-- end columns -->
-      </div><!-- end container -->
-    </section>
+            </div>
 
-
-
-    <footer class="footer">
+          
+      </div>
+    </section>    <footer class="footer">
         <div class="content has-text-centered">
           <p>
               Copyright &copy; 2019
@@ -221,9 +222,6 @@
       </footer>
 
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
   
 
@@ -238,8 +236,6 @@
 
 
 
-
-<script src="asset/prism.js"></script>
 
 
 

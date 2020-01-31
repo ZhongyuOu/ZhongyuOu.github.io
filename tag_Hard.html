@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Palindrome Linked List - CodingPark
+    Hard - CodingPark
     
     </title>
     <link rel="shortcut icon" href="/Users/johnnyau/Downloads/paper-plane.png" type="image/png" />
@@ -73,164 +73,120 @@
             </nav>
       </div>
 
- <div class="hero-body ct-body"></div>
-      
-    </section>
-    <section class="ct-body">
+ 
+ <div class="hero-body ct-body">
+    <div class="container">
+          <h1 class="title-only">
+                <span>#Hard</span>
+          </h1>
+    </div>
+  </div>
+</section>
+<section class="ct-body">
       <div class="container">
-          <div class="columns is-variable bd-klmn-columns is-4 is-centered">
-              <div class="column is-four-fifths">
-                  <div class="post-body single-content">
+          <div class="columns is-variable bd-klmn-columns is-4">
+              <div class="column is-two-thirds">
+               <div class="post-body">
+                  <div class="card archives">
                     
-                    <h1 class="title">
-                            Palindrome Linked List   
-                      </h1>
-                     
                     
-                      <div class="media">
-                            
-                            <figure class="media-left">
-                              <p class="image is-48x48">
-                                
-                                  <img class="is-rounded" src="/Users/johnnyau/Downloads/WechatIMG187_gaitubao_240x240.jpg">
-                                
-                              </p>
-                            </figure>
-                            
-                            <div class="media-content">
-                              <div class="content">
-                                <p>
-                                 <span class="date">12/26 23:5 PM</span>
-                                  <span class="tran-posted-in">posted in</span>&nbsp; 
-                                  
-                                      <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
-                                         
-                                  
-
-                                   
-                                      
-                                  <br />
-                                  <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_Easy.html'>#Easy</a>
-                                  
-                                    <a class="tag is-link is-light" href='tag_LinkedList.html'>#LinkedList</a>
+                        
+                       <div class="card-content">
+                         <div class="content">
+                          <a href="15748621727087.html">
+                            <h2 class="title">Super Agg Drop</h2>
+                          </a>
+                             <p class="des">
+                             <span class="date">11/27 21:42 PM</span>
+                              <span class="tran-posted-in">posted in</span>&nbsp; 
+                              
+                                  <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
                                      
+                             
+                                  
+                              <span class="tran-tags">Tags:</span>&nbsp;
+                              
+                                <a href='tag_DP.html'>#DP</a>
+                              
+                                <a href='tag_Hard.html'>#Hard</a>
+                                
+                           </p>
+                          </div>
+                       </div>
+                     
+          </div><!-- end card -->
+        </div><!-- end post body -->
 
-                                </p>
-                              </div>
-                            </div>
-                         
+              </div><!-- end column -->
+              <div class="column">
+                    <div class="card">
+                      <header class="card-header">
+                        <p class="card-header-title">
+                           <span class="tran-site-categories">Categories</span> 
+                        </p>
+                     
+                      </header>
+                      <div class="card-content site-categories">
+                        <div class="content"> 
+                          <ul>
+                          
+                                <li><a href="LeetCode.html">LeetCode</a>
+                                  
+                                  
+                                  
+                                </li> 
+                          
+                                <li><a href="SQL.html">SQL</a>
+                                  
+                                  
+                                  
+                                </li> 
+                          
+                          </ul>
+                        </div>
+                      </div>
+                     
                     </div>
-                </div>
-                  <article class="markdown-body single-content">
-                    <p>Given a singly linked list, determine if it is a palindrome.</p>
 
-<p><strong>Example 1:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2
-Output: false
-</code></pre>
-
-<p><strong>Example 2:</strong></p>
-
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;2-&gt;1
-Output: true
-</code></pre>
-
-<p><strong>Follow up:</strong><br/>
-Could you do it in \(O(n)\) time and \(O(1)\) space?</p>
-
-<h2 id="toc_0">Algorithm</h2>
-
-<p>This can be solved by reversing the 2nd half and compare the two halves. Let&#39;s start with an example [1, 1, 2, 1].</p>
-
-<p>In the beginning, set two pointers <code>fast</code> and <code>slow</code> starting at the head.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
-sf
-</code></pre>
-
-<p>(1) <strong>Move:</strong> <code>fast</code> pointer goes to the end, and <code>slow</code> goes to the middle.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
-          s          f
-</code></pre>
-
-<p>(2) <strong>Reverse:</strong> the right half is reversed, and <code>slow</code> pointer becomes the 2nd head.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1           
-h                      s
-</code></pre>
-
-<p>(3) <strong>Compare:</strong> run the two pointers <code>head</code> and <code>slow</code> together and compare.</p>
-
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1             
-     h            s
-</code></pre>
-
-<pre class="line-numbers"><code class="language-java">public boolean isPalindrome(ListNode head) {
-    ListNode fast = head, slow = head;
-    while (fast != null &amp;&amp; fast.next != null) {
-        fast = fast.next.next;
-        slow = slow.next;
-    }
-    // odd nodes: let right half smaller
-    if (fast != null) {
-        slow = slow.next;
-    }
-    slow = reverse(slow);
-    fast = head;
-    
-    while (slow != null) {
-        if (fast.val != slow.val) {
-            return false;
-        }
-        fast = fast.next;
-        slow = slow.next;
-    }
-    return true;
-}
-
-public ListNode reverse(ListNode head) {
-    ListNode prev = null;
-    while (head != null) {
-        ListNode next = head.next;
-        head.next = prev;
-        prev = head;
-        head = next;
-    }
-    return prev;
-}
-</code></pre>
-
-<h2 id="toc_1">Complexity Analysis</h2>
-
-<ul>
-<li><p><strong>Time complexity:</strong> \(O(n)\).<br/>
-The algorithm makes one traversal of the list of n nodes. Therefore time complexity is \(O(n)\).</p></li>
-<li><p><strong>Space complexity:</strong> \(O(1)\).<br/>
-We only used constant extra space.</p></li>
-</ul>
-
-                  </article>
-                  <div class="comments-wrap">
-                    <div class="share-comments">
-                      
-
-                      
-
-                      
-                    </div>
-                  </div><!-- end comments wrap -->
+                    <div class="card">
+                        <header class="card-header">
+                          <p class="card-header-title">
+                              <span class="tran-site-tags">Tags</span> 
+                          </p>
+                       
+                        </header>
+                        <div class="card-content site-tags">
+                          <div class="content">
+                           <div class="tags">
+                            
+                              <a class="tag is-link is-light" href="tag_Array.html">#Array</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_DP.html">#DP</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Easy.html">#Easy</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Hard.html">#Hard</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_LinkedList.html">#LinkedList</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Math.html">#Math</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Medium.html">#Medium</a> 
+                            
+                              <a class="tag is-link is-light" href="tag_Tree.html">#Tree</a> 
+                            
+                           </div>
+                             
+                          </div>
+                        </div>
+                       
+                      </div>
               </div>
-            </div><!-- end columns -->
-      </div><!-- end container -->
-    </section>
+            </div>
 
-
-
-    <footer class="footer">
+          
+      </div>
+    </section>    <footer class="footer">
         <div class="content has-text-centered">
           <p>
               Copyright &copy; 2019
@@ -241,9 +197,6 @@ We only used constant extra space.</p></li>
       </footer>
 
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
   
 
@@ -258,8 +211,6 @@ We only used constant extra space.</p></li>
 
 
 
-
-<script src="asset/prism.js"></script>
 
 
 
