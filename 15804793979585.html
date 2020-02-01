@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Add Two Numbers - CodingPark
+    How to install Manim on MacOS? - CodingPark
     
     </title>
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_paper-plane.png" type="image/png" />
@@ -83,9 +83,15 @@
           <div class="columns is-variable bd-klmn-columns is-4 is-centered">
               <div class="column is-four-fifths">
                   <div class="post-body single-content">
+                              
+                    <div class="card-image">
+                        <figure class="image">
+                          <img src="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_manim.png">
+                        </figure>
+                    </div>
                     
                     <h1 class="title">
-                            Add Two Numbers   
+                            How to install Manim on MacOS?   
                       </h1>
                      
                     
@@ -102,10 +108,10 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2020/01/15</span>
+                                 <span class="date">2020/01/31</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
-                                      <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
+                                      <span class="posted-in"><a href='February.html'>February</a></span>
                                          
                                   
 
@@ -113,10 +119,6 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_LinkedList.html'>#LinkedList</a>
-                                  
-                                    <a class="tag is-link is-light" href='tag_Medium.html'>#Medium</a>
                                      
 
                                 </p>
@@ -126,40 +128,72 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+                    <p><img src="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_manim.png" alt="math"/></p>
 
-<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p><em>What is Manim?</em></p>
 
-<p><strong>Example:</strong></p>
+<blockquote>
+<p><a href="https://github.com/3b1b/manim">Manim</a> is an animation engine for explanatory math videos. It&#39;s used to create precise animations programmatically, as seen in the videos at <a href="https://www.3blue1brown.com/">3Blue1Brown</a>.</p>
+</blockquote>
 
-<pre class="line-numbers"><code class="language-text">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
-Output: 7 -&gt; 0 -&gt; 8
-Explanation: 342 + 465 = 807.
+<p>The purpose of this post is to give another account of how to get Manim working on a <strong>Mac</strong> with <strong>Python3.7</strong>, nothing more. </p>
+
+<p>This process should be relatively straightforward if followed in order. The general process will involve:</p>
+
+<ul>
+<li>Downloading and installing Homebrew</li>
+<li>Downloading and installing MacTex</li>
+<li>Cloning the Manim repo and <em>creating a virtual environment</em> ( I strongly recommend doing that )</li>
+<li>Running examples</li>
+</ul>
+
+<h2 id="toc_0">Step 1:</h2>
+
+<p>You can install Homebrew by simply running the following line of code:</p>
+
+<pre class="line-numbers"><code class="language-shell">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 </code></pre>
 
-<h2 id="toc_0">Sample Code</h2>
+<p>Then head back to your terminal and run the following lines of code for packages that are needed to install.</p>
 
-<pre class="line-numbers"><code class="language-python"># Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        carry = 0;
-        res = n = ListNode(0);
-        while l1 or l2 or carry:
-            if l1:
-                carry += l1.val
-                l1 = l1.next;
-            if l2:
-                carry += l2.val;
-                l2 = l2.next;
-            carry, val = divmod(carry, 10)
-            n.next = n = ListNode(val);
-        return res.next
+<pre class="line-numbers"><code class="language-shell">brew install cairo
+brew install pkg-config
+brew install ffmpeg
+brew install sox
 </code></pre>
+
+<h2 id="toc_1">Step 2:</h2>
+
+<p>Now you need to create a virtual environment. If you are a green hand, I recommend you to install anoconda or miniconda. Run this line will create a new env:</p>
+
+<pre class="line-numbers"><code class="language-shell">conda create -n manim python=3.7
+</code></pre>
+
+<p>Then install some necessary packages：</p>
+
+<pre class="line-numbers"><code class="language-shell">pip install sox
+pip install ffmpeg
+pip install latex
+pip install manimlib
+</code></pre>
+
+<p>You can find the <code>requirements.txt</code> in the folder which you have just cloned. Copy this line to your terminal:</p>
+
+<pre class="line-numbers"><code class="language-shell">pip install -r requirements.txt
+</code></pre>
+
+<h2 id="toc_2">Step 3:</h2>
+
+<p>Now you have done all above steps. Run this command to check whether Manim really works:</p>
+
+<pre class="line-numbers"><code class="language-text">python extract_scene.py example_scenes.py SquareToCircle -pl
+</code></pre>
+
+<p>This should pull up your default player to run your sample video.</p>
+
+<h2 id="toc_3">One More Thing</h2>
+
+<p>If you want to learn more about Manim, I recommend you to read the official <a href="https://www.eulertour.com/learn/manim/">document</a>. Enjoy it!</p>
 
                   </article>
                   <div class="comments-wrap">

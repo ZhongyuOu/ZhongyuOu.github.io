@@ -1,12 +1,12 @@
 var i18nZHData = {
       'tran-site-categories':'Categories',
       'tran-site-tags':'Tags',
-      'tran-posted-in':'post to',
+      'tran-posted-in':'posted to',
       'tran-tags':'Tags:',
       'tran-archives':'Achive',
       'tran-categories':'Categories：',
       'tran-comments':'Comment',
-      'tran-readmore':'Read more...',
+      'tran-readmore':'Read more'
       'tran-prev-page':'&laquo; Prev',
       'tran-next-page':'Next &raquo;',
       'tran-disqus-comments':'Comment'
