@@ -131,7 +131,7 @@
 <p>For example:<br/>
 Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 
-<pre class="line-numbers"><code class="language-text">    3
+<pre><code class="language-text">    3
    / \
   9  20
     /  \
@@ -140,7 +140,7 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 
 <p>return its level order traversal as:</p>
 
-<pre class="line-numbers"><code class="language-text">[
+<pre><code class="language-text">[
   [3],
   [9,20],
   [15,7]
@@ -149,7 +149,7 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 
 <h2 id="toc_0">Approach 1: Double Queue</h2>
 
-<pre class="line-numbers"><code class="language-python">from collections import deque
+<pre><code class="language-python">from collections import deque
 class Solution:
     def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
         
@@ -175,7 +175,7 @@ class Solution:
 
 <h2 id="toc_1">Approach 2: List Comprehension</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
         if root == None:
             return

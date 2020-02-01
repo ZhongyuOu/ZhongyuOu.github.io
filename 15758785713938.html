@@ -132,12 +132,12 @@
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
+<pre><code class="language-text">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
 </code></pre>
 
 <h2 id="toc_0">Approach1: Recursion</h2>
 
-<pre class="line-numbers"><code class="language-java">/**
+<pre><code class="language-java">/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
@@ -160,7 +160,7 @@ class Solution {
 
 <h2 id="toc_1">Approach 2: Fake Head</h2>
 
-<pre class="line-numbers"><code class="language-java">private static ListNode swapPairs(ListNode head) {
+<pre><code class="language-java">private static ListNode swapPairs(ListNode head) {
     ListNode dummy = new ListNode(0);
     dummy.next = head;
     ListNode cur = dummy;

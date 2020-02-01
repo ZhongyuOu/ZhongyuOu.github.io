@@ -128,7 +128,7 @@
                   <article class="markdown-body single-content">
                     <p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
 
-<pre class="line-numbers"><code class="language-text">例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
+<pre><code class="language-text">例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
 
 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
 </code></pre>
@@ -148,7 +148,7 @@
 
 <h2 id="toc_1">Java Code</h2>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int ans = nums[0] + nums[1] + nums[2];
@@ -173,7 +173,7 @@
 
 <h2 id="toc_2">Python Code</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -&gt; int:
         nums.sort()
         ans = nums[0] + nums[1] + nums[2]

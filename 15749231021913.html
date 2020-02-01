@@ -130,7 +130,7 @@
 
 <p>The expression <code>subject IN (&#39;Chemistry&#39;,&#39;Physics&#39;)</code> can be used as a value - it will be 0 or 1.</p>
 
-<pre class="line-numbers"><code class="language-sql">SELECT winner, subject
+<pre><code class="language-sql">SELECT winner, subject
 FROM nobel
 WHERE yr=1984
 ORDER BY subject IN (&#39;Physics&#39;,&#39;Chemistry&#39;), subject, winner

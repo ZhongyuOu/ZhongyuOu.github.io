@@ -186,7 +186,7 @@
 
 <p>先做笛卡尔积，为了找到连续空座位，a.seat_id 里面的值应该大于 b.seat_id 且两者都应该为空。</p>
 
-<pre class="line-numbers"><code class="language-sql">select a.seat_id, a.free, b.seat_id, b.free
+<pre><code class="language-sql">select a.seat_id, a.free, b.seat_id, b.free
 from cinema a join cinema b
   on abs(a.seat_id - b.seat_id) = 1
   and a.free = true and b.free = true;
@@ -234,7 +234,7 @@ from cinema a join cinema b
 
 <p>注意：你可能发现 seat_id 4 在表中出现了两次。这是因为座位 4 与 3 和 5 都相邻。所以我们需要使用 distinct 将重复记录筛除。</p>
 
-<pre class="line-numbers"><code class="language-sql">select distinct a.seat_id
+<pre><code class="language-sql">select distinct a.seat_id
 from cinema a join cinema b
   on abs(a.seat_id - b.seat_id) = 1
   and a.free = true and b.free = true

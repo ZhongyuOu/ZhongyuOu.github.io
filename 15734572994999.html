@@ -126,7 +126,7 @@
                   <article class="markdown-body single-content">
                     <p>Table：<code>Activity</code></p>
 
-<pre class="line-numbers"><code class="language-text">+--------------+---------+
+<pre><code class="language-text">+--------------+---------+
 | Column Name  | Type    |
 +--------------+---------+
 | player_id    | int     |
@@ -143,7 +143,7 @@
 
 <p>查询结果格式如下所示：</p>
 
-<pre class="line-numbers"><code class="language-text">Activity table:
+<pre><code class="language-text">Activity table:
 +-----------+-----------+------------+--------------+
 | player_id | device_id | event_date | games_played |
 +-----------+-----------+------------+--------------+
@@ -173,7 +173,7 @@ Result table:
 <li>汇总。</li>
 </ol>
 
-<pre class="line-numbers"><code class="language-sql">select 
+<pre><code class="language-sql">select 
     round(sum(case when datediff(event_date, first_date) = 1 then 1 else 0 end)
           /(select count(distinct player_id) from Activity), 2) fraction 
 from

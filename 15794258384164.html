@@ -130,7 +130,7 @@
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
+<pre><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
 Output: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
 Explanation:
 rotate 1 steps to the right: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL
@@ -139,7 +139,7 @@ rotate 2 steps to the right: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
+<pre><code class="language-text">Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
 Output: 2-&gt;0-&gt;1-&gt;NULL
 Explanation:
 rotate 1 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
@@ -166,7 +166,7 @@ rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
 
 <h2 id="toc_1">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-java">public ListNode rotateRight(ListNode head, int n) {
+<pre><code class="language-java">public ListNode rotateRight(ListNode head, int n) {
     if (head==null||head.next==null) return head;
     ListNode dummy=new ListNode(0);
     dummy.next=head;

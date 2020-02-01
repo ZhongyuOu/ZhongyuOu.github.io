@@ -130,7 +130,7 @@
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
+<pre><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
 
 After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.
 </code></pre>
@@ -144,7 +144,7 @@ Given n will always be valid.</p>
 
 <p><img src="media/15767443041636/15767445250171.png" alt=""/></p>
 
-<pre class="line-numbers"><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+<pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode dummy = new ListNode(0);
     dummy.next = head;
     ListNode first = dummy;

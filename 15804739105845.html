@@ -130,7 +130,7 @@
 
 <p>For example, this binary tree <code>[1,2,2,3,4,4,3]</code> is symmetric:</p>
 
-<pre class="line-numbers"><code class="language-text">    1
+<pre><code class="language-text">    1
    / \
   2   2
  / \ / \
@@ -139,7 +139,7 @@
 
 <p>But the following <code>[1,2,2,null,3,null,3]</code> is not:</p>
 
-<pre class="line-numbers"><code class="language-text">    1
+<pre><code class="language-text">    1
    / \
   2   2
    \   \
@@ -148,7 +148,7 @@
 
 <h2 id="toc_0">Approach 1: Recursive</h2>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public boolean isSymmetric(TreeNode root) {
         return isMirror(root, root);
     }
@@ -172,7 +172,7 @@
 
 <h2 id="toc_2">Approach 2: Iterative</h2>
 
-<pre class="line-numbers"><code class="language-java">public boolean isSymmetric(TreeNode root) {
+<pre><code class="language-java">public boolean isSymmetric(TreeNode root) {
     Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();
     q.add(root);
     q.add(root);

@@ -130,13 +130,13 @@
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+<pre><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
 Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 </code></pre>
 
 <h2 id="toc_0">Approach 1: Iteratively</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists1(self, l1, l2):
+<pre><code class="language-python">def mergeTwoLists1(self, l1, l2):
     dummy = cur = ListNode(0)
     while l1 and l2:
         if l1.val &lt; l2.val:
@@ -152,7 +152,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 
 <h2 id="toc_1">Approach 2: Recursively</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists2(self, l1, l2):
+<pre><code class="language-python">def mergeTwoLists2(self, l1, l2):
     if not l1 or not l2:
         return l1 or l2
     if l1.val &lt; l2.val:
@@ -165,7 +165,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 
 <h2 id="toc_2">Approach 3: In-place</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists(self, l1, l2):
+<pre><code class="language-python">def mergeTwoLists(self, l1, l2):
     if None in (l1, l2):
         return l1 or l2
     dummy = cur = ListNode(0)

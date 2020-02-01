@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Super Agg Drop - CodingPark
+    Path Sum - CodingPark
     
     </title>
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_paper-plane.png" type="image/png" />
@@ -85,7 +85,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            Super Agg Drop   
+                            Path Sum   
                       </h1>
                      
                     
@@ -102,7 +102,7 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2019/11/27</span>
+                                 <span class="date">2020/02/01</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
                                       <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
@@ -113,10 +113,6 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_DP.html'>#DP</a>
-                                  
-                                    <a class="tag is-link is-light" href='tag_Hard.html'>#Hard</a>
                                      
 
                                 </p>
@@ -126,53 +122,54 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>你面前有一栋从 1 到 N 共 N 层的楼，然后给你 K 个鸡蛋（K 至少为 1）。现在确定这栋楼存在楼层 <code>0 &lt;= F &lt;= N</code>，在这层楼将鸡蛋扔下去，鸡蛋恰好没摔碎（高于 F 的楼层都会碎，低于F的楼层都不会碎）。现在问你，最坏情况下，你至少要扔几次鸡蛋，才能确定这个楼层 F 呢？</p>
+                    <p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
 
-<p>PS：F 可以为 0，比如说鸡蛋在 1 层都能摔碎，那么 <code>F = 0</code>。</p>
+<p><strong>Note:</strong> A leaf is a node with no children.</p>
 
-<h2 id="toc_0">Intuition：</h2>
+<p><strong>Example:</strong><br/>
+Given the below binary tree and <code>sum = 22</code>,</p>
 
-<p>在第 <code>i</code> 层楼扔了鸡蛋之后，可能出现两种情况：鸡蛋碎了，鸡蛋没碎。</p>
+<pre><code class="language-text">      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+</code></pre>
 
-<ul>
-<li>如果鸡蛋碎了，那么鸡蛋的个数 <code>K</code> 应该减一，搜索的楼层区间应该从 <code>[1...N]</code> 变为 <code>[1...i-1]</code> 共 <code>i-1</code> 层楼；</li>
-<li>如果鸡蛋没碎，那么鸡蛋的个数 K 不变，搜索的楼层区间应该从 <code>[1...N]</code> 变为 <code>[i+1...N]</code> 共 <code>N-i</code> 层楼。</li>
-</ul>
+<p>return true, as there exist a root-to-leaf path <code>5-&gt;4-&gt;11-&gt;2</code> which sum is 22.</p>
 
-<p>复杂度分析：</p>
+<h2 id="toc_0">Approach 1: Recursive</h2>
 
-<ul>
-<li>时间复杂度为函数本身复杂度和 K 个子问题复杂度的乘积 \(O(KN^2)\)；</li>
-<li>空间复杂度为子问题个数 \(O(KN)\)。</li>
-</ul>
+<pre><code class="language-python">class Solution:
+    def hasPathSum(self, root: TreeNode, target: int) -&gt; bool:
+        if not root:
+            return False
+        if (not root.left) and (not root.right) and (root.val == target):
+            return True
+        target -= root.val
+        return self.hasPathSum(root.left, sum) or self.hasPathSum(
+            root.right, sum)
+</code></pre>
 
-<h2 id="toc_1">Sample Code</h2>
+<h2 id="toc_1">Approach 2: Iterative</h2>
 
-<pre><code class="language-python">def superEggDrop(K: int, N: int):
-
-    memo = dict()
-    def dp(K, N) -&gt; int:
-        # 基线条件
-        if K == 1: return N
-        if N == 0: return 0
-        # 避免重复计算
-        if (K, N) in memo:
-            return memo[(K, N)]
-
-        res = float(&#39;INF&#39;)
-        # 穷举所有可能的选择
-        for i in range(1, N + 1):
-            res = min(res, 
-                      max(
-                            dp(K, N - i), 
-                            dp(K - 1, i - 1)
-                         ) + 1
-                  )
-        # 记入备忘录
-        memo[(K, N)] = res
-        return res
-
-    return dp(K, N)
+<pre><code class="language-python">class Solution:
+    def hasPathSum(self, root: TreeNode, target: int) -&gt; bool:
+        if not root:
+            return False
+        queue = [(root, target-root.val)]
+        while queue:
+            curr, val = queue.pop(0)
+            if not curr.left and not curr.right:
+                if val == 0:
+                    return True
+            if curr.left:
+                queue.append((curr.left, val-curr.left.val))
+            if curr.right:
+                queue.append((curr.right, val-curr.right.val))
+        return False
 </code></pre>
 
                   </article>
@@ -203,9 +200,6 @@
       </footer>
 
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
   
 

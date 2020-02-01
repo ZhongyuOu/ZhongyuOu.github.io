@@ -132,7 +132,7 @@
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: head = [3,2,0,-4], pos = 1
+<pre><code class="language-text">Input: head = [3,2,0,-4], pos = 1
 Output: true
 Explanation: There is a cycle in the linked list, where tail co`n`ects to the second node.
 </code></pre>
@@ -141,7 +141,7 @@ Explanation: There is a cycle in the linked list, where tail co`n`ects to the se
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: head = [1], pos = -1
+<pre><code class="language-text">Input: head = [1], pos = -1
 Output: false
 Explanation: There is no cycle in the linked list.
 </code></pre>
@@ -156,7 +156,7 @@ To detect if a list is cyclic, we can check whether a node had been visited befo
 <p><strong>Algorithm</strong><br/>
 We go through each node one by one and record each node&#39;s reference (or memory address) in a hash table. If the current node is null, we have reached the end of the list and it must not be cyclic. If current node’s reference is in the hash table, then return true.</p>
 
-<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+<pre><code class="language-java">public boolean hasCycle(ListNode head) {
     Set&lt;ListNode&gt; nodesSeen = new HashSet&lt;&gt;();
     while (head != null) {
         if (nodesSeen.contains(head)) {
@@ -179,7 +179,7 @@ We go through each node one by one and record each node&#39;s reference (or memo
 
 <h2 id="toc_1">Approach 2: Two Pointers</h2>
 
-<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+<pre><code class="language-java">public boolean hasCycle(ListNode head) {
     if (head == null || head.next == null) {
         return false;
     }

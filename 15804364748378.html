@@ -134,13 +134,13 @@
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: dividend = 10, divisor = 3
+<pre><code class="language-text">Input: dividend = 10, divisor = 3
 Output: 3
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: dividend = 7, divisor = -3
+<pre><code class="language-text">Input: dividend = 7, divisor = -3
 Output: -2
 </code></pre>
 
@@ -154,7 +154,7 @@ Output: -2
 
 <h2 id="toc_0">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def divide(self, dividend, divisor):
         positive = (dividend &lt; 0) == (divisor &lt; 0)
         dividend, divisor = abs(dividend), abs(divisor)

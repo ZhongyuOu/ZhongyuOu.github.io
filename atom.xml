@@ -4,7 +4,7 @@
   <title><![CDATA[CodingPark]]></title>
   <link href="https://zhongyuou.github.io/atom.xml" rel="self"/>
   <link href="https://zhongyuou.github.io/"/>
-  <updated>2020-02-01T09:59:14+08:00</updated>
+  <updated>2020-02-01T20:42:44+08:00</updated>
   <id>https://zhongyuou.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,13 +13,70 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
+    <title type="html"><![CDATA[Path Sum]]></title>
+    <link href="https://zhongyuou.github.io/15805591056032.html"/>
+    <updated>2020-02-01T20:11:45+08:00</updated>
+    <id>https://zhongyuou.github.io/15805591056032.html</id>
+    <content type="html"><![CDATA[
+<p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+
+<p><strong>Note:</strong> A leaf is a node with no children.</p>
+
+<p><strong>Example:</strong><br/>
+Given the below binary tree and <code>sum = 22</code>,</p>
+
+<pre><code class="language-text">      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+</code></pre>
+
+<p>return true, as there exist a root-to-leaf path <code>5-&gt;4-&gt;11-&gt;2</code> which sum is 22.</p>
+
+<h2 id="toc_0">Approach 1: Recursive</h2>
+
+<pre><code class="language-python">class Solution:
+    def hasPathSum(self, root: TreeNode, target: int) -&gt; bool:
+        if not root:
+            return False
+        if (not root.left) and (not root.right) and (root.val == target):
+            return True
+        target -= root.val
+        return self.hasPathSum(root.left, sum) or self.hasPathSum(
+            root.right, sum)
+</code></pre>
+
+<h2 id="toc_1">Approach 2: Iterative</h2>
+
+<pre><code class="language-python">class Solution:
+    def hasPathSum(self, root: TreeNode, target: int) -&gt; bool:
+        if not root:
+            return False
+        queue = [(root, target-root.val)]
+        while queue:
+            curr, val = queue.pop(0)
+            if not curr.left and not curr.right:
+                if val == 0:
+                    return True
+            if curr.left:
+                queue.append((curr.left, val-curr.left.val))
+            if curr.right:
+                queue.append((curr.right, val-curr.right.val))
+        return False
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How to install Manim on MacOS?]]></title>
     <link href="https://zhongyuou.github.io/15804793979585.html"/>
     <updated>2020-01-31T22:03:17+08:00</updated>
     <id>https://zhongyuou.github.io/15804793979585.html</id>
     <content type="html"><![CDATA[
-<p><img src="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_manim.png" alt="math"/></p>
-
 <p><em>What is Manim?</em></p>
 
 <blockquote>
@@ -41,12 +98,12 @@
 
 <p>You can install Homebrew by simply running the following line of code:</p>
 
-<pre class="line-numbers"><code class="language-shell">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<pre><code class="language-shell">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 </code></pre>
 
 <p>Then head back to your terminal and run the following lines of code for packages that are needed to install.</p>
 
-<pre class="line-numbers"><code class="language-shell">brew install cairo
+<pre><code class="language-shell">brew install cairo
 brew install pkg-config
 brew install ffmpeg
 brew install sox
@@ -54,14 +111,14 @@ brew install sox
 
 <h2 id="toc_1">Step 2:</h2>
 
-<p>Now you need to create a virtual environment. If you are a green hand, I recommend you to install anoconda or miniconda. Run this line will create a new env:</p>
+<p>Now you need to create a virtual environment. If you are a junior programmer, I recommend you to install Anoconda or Miniconda. Run this line will create a new env:</p>
 
-<pre class="line-numbers"><code class="language-shell">conda create -n manim python=3.7
+<pre><code class="language-shell">conda create -n manim python=3.7
 </code></pre>
 
 <p>Then install some necessary packages：</p>
 
-<pre class="line-numbers"><code class="language-shell">pip install sox
+<pre><code class="language-shell">pip install sox
 pip install ffmpeg
 pip install latex
 pip install manimlib
@@ -69,14 +126,14 @@ pip install manimlib
 
 <p>You can find the <code>requirements.txt</code> in the folder which you have just cloned. Copy this line to your terminal:</p>
 
-<pre class="line-numbers"><code class="language-shell">pip install -r requirements.txt
+<pre><code class="language-shell">pip install -r requirements.txt
 </code></pre>
 
 <h2 id="toc_2">Step 3:</h2>
 
 <p>Now you have done all above steps. Run this command to check whether Manim really works:</p>
 
-<pre class="line-numbers"><code class="language-text">python extract_scene.py example_scenes.py SquareToCircle -pl
+<pre><code class="language-text">python extract_scene.py example_scenes.py SquareToCircle -pl
 </code></pre>
 
 <p>This should pull up your default player to run your sample video.</p>
@@ -98,7 +155,7 @@ pip install manimlib
 
 <p>For example, this binary tree <code>[1,2,2,3,4,4,3]</code> is symmetric:</p>
 
-<pre class="line-numbers"><code class="language-text">    1
+<pre><code class="language-text">    1
    / \
   2   2
  / \ / \
@@ -107,7 +164,7 @@ pip install manimlib
 
 <p>But the following <code>[1,2,2,null,3,null,3]</code> is not:</p>
 
-<pre class="line-numbers"><code class="language-text">    1
+<pre><code class="language-text">    1
    / \
   2   2
    \   \
@@ -116,7 +173,7 @@ pip install manimlib
 
 <h2 id="toc_0">Approach 1: Recursive</h2>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public boolean isSymmetric(TreeNode root) {
         return isMirror(root, root);
     }
@@ -140,7 +197,7 @@ pip install manimlib
 
 <h2 id="toc_2">Approach 2: Iterative</h2>
 
-<pre class="line-numbers"><code class="language-java">public boolean isSymmetric(TreeNode root) {
+<pre><code class="language-java">public boolean isSymmetric(TreeNode root) {
     Queue&lt;TreeNode&gt; q = new LinkedList&lt;&gt;();
     q.add(root);
     q.add(root);
@@ -179,13 +236,13 @@ pip install manimlib
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+<pre><code class="language-text">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4
 Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 </code></pre>
 
 <h2 id="toc_0">Approach 1: Iteratively</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists1(self, l1, l2):
+<pre><code class="language-python">def mergeTwoLists1(self, l1, l2):
     dummy = cur = ListNode(0)
     while l1 and l2:
         if l1.val &lt; l2.val:
@@ -201,7 +258,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 
 <h2 id="toc_1">Approach 2: Recursively</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists2(self, l1, l2):
+<pre><code class="language-python">def mergeTwoLists2(self, l1, l2):
     if not l1 or not l2:
         return l1 or l2
     if l1.val &lt; l2.val:
@@ -214,7 +271,7 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 
 <h2 id="toc_2">Approach 3: In-place</h2>
 
-<pre class="line-numbers"><code class="language-python">def mergeTwoLists(self, l1, l2):
+<pre><code class="language-python">def mergeTwoLists(self, l1, l2):
     if None in (l1, l2):
         return l1 or l2
     dummy = cur = ListNode(0)
@@ -250,13 +307,13 @@ Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: dividend = 10, divisor = 3
+<pre><code class="language-text">Input: dividend = 10, divisor = 3
 Output: 3
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: dividend = 7, divisor = -3
+<pre><code class="language-text">Input: dividend = 7, divisor = -3
 Output: -2
 </code></pre>
 
@@ -270,7 +327,7 @@ Output: -2
 
 <h2 id="toc_0">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def divide(self, dividend, divisor):
         positive = (dividend &lt; 0) == (divisor &lt; 0)
         dividend, divisor = abs(dividend), abs(divisor)
@@ -297,7 +354,7 @@ Output: -2
 
 <p>示例:</p>
 
-<pre class="line-numbers"><code class="language-text">输入: [-2,1,-3,4,-1,2,1,-5,4],
+<pre><code class="language-text">输入: [-2,1,-3,4,-1,2,1,-5,4],
 输出: 6
 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
 </code></pre>
@@ -314,7 +371,7 @@ Output: -2
 
 <h2 id="toc_1">Java Code</h2>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public int maxSubArray(int[] nums) {
         int sum = 0;
         int ans = nums[0];
@@ -334,7 +391,7 @@ Output: -2
 
 <h2 id="toc_2">Python Code</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def maxSubArray(self, nums: List[int]) -&gt; int:
         total = 0
         ans = nums[0]
@@ -361,7 +418,7 @@ Output: -2
 <p>For example:<br/>
 Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 
-<pre class="line-numbers"><code class="language-text">    3
+<pre><code class="language-text">    3
    / \
   9  20
     /  \
@@ -370,7 +427,7 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 
 <p>return its level order traversal as:</p>
 
-<pre class="line-numbers"><code class="language-text">[
+<pre><code class="language-text">[
   [3],
   [9,20],
   [15,7]
@@ -379,7 +436,7 @@ Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
 
 <h2 id="toc_0">Approach 1: Double Queue</h2>
 
-<pre class="line-numbers"><code class="language-python">from collections import deque
+<pre><code class="language-python">from collections import deque
 class Solution:
     def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
         
@@ -405,7 +462,7 @@ class Solution:
 
 <h2 id="toc_1">Approach 2: List Comprehension</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def levelOrder(self, root: TreeNode) -&gt; List[List[int]]:
         if root == None:
             return
@@ -429,7 +486,7 @@ class Solution:
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: [1,null,2,3]
+<pre><code class="language-text">Input: [1,null,2,3]
    1
     \
      2
@@ -443,7 +500,7 @@ Output: [1,2,3]
 
 <h2 id="toc_0">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def preorderTraversal(self, root: TreeNode) -&gt; List[int]:
         if not root:
             return
@@ -472,7 +529,7 @@ Output: [1,2,3]
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
+<pre><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, k = 2
 Output: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
 Explanation:
 rotate 1 steps to the right: 5-&gt;1-&gt;2-&gt;3-&gt;4-&gt;NULL
@@ -481,7 +538,7 @@ rotate 2 steps to the right: 4-&gt;5-&gt;1-&gt;2-&gt;3-&gt;NULL
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
+<pre><code class="language-text">Input: 0-&gt;1-&gt;2-&gt;NULL, k = 4
 Output: 2-&gt;0-&gt;1-&gt;NULL
 Explanation:
 rotate 1 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
@@ -508,7 +565,7 @@ rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
 
 <h2 id="toc_1">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-java">public ListNode rotateRight(ListNode head, int n) {
+<pre><code class="language-java">public ListNode rotateRight(ListNode head, int n) {
     if (head==null||head.next==null) return head;
     ListNode dummy=new ListNode(0);
     dummy.next=head;
@@ -544,7 +601,7 @@ rotate 4 steps to the right: 2-&gt;0-&gt;1-&gt;NULL
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: head = [1,2,null,3]
+<pre><code class="language-text">Input: head = [1,2,null,3]
 Output: [1,3,2]
 Explanation:
 
@@ -566,7 +623,7 @@ The input multilevel linked list is as follows:
 
 <h2 id="toc_1">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public Node flatten(Node head) {
         if( head == null) return head;
     // Pointer
@@ -610,14 +667,14 @@ The input multilevel linked list is as follows:
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+<pre><code class="language-text">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
 Output: 7 -&gt; 0 -&gt; 8
 Explanation: 342 + 465 = 807.
 </code></pre>
 
 <h2 id="toc_0">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-python"># Definition for singly-linked list.
+<pre><code class="language-python"># Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -664,7 +721,7 @@ class Solution:
 
 <h2 id="toc_1">Sample Code</h2>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def isPalindrome(self, x: int) -&gt; bool:
         if x &lt; 0 or (x % 10 == 0 and x != 0):
             return False
@@ -688,13 +745,13 @@ class Solution:
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2
+<pre><code class="language-text">Input: 1-&gt;2
 Output: false
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;2-&gt;1
+<pre><code class="language-text">Input: 1-&gt;2-&gt;2-&gt;1
 Output: true
 </code></pre>
 
@@ -707,29 +764,29 @@ Could you do it in \(O(n)\) time and \(O(1)\) space?</p>
 
 <p>In the beginning, set two pointers <code>fast</code> and <code>slow</code> starting at the head.</p>
 
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
+<pre><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
 sf
 </code></pre>
 
 <p>(1) <strong>Move:</strong> <code>fast</code> pointer goes to the end, and <code>slow</code> goes to the middle.</p>
 
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
+<pre><code class="language-text">1 -&gt; 1 -&gt; 2 -&gt; 1 -&gt; null 
           s          f
 </code></pre>
 
 <p>(2) <strong>Reverse:</strong> the right half is reversed, and <code>slow</code> pointer becomes the 2nd head.</p>
 
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1           
+<pre><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1           
 h                      s
 </code></pre>
 
 <p>(3) <strong>Compare:</strong> run the two pointers <code>head</code> and <code>slow</code> together and compare.</p>
 
-<pre class="line-numbers"><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1             
+<pre><code class="language-text">1 -&gt; 1    null &lt;- 2 &lt;- 1             
      h            s
 </code></pre>
 
-<pre class="line-numbers"><code class="language-java">public boolean isPalindrome(ListNode head) {
+<pre><code class="language-java">public boolean isPalindrome(ListNode head) {
     ListNode fast = head, slow = head;
     while (fast != null &amp;&amp; fast.next != null) {
         fast = fast.next.next;
@@ -788,13 +845,13 @@ We only used constant extra space.</p></li>
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+<pre><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
+<pre><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
 Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
 </code></pre>
 
@@ -813,7 +870,7 @@ Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
 
 <p><img src="https://leetcode.com/problems/odd-even-linked-list/Figures/328_Odd_Even.svg" alt="example"/></p>
 
-<pre class="line-numbers"><code class="language-java">public class Solution {
+<pre><code class="language-java">public class Solution {
     public ListNode oddEvenList(ListNode head) {
         if (head == null) return null;
         ListNode odd = head, even = head.next, evenHead = even;
@@ -842,7 +899,7 @@ Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
+<pre><code class="language-text">Given linked list: 1-&gt;2-&gt;3-&gt;4-&gt;5, and n = 2.
 
 After removing the second node from the end, the linked list becomes 1-&gt;2-&gt;3-&gt;5.
 </code></pre>
@@ -856,7 +913,7 @@ Given n will always be valid.</p>
 
 <p><img src="media/15767443041636/15767445250171.png" alt=""/></p>
 
-<pre class="line-numbers"><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+<pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
     ListNode dummy = new ListNode(0);
     dummy.next = head;
     ListNode first = dummy;
@@ -903,7 +960,7 @@ We only used constant extra space.</p></li>
 
 <h3 id="toc_1">Sample Code</h3>
 
-<pre class="line-numbers"><code class="language-java">public class Solution {
+<pre><code class="language-java">public class Solution {
     public ListNode detectCycle(ListNode head) {
         Set&lt;ListNode&gt; visited = new HashSet&lt;ListNode&gt;();
 
@@ -942,7 +999,7 @@ We only used constant extra space.</p></li>
 
 <h3 id="toc_6">Sample Code</h3>
 
-<pre class="line-numbers"><code class="language-java">public class Solution {
+<pre><code class="language-java">public class Solution {
     private ListNode getIntersect(ListNode head) {
         ListNode tortoise = head;
         ListNode hare = head;
@@ -1010,12 +1067,12 @@ We only used constant extra space.</p></li>
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
+<pre><code class="language-text">Given 1-&gt;2-&gt;3-&gt;4, you should return the list as 2-&gt;1-&gt;4-&gt;3.
 </code></pre>
 
 <h2 id="toc_0">Approach1: Recursion</h2>
 
-<pre class="line-numbers"><code class="language-java">/**
+<pre><code class="language-java">/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
@@ -1038,7 +1095,7 @@ class Solution {
 
 <h2 id="toc_1">Approach 2: Fake Head</h2>
 
-<pre class="line-numbers"><code class="language-java">private static ListNode swapPairs(ListNode head) {
+<pre><code class="language-java">private static ListNode swapPairs(ListNode head) {
     ListNode dummy = new ListNode(0);
     dummy.next = head;
     ListNode cur = dummy;
@@ -1068,19 +1125,19 @@ class Solution {
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 123
+<pre><code class="language-text">Input: 123
 Output: 321
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: -123
+<pre><code class="language-text">Input: -123
 Output: -321
 </code></pre>
 
 <p><strong>Example 3:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 120
+<pre><code class="language-text">Input: 120
 Output: 21
 </code></pre>
 
@@ -1101,7 +1158,7 @@ Assume we are dealing with an environment which could only store integers within
 
 <p>However, this approach is dangerous, because the statement \(\text{temp} = \text{rev} \cdot 10 + \text{pop}\) can cause overflow.</p>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public int reverse(int x) {
         int rev = 0;
         while (x != 0) {
@@ -1136,7 +1193,7 @@ Assume we are dealing with an environment which could only store integers within
 
 <p><strong>Example:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input:  1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
+<pre><code class="language-text">Input:  1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
 Output: 1-&gt;2-&gt;3-&gt;4-&gt;5
 </code></pre>
 
@@ -1156,7 +1213,7 @@ First we make a list of edge cases that need to be considered:</p>
 
 <p><strong>Algorithm</strong></p>
 
-<pre class="line-numbers"><code class="language-python">class Solution:
+<pre><code class="language-python">class Solution:
     def removeElements(self, head, val):
         &quot;&quot;&quot;
         :type head: ListNode
@@ -1199,7 +1256,7 @@ First we make a list of edge cases that need to be considered:</p>
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: head = [3,2,0,-4], pos = 1
+<pre><code class="language-text">Input: head = [3,2,0,-4], pos = 1
 Output: true
 Explanation: There is a cycle in the linked list, where tail co`n`ects to the second node.
 </code></pre>
@@ -1208,7 +1265,7 @@ Explanation: There is a cycle in the linked list, where tail co`n`ects to the se
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: head = [1], pos = -1
+<pre><code class="language-text">Input: head = [1], pos = -1
 Output: false
 Explanation: There is no cycle in the linked list.
 </code></pre>
@@ -1223,7 +1280,7 @@ To detect if a list is cyclic, we can check whether a node had been visited befo
 <p><strong>Algorithm</strong><br/>
 We go through each node one by one and record each node&#39;s reference (or memory address) in a hash table. If the current node is null, we have reached the end of the list and it must not be cyclic. If current node’s reference is in the hash table, then return true.</p>
 
-<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+<pre><code class="language-java">public boolean hasCycle(ListNode head) {
     Set&lt;ListNode&gt; nodesSeen = new HashSet&lt;&gt;();
     while (head != null) {
         if (nodesSeen.contains(head)) {
@@ -1246,7 +1303,7 @@ We go through each node one by one and record each node&#39;s reference (or memo
 
 <h2 id="toc_1">Approach 2: Two Pointers</h2>
 
-<pre class="line-numbers"><code class="language-java">public boolean hasCycle(ListNode head) {
+<pre><code class="language-java">public boolean hasCycle(ListNode head) {
     if (head == null || head.next == null) {
         return false;
     }
@@ -1281,62 +1338,6 @@ We break down the movement of the slow pointer into two steps, the non-cyclic pa
 <p>Therefore, the worst case time complexity is <code>O(N+K)</code>, which is <code>O(n)</code>.</p></li>
 <li><p><strong>Space complexity:</strong> We only use two nodes (slow and fast) so the space complexity is <code>O(1)</code>.</p></li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[World]]></title>
-    <link href="https://zhongyuou.github.io/15754265806958.html"/>
-    <updated>2019-12-04T10:29:40+08:00</updated>
-    <id>https://zhongyuou.github.io/15754265806958.html</id>
-    <content type="html"><![CDATA[
-<p>找出洲份，當中全部國家都有少於或等於 25000000 人口. 在這些洲份中，列出國家名字name，continent 洲份和population人口.</p>
-
-<h2 id="toc_0">Hint</h2>
-
-<p>使用 <code>population &gt; 0</code> 跳过空值.</p>
-
-<pre class="line-numbers"><code class="language-sql">select name, continent, population from world x
-where 25000000 &gt;= all(
-  select population from world y
-  where x.continent = y.continent and population &gt; 0);
-</code></pre>
-
-<p><strong>Correct answer:</strong></p>
-
-<table>
-<thead>
-<tr>
-<th style="text-align: center">name</th>
-<th style="text-align: center">continent</th>
-<th style="text-align: center">population</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td style="text-align: center">Antigua and Barbuda</td>
-<td style="text-align: center">Caribbean</td>
-<td style="text-align: center">86295</td>
-</tr>
-<tr>
-<td style="text-align: center">Australia</td>
-<td style="text-align: center">Oceania</td>
-<td style="text-align: center">23545500</td>
-</tr>
-<tr>
-<td style="text-align: center">Bahamas</td>
-<td style="text-align: center">Caribbean</td>
-<td style="text-align: center">351461</td>
-</tr>
-<tr>
-<td style="text-align: center">Barbados</td>
-<td style="text-align: center">Caribbean</td>
-<td style="text-align: center">285000</td>
-</tr>
-</tbody>
-</table>
 
 ]]></content>
   </entry>

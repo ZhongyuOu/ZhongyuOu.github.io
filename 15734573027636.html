@@ -128,7 +128,7 @@
 
 <p>写一个查询语句找到两点之间的最近距离，保留 2 位小数。</p>
 
-<pre class="line-numbers"><code class="language-text">| x  | y  |
+<pre><code class="language-text">| x  | y  |
 |----|----|
 | -1 | -1 |
 | 0  | 0  |
@@ -137,14 +137,14 @@
 
 <p>最近距离在点 (-1,-1) 和(-1,-2) 之间，距离为 1.00 。所以输出应该为：</p>
 
-<pre class="line-numbers"><code class="language-text">| shortest |
+<pre><code class="language-text">| shortest |
 |----------|
 | 1.00     |
 </code></pre>
 
 <h2 id="toc_0">Solution</h2>
 
-<pre class="line-numbers"><code class="language-sql">SELECT
+<pre><code class="language-sql">SELECT
     ROUND(SQRT(MIN((POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2)))), 2) AS shortest
 FROM
     point_2d p1
@@ -155,7 +155,7 @@ FROM
 
 <p>优化避免重复运算：</p>
 
-<pre class="line-numbers"><code class="language-sql">SELECT
+<pre><code class="language-sql">SELECT
     ROUND(SQRT(MIN((POW(p1.x - p2.x, 2) + POW(p1.y - p2.y, 2)))),2) AS shortest
 FROM
     point_2d p1

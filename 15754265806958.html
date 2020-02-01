@@ -130,7 +130,7 @@
 
 <p>使用 <code>population &gt; 0</code> 跳过空值.</p>
 
-<pre class="line-numbers"><code class="language-sql">select name, continent, population from world x
+<pre><code class="language-sql">select name, continent, population from world x
 where 25000000 &gt;= all(
   select population from world y
   where x.continent = y.continent and population &gt; 0);

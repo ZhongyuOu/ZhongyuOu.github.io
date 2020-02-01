@@ -126,7 +126,7 @@
                   <article class="markdown-body single-content">
                     <p>部门表 <code>Department</code>：</p>
 
-<pre class="line-numbers"><code class="language-text">+---------------+---------+
+<pre><code class="language-text">+---------------+---------+
 | Column Name   | Type    |
 +---------------+---------+
 | id            | int     |
@@ -142,7 +142,7 @@
 
 <p>查询结果格式如下面的示例所示：</p>
 
-<pre class="line-numbers"><code class="language-text">Department 表：
+<pre><code class="language-text">Department 表：
 +------+---------+-------+
 | id   | revenue | month |
 +------+---------+-------+
@@ -167,7 +167,7 @@
 
 <h2 id="toc_0">Solution</h2>
 
-<pre class="line-numbers"><code class="language-sql">select 
+<pre><code class="language-sql">select 
     `id`,
     max(if(`month` = &#39;Jan&#39;, revenue, null)) as &quot;Jan_Revenue&quot;,
     max(if(`month` = &#39;Feb&#39;, revenue, null)) as &quot;Feb_Revenue&quot;,

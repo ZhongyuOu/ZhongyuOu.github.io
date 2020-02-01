@@ -140,13 +140,13 @@
 
 <p>示例 1：</p>
 
-<pre class="line-numbers"><code class="language-text">输入：&quot;.L.R...LR..L..&quot;
+<pre><code class="language-text">输入：&quot;.L.R...LR..L..&quot;
 输出：&quot;LL.RR.LLRRLL..&quot;
 </code></pre>
 
 <p>示例 2：</p>
 
-<pre class="line-numbers"><code class="language-text">输入：&quot;RR.L&quot;
+<pre><code class="language-text">输入：&quot;RR.L&quot;
 输出：&quot;RR.L&quot;
 说明：第一张多米诺骨牌没有给第二张施加额外的力。
 </code></pre>
@@ -160,7 +160,7 @@
 <li>时间和空间复杂度：\(O(n)\)</li>
 </ul>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public String pushDominoes(String dominoes) {
         int N = dominoes.length();
         int[] indexes = new int[N+2];
@@ -205,7 +205,7 @@
 <li>对于骨牌的结果 <code>answer[i]</code>，如果左右两侧力相等，答案是 <code>&#39;.&#39;</code>。否则，哪边力大答案就是哪边。</li>
 </ul>
 
-<pre class="line-numbers"><code class="language-java">class Solution {
+<pre><code class="language-java">class Solution {
     public String pushDominoes(String S) {
         char[] A = S.toCharArray();
         int N = A.length;

@@ -132,13 +132,13 @@
 
 <p><strong>Example 1:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+<pre><code class="language-text">Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
 Output: 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL
 </code></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre class="line-numbers"><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
+<pre><code class="language-text">Input: 2-&gt;1-&gt;3-&gt;5-&gt;6-&gt;4-&gt;7-&gt;NULL
 Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
 </code></pre>
 
@@ -157,7 +157,7 @@ Output: 2-&gt;3-&gt;6-&gt;7-&gt;1-&gt;5-&gt;4-&gt;NULL
 
 <p><img src="https://leetcode.com/problems/odd-even-linked-list/Figures/328_Odd_Even.svg" alt="example"/></p>
 
-<pre class="line-numbers"><code class="language-java">public class Solution {
+<pre><code class="language-java">public class Solution {
     public ListNode oddEvenList(ListNode head) {
         if (head == null) return null;
         ListNode odd = head, even = head.next, evenHead = even;
