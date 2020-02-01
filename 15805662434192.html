@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Path Sum - CodingPark
+    Construct Binary Tree from Inorder and Postorder Traversal - CodingPark
     
     </title>
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_paper-plane.png" type="image/png" />
@@ -85,7 +85,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            Path Sum   
+                            Construct Binary Tree from Inorder and Postorder Traversal   
                       </h1>
                      
                     
@@ -126,54 +126,59 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <p>Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.</p>
+                    <p>Given inorder and postorder traversal of a tree, construct the binary tree.</p>
 
-<p><strong>Note:</strong> A leaf is a node with no children.</p>
+<p><strong>Note:</strong><br/>
+You may assume that duplicates do not exist in the tree.</p>
 
-<p><strong>Example:</strong><br/>
-Given the below binary tree and <code>sum = 22</code>,</p>
+<p>For example, given</p>
 
-<pre><code class="language-text">      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \      \
-7    2      1
+<pre><code class="language-text">inorder = [9,3,15,20,7]
+postorder = [9,15,7,20,3]
 </code></pre>
 
-<p>return true, as there exist a root-to-leaf path <code>5-&gt;4-&gt;11-&gt;2</code> which sum is 22.</p>
+<p>Return the following binary tree:</p>
 
-<h2 id="toc_0">Approach 1: Recursive</h2>
-
-<pre><code class="language-python">class Solution:
-    def hasPathSum(self, root: TreeNode, target: int) -&gt; bool:
-        if not root:
-            return False
-        if (not root.left) and (not root.right) and (root.val == target):
-            return True
-        target -= root.val
-        return self.hasPathSum(root.left, sum) or self.hasPathSum(
-            root.right, sum)
+<pre><code class="language-text">    3
+   / \
+  9  20
+    /  \
+   15   7
 </code></pre>
 
-<h2 id="toc_1">Approach 2: Iterative</h2>
+<h2 id="toc_0">Approach 1:</h2>
 
 <pre><code class="language-python">class Solution:
-    def hasPathSum(self, root: TreeNode, target: int) -&gt; bool:
-        if not root:
-            return False
-        queue = [(root, target-root.val)]
-        while queue:
-            curr, val = queue.pop(0)
-            if not curr.left and not curr.right:
-                if val == 0:
-                    return True
-            if curr.left:
-                queue.append((curr.left, val-curr.left.val))
-            if curr.right:
-                queue.append((curr.right, val-curr.right.val))
-        return False
+    def buildTree(self, inorder, postorder):
+        if not inorder or not postorder:
+            return None
+        root = TreeNode(postorder.pop())
+        idx = inorder.index(root.val)
+        root.right = self.buildTree(inorder[idx+1:], postorder)
+        root.left = self.buildTree(inorder[:idx], postorder)
+        return root
+</code></pre>
+
+<h2 id="toc_1">Approach 2:</h2>
+
+<p>The code above is clean and short. But can we optimize our solution? After doing complexity analysis, we find that the overall running time and extra space are both \(O(n^2)\). So this implementation has a very bad performance, and we can avoid it.</p>
+
+<p>Here I implement a new solution with the aid of HashTable (or we call it dictionary in Python):</p>
+
+<pre><code class="language-python">class Solution:
+    def buildTree(self, inorder, postorder):
+        hash_map = {}
+        for idx, val in enumerate(inorder):
+            hash_map[val] = idx
+        def helper(low, high):
+            if low &gt; high:
+                return None
+            node = TreeNode(postorder.pop())
+            mid = hash_map[node.val]
+            node.right = helper(mid+1, high)
+            node.left = helper(low, mid-1)
+            return node
+        return helper(0, len(inorder)-1)
 </code></pre>
 
                   </article>
@@ -204,6 +209,9 @@ Given the below binary tree and <code>sum = 22</code>,</p>
       </footer>
 
 
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
   
 
