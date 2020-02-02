@@ -4,7 +4,7 @@
   <title><![CDATA[CodingPark]]></title>
   <link href="https://zhongyuou.github.io/atom.xml" rel="self"/>
   <link href="https://zhongyuou.github.io/"/>
-  <updated>2020-02-01T22:29:06+08:00</updated>
+  <updated>2020-02-02T22:31:51+08:00</updated>
   <id>https://zhongyuou.github.io/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -13,11 +13,13 @@
   <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
-    <title type="html"><![CDATA[Construct Binary Tree from Inorder and Postorder Traversal]]></title>
+    <title type="html"><![CDATA[Construct Binary Tree]]></title>
     <link href="https://zhongyuou.github.io/15805662434192.html"/>
     <updated>2020-02-01T22:10:43+08:00</updated>
     <id>https://zhongyuou.github.io/15805662434192.html</id>
     <content type="html"><![CDATA[
+<h2 id="toc_0">1. From Inorder and Postorder Traversal</h2>
+
 <p>Given inorder and postorder traversal of a tree, construct the binary tree.</p>
 
 <p><strong>Note:</strong><br/>
@@ -38,7 +40,7 @@ postorder = [9,15,7,20,3]
    15   7
 </code></pre>
 
-<h2 id="toc_0">Approach 1:</h2>
+<h3 id="toc_1">Approach 1:</h3>
 
 <pre><code class="language-python">class Solution:
     def buildTree(self, inorder, postorder):
@@ -51,7 +53,7 @@ postorder = [9,15,7,20,3]
         return root
 </code></pre>
 
-<h2 id="toc_1">Approach 2:</h2>
+<h3 id="toc_2">Approach 2:</h3>
 
 <p>The code above is clean and short. But can we optimize our solution? After doing complexity analysis, we find that the overall running time and extra space are both \(O(n^2)\). So this implementation has a very bad performance, and we can avoid it.</p>
 
@@ -69,6 +71,49 @@ postorder = [9,15,7,20,3]
             mid = hash_map[node.val]
             node.right = helper(mid+1, high)
             node.left = helper(low, mid-1)
+            return node
+        return helper(0, len(inorder)-1)
+</code></pre>
+
+<h2 id="toc_3">From Preorder and Inorder Traversal</h2>
+
+<p>Given preorder and inorder traversal of a tree, construct the binary tree.</p>
+
+<p>Note:<br/>
+You may assume that duplicates do not exist in the tree.</p>
+
+<p>For example, given</p>
+
+<pre><code class="language-text">preorder = [3,9,20,15,7]
+inorder = [9,3,15,20,7]
+</code></pre>
+
+<p>Return the following binary tree:</p>
+
+<pre><code class="language-text">    3
+   / \
+  9  20
+    /  \
+   15   7
+</code></pre>
+
+<h3 id="toc_4">Solution:</h3>
+
+<p>The solution is relatively similar with above question and can be optimized by HashMap. However, this question we need the first element of the preorder list, we can&#39;t use list.pop() anymore. Intuitively, we think about use double queue, but iterator is also work.</p>
+
+<pre><code class="language-python">class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -&gt; TreeNode:
+        hash_map = {}
+        for idx, val in enumerate(inorder):
+            hash_map[val] = idx
+        iter_pre = iter(preorder)
+        def helper(low, high):
+            if low &gt; high:
+                return None
+            node = TreeNode(next(iter_pre))
+            mid = hash_map[node.val]
+            node.left = helper(low, mid-1)
+            node.right = helper(mid+1, high)
             return node
         return helper(0, len(inorder)-1)
 </code></pre>
