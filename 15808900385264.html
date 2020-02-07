@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-    Construct Binary Tree - CodingPark
+    The reason why we need to use nums[:] - CodingPark
     
     </title>
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/ZhongyuOu/img_bed/master/2020/1/31_paper-plane.png" type="image/png" />
@@ -85,7 +85,7 @@
                   <div class="post-body single-content">
                     
                     <h1 class="title">
-                            Construct Binary Tree   
+                            The reason why we need to use nums[:]   
                       </h1>
                      
                     
@@ -102,10 +102,10 @@
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                 <span class="date">2020/02/01</span>
+                                 <span class="date">2020/02/05</span>
                                   <span class="tran-posted-in">posted in</span>&nbsp; 
                                   
-                                      <span class="posted-in"><a href='LeetCode.html'>LeetCode</a></span>
+                                      <span class="posted-in"><a href='February.html'>February</a></span>
                                          
                                   
 
@@ -113,10 +113,6 @@
                                       
                                   <br />
                                   <span class="tran-tags">Tags:</span>&nbsp;
-                                  
-                                    <a class="tag is-link is-light" href='tag_Tree.html'>#Tree</a>
-                                  
-                                    <a class="tag is-link is-light" href='tag_Medium.html'>#Medium</a>
                                      
 
                                 </p>
@@ -126,105 +122,115 @@
                     </div>
                 </div>
                   <article class="markdown-body single-content">
-                    <h2 id="toc_0">1. From Inorder and Postorder Traversal</h2>
+                    <p>Firstly, let&#39;s see a leetcode problem:</p>
 
-<p>Given inorder and postorder traversal of a tree, construct the binary tree.</p>
+<p>Given an array, rotate the array to the right by k steps, where k is non-negative.</p>
 
-<p><strong>Note:</strong><br/>
-You may assume that duplicates do not exist in the tree.</p>
+<p><strong>Example 1:</strong></p>
 
-<p>For example, given</p>
-
-<pre><code class="language-text">inorder = [9,3,15,20,7]
-postorder = [9,15,7,20,3]
+<pre><code class="language-text">Input: [1,2,3,4,5,6,7] and k = 3
+Output: [5,6,7,1,2,3,4]
 </code></pre>
 
-<p>Return the following binary tree:</p>
+<p><strong>Explanation:</strong></p>
 
-<pre><code class="language-text">    3
-   / \
-  9  20
-    /  \
-   15   7
+<pre><code class="language-text">rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
 </code></pre>
 
-<h3 id="toc_1">Approach 1:</h3>
+<p><strong>Example 2:</strong></p>
+
+<pre><code class="language-text">Input: [-1,-100,3,99] and k = 2
+Output: [3,99,-1,-100]
+</code></pre>
+
+<p><strong>Explanation:</strong></p>
+
+<pre><code class="language-text">rotate 1 steps to the right: [99,-1,-100,3]
+rotate 2 steps to the right: [3,99,-1,-100]
+</code></pre>
+<br>
+<h2 id="toc_0">Solution:</h2>
 
 <pre><code class="language-python">class Solution:
-    def buildTree(self, inorder, postorder):
-        if not inorder or not postorder:
-            return None
-        root = TreeNode(postorder.pop())
-        idx = inorder.index(root.val)
-        root.right = self.buildTree(inorder[idx+1:], postorder)
-        root.left = self.buildTree(inorder[:idx], postorder)
-        return root
+    # @param nums, a list of integer
+    # @param k, num of steps
+    # @return nothing, please modify the nums list in-place.
+    def rotate(self, nums, k):
+        n = len(nums)
+        k = k % n
+        nums[:] = nums[-k:] + nums[:-k]
+</code></pre>
+<br>
+<h2 id="toc_1">Explaination</h2>
+
+<p>This solution is quite pythonic, but there is a little important thing to be cautious:</p>
+
+<pre><code class="language-python">nums[:] = nums[-k:] + nums[:-k] 
 </code></pre>
 
-<h3 id="toc_2">Approach 2:</h3>
+<p>Can&#39;t be written as:</p>
 
-<p>The code above is clean and short. But can we optimize our solution? After doing complexity analysis, we find that the overall running time and extra space are both \(O(n^2)\). So this implementation has a very bad performance, and we can avoid it.</p>
-
-<p>Here I implement a new solution with the aid of HashTable (or we call it dictionary in Python):</p>
-
-<pre><code class="language-python">class Solution:
-    def buildTree(self, inorder, postorder):
-        hash_map = {}
-        for idx, val in enumerate(inorder):
-            hash_map[val] = idx
-        def helper(low, high):
-            if low &gt; high:
-                return None
-            node = TreeNode(postorder.pop())
-            mid = hash_map[node.val]
-            node.right = helper(mid+1, high)
-            node.left = helper(low, mid-1)
-            return node
-        return helper(0, len(inorder)-1)
+<pre><code class="language-python">nums = nums[-k:] + nums[:-k]
 </code></pre>
 
-<h2 id="toc_3">2. From Preorder and Inorder Traversal</h2>
+<p>The previous one can truly change the value of <code>nums</code>, but the following one just changes its reference to a new <code>nums</code> not the value of old <code>nums</code>.</p>
 
-<p>Given preorder and inorder traversal of a tree, construct the binary tree.</p>
+<p>For example:</p>
 
-<p>Note:<br/>
-You may assume that duplicates do not exist in the tree.</p>
-
-<p>For example, given</p>
-
-<pre><code class="language-text">preorder = [3,9,20,15,7]
-inorder = [9,3,15,20,7]
+<pre><code class="language-python">nums = [1,2,3,4,5,6,7]
+id(nums)  # Output: 4600921288
+nums = nums[5:] + nums[:5]
+id(nums)  # Output: 4601032392
 </code></pre>
 
-<p>Return the following binary tree:</p>
+<p>We can see that the memory address has been changed. Now let&#39;s see another example:</p>
 
-<pre><code class="language-text">    3
-   / \
-  9  20
-    /  \
-   15   7
+<pre><code class="language-python">nums = [1,2,3,4,5,6,7]
+id(nums)  # Output: 4599466056
+nums[:] = nums[5:] + nums[:5]
+id(nums)  # Output: 4599466056
 </code></pre>
 
-<h3 id="toc_4">Solution:</h3>
+<p>Nothing change. So if you want change a list inplace, please use <code>list[:]</code> rather than a new assignment.<br/>
+<br></p>
 
-<p>The solution is relatively similar with above question and can be optimized by HashMap. However, this question we need the first element of the preorder list, we can&#39;t use list.pop() anymore. Intuitively, we think about use double queue, but iterator is also work.</p>
+<h2 id="toc_2">An Optimized Solution</h2>
 
-<pre><code class="language-python">class Solution:
-    def buildTree(self, preorder: List[int], inorder: List[int]) -&gt; TreeNode:
-        hash_map = {}
-        for idx, val in enumerate(inorder):
-            hash_map[val] = idx
-        iter_pre = iter(preorder)
-        def helper(low, high):
-            if low &gt; high:
-                return None
-            node = TreeNode(next(iter_pre))
-            mid = hash_map[node.val]
-            node.left = helper(low, mid-1)
-            node.right = helper(mid+1, high)
-            return node
-        return helper(0, len(inorder)-1)
+<p>This approach is based on the fact that when we rotate the array <code>k</code> times, <code>k</code> elements from the back end of the array come to the front and the rest of the elements from the front shift backwards.</p>
+
+<ul>
+<li>Reverse all the elements of the array.</li>
+<li>Reverse the first <code>k</code> elements.</li>
+<li>Reverse the rest <code>n−k</code> elements gives us the required result.</li>
+</ul>
+
+<pre><code class="language-java">public class Solution {
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int start, int end) {
+        while (start &lt; end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
 </code></pre>
+
+<p><strong>Complexity Analysis</strong></p>
+
+<ul>
+<li>Time complexity : \(O(n)\). N elements are reversed a total of three times.</li>
+<li>Space complexity : \(O(1)\). No extra space is used.</li>
+</ul>
 
                   </article>
                   <div class="comments-wrap">
